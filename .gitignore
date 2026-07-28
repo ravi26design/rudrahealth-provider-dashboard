@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# Editor / tooling
+.claude/
+
+# Local backups & working copies (not part of the deliverable)
+index copy.html
+index.backup-*.html
+*.backup.html
