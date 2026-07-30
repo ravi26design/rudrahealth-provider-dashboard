@@ -3295,7 +3295,7 @@ body{padding-top:0!important}
 ══════════════════════════════════════════════ -->
 <div id='page-login' class='page active'>
 <style>
-  .rl-stage{width:100%;min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:32px 20px;box-sizing:border-box;background:#ECEBF1;font-family:'Manrope','Inter',system-ui,-apple-system,sans-serif}#page-login{position:fixed;inset:0;overflow-y:auto;background:#ECEBF1;display:block}
+  .rl-stage{width:100%;min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:32px 20px;box-sizing:border-box;background:#ECEBF1;font-family:'Manrope','Inter',system-ui,-apple-system,sans-serif}#page-login{position:fixed;inset:0;overflow-y:auto;background:#ECEBF1;display:block} .rl-card{border:1px solid rgba(255,255,255,.7);box-shadow:0 40px 90px -34px rgba(30,41,59,.40),0 10px 30px -14px rgba(30,41,59,.18);animation:rlUp .6s cubic-bezier(.22,.61,.36,1) both}.rl-brand{position:relative;overflow:hidden}.rl-brand>*{position:relative;z-index:1}.rl-brand::before{content:'';position:absolute;top:-90px;right:-70px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(197,109,95,.13),transparent 68%);pointer-events:none;z-index:0}.rl-brand::after{content:'';position:absolute;bottom:-110px;left:-70px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(78,123,94,.11),transparent 68%);pointer-events:none;z-index:0}.rl-headline{font-family:'Fraunces','Georgia',serif;font-weight:400;font-size:41px;line-height:1.06;letter-spacing:-.5px}.rl-accent{font-style:italic}.rl-lede{max-width:340px}.rl-pill{box-shadow:0 1px 2px rgba(20,20,40,.05)}.rl-input:focus{box-shadow:0 0 0 3px rgba(91,143,199,.16)}.rl-org.selected{box-shadow:0 0 0 3px rgba(91,143,199,.12)}.rl-signin{display:flex;align-items:center;justify-content:center;gap:9px;background:linear-gradient(180deg,#335479,#284762)}.rl-signin:hover{background:linear-gradient(180deg,#2C4A6C,#213B54)}.rl-signin svg{width:18px;height:18px}.rl-legal{display:flex;align-items:center;gap:7px;justify-content:center}.rl-legal svg{width:14px;height:14px;opacity:.7}@keyframes rlUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}@media(prefers-reduced-motion:reduce){.rl-card{animation:none}}
   .rl-card{width:100%;max-width:960px;display:grid;grid-template-columns:1.04fr 1fr;background:#fff;border-radius:26px;overflow:hidden;box-shadow:0 30px 80px rgba(42,42,66,.16),0 2px 8px rgba(42,42,66,.05)}
   .rl-brand{padding:46px 46px 40px;background:linear-gradient(180deg,#FBFAF7,#F5F2EC);display:flex;flex-direction:column}
   .rl-brandtop{margin-bottom:auto}
@@ -3390,11 +3390,11 @@ body{padding-top:0!important}
           <a class='rl-forgot' onclick='fpGo(1)'>Forgot password?</a>
         </div>
 
-        <button class='rl-signin' onclick='doLogin()'>Sign in</button>
+        <button class='rl-signin' onclick='doLogin()'>Sign in <i data-lucide='arrow-right'></i></button>
       </div>
 
     </div>
-    <div class='rl-legal'>HIPAA-compliant · SOC 2 Type II · 256-bit encryption</div>
+    <div class='rl-legal'><i data-lucide='shield-check'></i>HIPAA-compliant · SOC 2 Type II · 256-bit encryption</div>
   </div>
 <script>function rlSelectOrg(b){var g=b.parentNode.querySelectorAll('.rl-org');for(var i=0;i<g.length;i++){g[i].classList.remove('selected')}b.classList.add('selected')}if(window.lucide&&lucide.createIcons){lucide.createIcons();}</script>
 </div>
