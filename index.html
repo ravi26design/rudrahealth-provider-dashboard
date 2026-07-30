@@ -3295,7 +3295,7 @@ body{padding-top:0!important}
 ══════════════════════════════════════════════ -->
 <div id='page-login' class='page active'>
 <style>
-  .rl-stage{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:32px 20px;box-sizing:border-box;background:linear-gradient(165deg,#F0EEF4 0%,#E8ECF2 100%);font-family:'Manrope','Inter',system-ui,-apple-system,sans-serif}
+  .rl-stage{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:32px 20px;box-sizing:border-box;background:#ECEBF1;font-family:'Manrope','Inter',system-ui,-apple-system,sans-serif}
   .rl-card{width:100%;max-width:960px;display:grid;grid-template-columns:1.04fr 1fr;background:#fff;border-radius:26px;overflow:hidden;box-shadow:0 30px 80px rgba(42,42,66,.16),0 2px 8px rgba(42,42,66,.05)}
   .rl-brand{padding:46px 46px 40px;background:linear-gradient(180deg,#FBFAF7,#F5F2EC);display:flex;flex-direction:column}
   .rl-brandtop{margin-bottom:auto}
@@ -3305,7 +3305,7 @@ body{padding-top:0!important}
   .rl-accent{color:#C56D5F}
   .rl-lede{font-size:15px;line-height:1.62;color:#6D675F;max-width:330px}
   .rl-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:36px}
-  .rl-pill{font-size:13px;font-weight:600;padding:8px 17px;border-radius:999px}
+  .rl-pill{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;padding:8px 16px;border-radius:999px}.rl-pill svg{width:15px;height:15px;stroke-width:2.4}
   .rl-pill-blue{background:#CFE0F1;color:#2F5D86}
   .rl-pill-coral{background:#F3D6CF;color:#A85348}
   .rl-pill-gold{background:#F3E4BE;color:#8A6A21}
@@ -3350,10 +3350,10 @@ body{padding-top:0!important}
         <h1 class='rl-headline'>Care that <span class='rl-accent'>connects</span>,<br>not a leaderboard.</h1>
         <p class='rl-lede'>Predictive recovery intelligence for OUD care teams — always with a clinician in the loop.</p>
         <div class='rl-pills'>
-          <span class='rl-pill rl-pill-blue'>Predict</span>
-          <span class='rl-pill rl-pill-coral'>Prevent</span>
-          <span class='rl-pill rl-pill-gold'>Retain</span>
-          <span class='rl-pill rl-pill-green'>Recover</span>
+          <span class='rl-pill rl-pill-blue'><i data-lucide='trending-up'></i>Predict</span>
+          <span class='rl-pill rl-pill-coral'><i data-lucide='shield-check'></i>Prevent</span>
+          <span class='rl-pill rl-pill-gold'><i data-lucide='heart-handshake'></i>Retain</span>
+          <span class='rl-pill rl-pill-green'><i data-lucide='sprout'></i>Recover</span>
         </div>
       </div>
 
@@ -3396,7 +3396,7 @@ body{padding-top:0!important}
     </div>
     <div class='rl-legal'>HIPAA-compliant · SOC 2 Type II · 256-bit encryption</div>
   </div>
-<script>function rlSelectOrg(b){var g=b.parentNode.querySelectorAll('.rl-org');for(var i=0;i<g.length;i++){g[i].classList.remove('selected')}b.classList.add('selected')}</script>
+<script>function rlSelectOrg(b){var g=b.parentNode.querySelectorAll('.rl-org');for(var i=0;i<g.length;i++){g[i].classList.remove('selected')}b.classList.add('selected')}if(window.lucide&&lucide.createIcons){lucide.createIcons();}</script>
 </div>
 
 <!-- Password-reset confirmation (shows over login) -->
