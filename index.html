@@ -3463,6 +3463,20 @@ body{padding-top:0!important}
           <div class=&quot;tb-avatar&quot;><i data-lucide='user'></i></div>
         </div>
       </div>
+      <div class=&quot;card&quot;>
+        <div class=&quot;card-header&quot;>
+          <div><div class=&quot;card-title&quot;><i data-lucide='users'></i> High-Risk Patients</div><div class=&quot;card-sub&quot;>Sorted by relapse risk score · Updated hourly</div></div>
+          <button class=&quot;btn btn-ghost btn-sm&quot; onclick=&quot;showSection('patients',document.querySelector('[onclick*=patients]'))&quot;>View All</button>
+        </div>
+        <table>
+          <thead><tr><th>Patient</th><th>Risk Score</th><th>Last Check-In</th><th>MOUD</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td><div class=&quot;flex&quot;><div class=&quot;avatar red&quot; style=&quot;width:28px;height:28px;font-size:11px;&quot;>JD</div><div><div class=&quot;fw-600&quot;>J. Davis</div><div class=&quot;text-xs&quot;>OUD · 43 days</div></div></div></td><td><span class=&quot;tag tag-red risk-tag&quot;>94 · High</span></td><td>Yesterday</td><td>Suboxone</td><td><button class=&quot;btn btn-primary btn-sm&quot; style=&quot;width:auto&quot; onclick=&quot;openIntervene('J. Davis','94 · High','Suboxone')&quot;>Intervene</button></td></tr>
+            <tr><td><div class=&quot;flex&quot;><div class=&quot;avatar yellow&quot; style=&quot;width:28px;height:28px;font-size:11px;&quot;>ML</div><div><div class=&quot;fw-600&quot;>M. Lee</div><div class=&quot;text-xs&quot;>AUD · 21 days</div></div></div></td><td><span class=&quot;tag tag-red risk-tag&quot;>88 · High</span></td><td>2 days ago</td><td>Naltrexone</td><td><button class=&quot;btn btn-primary btn-sm&quot; style=&quot;width:auto&quot; onclick=&quot;openIntervene('M. Lee','88 · High','Naltrexone')&quot;>Intervene</button></td></tr>
+            <tr><td><div class=&quot;flex&quot;><div class=&quot;avatar&quot; style=&quot;width:28px;height:28px;font-size:11px;&quot;>SP</div><div><div class=&quot;fw-600&quot;>S. Patel</div><div class=&quot;text-xs&quot;>OUD · 67 days</div></div></div></td><td><span class=&quot;tag tag-yellow risk-tag&quot;>72 · Med</span></td><td>Today</td><td>Methadone</td><td><button class=&quot;btn btn-secondary btn-sm&quot; onclick=&quot;openIntervene('S. Patel','72 · Med','Methadone')&quot;>Review</button></td></tr>
+          </tbody>
+        </table>
+      </div>
 
 
       <div class=&quot;stat-grid&quot;>
@@ -3562,20 +3576,6 @@ body{padding-top:0!important}
         </div>
       </div>
 
-      <div class=&quot;card&quot;>
-        <div class=&quot;card-header&quot;>
-          <div><div class=&quot;card-title&quot;><i data-lucide='users'></i> High-Risk Patients</div><div class=&quot;card-sub&quot;>Sorted by relapse risk score · Updated hourly</div></div>
-          <button class=&quot;btn btn-ghost btn-sm&quot; onclick=&quot;showSection('patients',document.querySelector('[onclick*=patients]'))&quot;>View All</button>
-        </div>
-        <table>
-          <thead><tr><th>Patient</th><th>Risk Score</th><th>Last Check-In</th><th>MOUD</th><th>Action</th></tr></thead>
-          <tbody>
-            <tr><td><div class=&quot;flex&quot;><div class=&quot;avatar red&quot; style=&quot;width:28px;height:28px;font-size:11px;&quot;>JD</div><div><div class=&quot;fw-600&quot;>J. Davis</div><div class=&quot;text-xs&quot;>OUD · 43 days</div></div></div></td><td><span class=&quot;tag tag-red risk-tag&quot;>94 · High</span></td><td>Yesterday</td><td>Suboxone</td><td><button class=&quot;btn btn-primary btn-sm&quot; style=&quot;width:auto&quot; onclick=&quot;openIntervene('J. Davis','94 · High','Suboxone')&quot;>Intervene</button></td></tr>
-            <tr><td><div class=&quot;flex&quot;><div class=&quot;avatar yellow&quot; style=&quot;width:28px;height:28px;font-size:11px;&quot;>ML</div><div><div class=&quot;fw-600&quot;>M. Lee</div><div class=&quot;text-xs&quot;>AUD · 21 days</div></div></div></td><td><span class=&quot;tag tag-red risk-tag&quot;>88 · High</span></td><td>2 days ago</td><td>Naltrexone</td><td><button class=&quot;btn btn-primary btn-sm&quot; style=&quot;width:auto&quot; onclick=&quot;openIntervene('M. Lee','88 · High','Naltrexone')&quot;>Intervene</button></td></tr>
-            <tr><td><div class=&quot;flex&quot;><div class=&quot;avatar&quot; style=&quot;width:28px;height:28px;font-size:11px;&quot;>SP</div><div><div class=&quot;fw-600&quot;>S. Patel</div><div class=&quot;text-xs&quot;>OUD · 67 days</div></div></div></td><td><span class=&quot;tag tag-yellow risk-tag&quot;>72 · Med</span></td><td>Today</td><td>Methadone</td><td><button class=&quot;btn btn-secondary btn-sm&quot; onclick=&quot;openIntervene('S. Patel','72 · Med','Methadone')&quot;>Review</button></td></tr>
-          </tbody>
-        </table>
-      </div>
     </div>
 
     <!-- ── INTEGRATIONS ── -->
