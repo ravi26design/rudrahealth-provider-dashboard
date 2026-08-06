@@ -3466,7 +3466,7 @@ body{padding-top:0!important}
       <div class=&quot;card&quot;>
         <div class=&quot;card-header&quot;>
           <div><div class=&quot;card-title&quot;><i data-lucide='users'></i> High-Risk Patients</div><div class=&quot;card-sub&quot; id=&quot;hrSub&quot; style=&quot;color:#C0413F;font-weight:600&quot;>12 High-Risk Patients</div></div>
-          <button class=&quot;hr-viewall&quot; onclick=&quot;showSection('patients',document.querySelector('[onclick*=patients]'))&quot;><i data-lucide='eye'></i>View All</button>
+          <button class=&quot;hr-viewall&quot; onclick=&quot;showSection('patients',document.querySelector('[onclick*=patients]'));switchTab('patientTabs','tab-high-risk',document.querySelector('#patientTabs .tab'))&quot;><i data-lucide='eye'></i>View All</button>
         </div>
         <table class='hr-table'>
           <thead><tr><th>Patient</th><th>Risk Score</th><th>Last Check-In</th><th>MOUD</th><th>Action</th></tr></thead>
@@ -4138,12 +4138,30 @@ body{padding-top:0!important}
       </div>
 
       <div class=&quot;tabs&quot; id=&quot;patientTabs&quot;>
-        <div class=&quot;tab active&quot; onclick=&quot;switchTab('patientTabs','tab-patient-list',this)&quot;>Patient List</div>
+        <div class=&quot;tab active&quot; onclick=&quot;switchTab('patientTabs','tab-high-risk',this)&quot;>High-Risk</div><div class=&quot;tab&quot; onclick=&quot;switchTab('patientTabs','tab-patient-list',this)&quot;>All Patients</div>
         <div class=&quot;tab&quot; onclick=&quot;switchTab('patientTabs','tab-care-plan',this)&quot;>Care Plan Template</div>
         <div class=&quot;tab&quot; onclick=&quot;switchTab('patientTabs','tab-risk',this)&quot;>Risk Configuration</div>
       </div>
 
-      <div id=&quot;tab-patient-list&quot;>
+      <div id=&quot;tab-high-risk&quot;>
+        <div class=&quot;card&quot;>
+          <div style=&quot;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px&quot;>
+            <div><div style=&quot;font:700 18px/1.2 Sora,Manrope,sans-serif;color:#20261F&quot;>High-Risk Patients</div><div style=&quot;font-size:13px;color:#8A928A;margin-top:2px&quot;>Flagged by the AI relapse model — prioritized for intervention</div></div>
+            <span class=&quot;tag tag-red&quot; style=&quot;font-weight:600&quot;>5 need attention</span>
+          </div>
+          <table>
+            <thead><tr><th>Patient</th><th>Diagnosis</th><th>MOUD</th><th>Days Sober</th><th>Relapse Risk</th><th>Care Team</th><th>Actions</th></tr></thead>
+            <tbody>
+              <tr><td><div class=&quot;fw-600&quot;>J. Davis</div><div class=&quot;text-xs&quot;>#P-002 · DOB 1994</div></td><td>OUD + AUD</td><td>Suboxone 16mg</td><td>43</td><td><span class=&quot;tag tag-red&quot;>High 94</span></td><td>Dr. Rivera</td><td><button class=&quot;btn btn-ghost btn-sm&quot;>Edit</button></td></tr>
+              <tr><td><div class=&quot;fw-600&quot;>Maria O.</div><div class=&quot;text-xs&quot;>#P-006 · DOB 1991</div></td><td>SUD</td><td>Suboxone 8mg</td><td>132</td><td><span class=&quot;tag tag-red&quot;>High 93</span></td><td>L. Chen</td><td><button class=&quot;btn btn-ghost btn-sm&quot;>Edit</button></td></tr>
+              <tr><td><div class=&quot;fw-600&quot;>Amy L.</div><div class=&quot;text-xs&quot;>#P-018 · DOB 1982</div></td><td>OUD</td><td>Methadone</td><td>124</td><td><span class=&quot;tag tag-red&quot;>High 89</span></td><td>Dr. Rivera</td><td><button class=&quot;btn btn-ghost btn-sm&quot;>Edit</button></td></tr>
+              <tr><td><div class=&quot;fw-600&quot;>M. Lee</div><div class=&quot;text-xs&quot;>#P-003 · DOB 1987</div></td><td>AUD</td><td>Naltrexone</td><td>21</td><td><span class=&quot;tag tag-red&quot;>High 88</span></td><td>L. Chen</td><td><button class=&quot;btn btn-ghost btn-sm&quot;>Edit</button></td></tr>
+              <tr><td><div class=&quot;fw-600&quot;>Robert H.</div><div class=&quot;text-xs&quot;>#P-005 · DOB 1990</div></td><td>OUD + AUD</td><td>Naltrexone</td><td>169</td><td><span class=&quot;tag tag-red&quot;>High 83</span></td><td>Dr. Rivera</td><td><button class=&quot;btn btn-ghost btn-sm&quot;>Edit</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div id=&quot;tab-patient-list&quot; class=&quot;hidden&quot;>
         <div class=&quot;card&quot;>
           <div class=&quot;card-header&quot;>
             <div class=&quot;card-title&quot;>All Patients <span class=&quot;pill tag-gray&quot; style=&quot;margin-left:8px;&quot; id=&quot;patientCount&quot;>25</span></div>
