@@ -5296,7 +5296,7 @@ function tbLogout(e){e.stopPropagation();tbCloseProfile();if(window.doLogout){do
   }
   function buildPatientAvatars(){
     var body = document.getElementById('patientTableBody'); if (!body) return;
-    body.querySelectorAll('tr').forEach(function(row){
+    document.querySelectorAll('#patientTableBody tr, #tab-high-risk tbody tr').forEach(function(row){
       var td = row.querySelector('td'); if (!td || td.querySelector('.avatar')) return;
       var nameEl = td.querySelector('.fw-600'); if (!nameEl) return;
       var metaEl = td.querySelector('.text-xs');
