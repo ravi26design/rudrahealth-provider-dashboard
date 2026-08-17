@@ -3430,11 +3430,11 @@ body{padding-top:0!important}
     <div class=&quot;nav-item&quot; onclick=&quot;showSection('surveymanager',this)&quot;><span class=&quot;icon&quot;><i data-lucide='clipboard-list'></i></span> Survey Management</div>
 
     <div class=&quot;nav-section&quot;>Configuration</div>
-    <div class=&quot;nav-item nav-disabled&quot; style=&quot;pointer-events:none;opacity:.45;cursor:not-allowed&quot; onclick=&quot;showSection('integrations',this)&quot;><span class=&quot;icon&quot;><i data-lucide='plug-zap'></i></span> Integrations <span class=&quot;badge&quot;>2</span></div>
-    <div class=&quot;nav-item nav-disabled&quot; style=&quot;pointer-events:none;opacity:.45;cursor:not-allowed&quot; onclick=&quot;showSection('messaging',this)&quot;><span class=&quot;icon&quot;><i data-lucide='message-square-text'></i></span> Messaging Setup</div>
+    <div class=&quot;nav-item&quot; onclick=&quot;showSection('integrations',this)&quot;><span class=&quot;icon&quot;><i data-lucide='plug-zap'></i></span> Integrations <span class=&quot;badge&quot;>2</span></div>
+    <div class=&quot;nav-item&quot; onclick=&quot;showSection('messaging',this)&quot;><span class=&quot;icon&quot;><i data-lucide='message-square-text'></i></span> Messaging Setup</div>
 
     <div class=&quot;nav-section&quot;>Reports</div>
-    <div class=&quot;nav-item nav-disabled&quot; style=&quot;pointer-events:none;opacity:.45;cursor:not-allowed&quot; onclick=&quot;showSection('outcomes',this)&quot;><span class=&quot;icon&quot;><i data-lucide='trending-up'></i></span> Outcomes Data</div>
+    <div class=&quot;nav-item&quot; onclick=&quot;showSection('outcomes',this)&quot;><span class=&quot;icon&quot;><i data-lucide='trending-up'></i></span> Outcomes Data</div>
 
     <div class=&quot;sidebar-footer&quot;>
       <div class=&quot;user-chip&quot;>
@@ -3460,7 +3460,7 @@ body{padding-top:0!important}
         </div>
         <div class=&quot;tb-actions&quot;><div class=&quot;dash-filter&quot;><button class=&quot;df-seg active&quot; onclick=&quot;dashFilter('Daily',this)&quot;>Daily</button><button class=&quot;df-seg&quot; onclick=&quot;dashFilter('Weekly',this)&quot;>Weekly</button><button class=&quot;df-seg&quot; onclick=&quot;dashFilter('Monthly',this)&quot;>Monthly</button></div><script>var DF={Daily:{v:[248,17,81,71],sub:['new today','Needs intervention','vs yesterday','out of 100'],delta:['↑ 12','3 new','↑ 4%','↑ 3'],hr:17,ret:'76% today',chart:[60,62,64,63,66,68,69,71,72,74,75,76],badge:'76%'},Weekly:{v:[262,14,84,72],sub:['new this week','Needs intervention','vs last week','out of 100'],delta:['↑ 18','2 new','↑ 6%','↑ 4'],hr:22,ret:'76% this week',chart:[58,60,62,61,64,66,68,69,71,73,74,76],badge:'76%'},Monthly:{v:[310,23,88,74],sub:['new this month','Needs intervention','vs last month','out of 100'],delta:['↑ 34','5 new','↑ 9%','↑ 6'],hr:30,ret:'78% this month',chart:[50,54,57,60,62,65,67,70,72,74,76,78],badge:'78%'}};function dashFilter(p,el){var s=el.parentNode.querySelectorAll('.df-seg');for(var i=0;i<s.length;i++)s[i].classList.remove('active');el.classList.add('active');var d=DF[p];if(d){var v=document.querySelectorAll('#sec-dashboard .stat-grid .stat-val');var u=document.querySelectorAll('#sec-dashboard .stat-grid .stat-sub');var g=document.querySelectorAll('#sec-dashboard .stat-grid .delta');for(var j=0;j<v.length&&j<d.v.length;j++){var sf=v[j].getAttribute('data-suffix')||'';v[j].setAttribute('data-count',d.v[j]);v[j].textContent=d.v[j]+sf;}for(var k=0;k<u.length&&k<d.sub.length;k++)u[k].textContent=d.sub[k];for(var m=0;m<g.length&&m<d.delta.length;m++)g[m].textContent=d.delta[m];var hrEl=document.getElementById('hrSub');if(hrEl)hrEl.textContent=d.hr+' High-Risk Patients';var rt=document.getElementById('retTag');if(rt)rt.textContent=d.ret;var bars=document.querySelectorAll('#sec-dashboard .retbar');if(bars.length&&d.chart){for(var b=0;b<bars.length&&b<d.chart.length;b++){var cv=d.chart[b];var yt=185-cv*1.59;bars[b].setAttribute('y',yt.toFixed(1));bars[b].setAttribute('height',(185-yt).toFixed(1));bars[b].setAttribute('data-t','Wk '+(b+1)+' · '+cv+'%');}}var bd=document.getElementById('retBadge');if(bd)bd.textContent=d.badge;}if(window.toast)toast('Showing '+p.toLowerCase()+' view','info');}</script>
           <div class=&quot;tb-icons&quot;><button class=&quot;tb-icon-btn&quot; onclick=&quot;exportReport()&quot; title=&quot;Export report&quot;><i data-lucide='download'></i></button>
-          <div class=&quot;tb-notif-wrap&quot; style=&quot;position:relative;display:inline-flex&quot;><button class=&quot;tb-icon-btn&quot; title=&quot;Notifications&quot; onclick=&quot;tbToggleNotif(event)&quot;><i data-lucide='bell'></i><span class=&quot;tb-dot&quot; id=&quot;tbNotifDot&quot;></span></button><div class=&quot;tb-notif-menu&quot; id=&quot;tbNotifMenu&quot;><div class=&quot;tb-notif-head&quot;><span>Notifications</span><button class=&quot;tb-notif-clear&quot; onclick=&quot;tbMarkAllRead(event)&quot;>Mark all read</button></div><div class=&quot;tb-notif-list&quot;><div class=&quot;tb-notif-item unread&quot;><div class=&quot;tb-notif-ic&quot; style=&quot;background:#FBEAEA;color:#C0413F&quot;><i data-lucide='siren'></i></div><div class=&quot;tb-notif-body&quot;><div class=&quot;tb-notif-t&quot;>Jamie L. flagged high-risk</div><div class=&quot;tb-notif-d&quot;>3 missed MOUD doses · 78% relapse risk</div><div class=&quot;tb-notif-time&quot;>5 min ago</div></div></div><div class=&quot;tb-notif-item unread&quot;><div class=&quot;tb-notif-ic&quot; style=&quot;background:#E9F1FA;color:#2F6DB0&quot;><i data-lucide='message-square-text'></i></div><div class=&quot;tb-notif-body&quot;><div class=&quot;tb-notif-t&quot;>New survey response — M. Lee</div><div class=&quot;tb-notif-d&quot;>PHQ-9 completed</div><div class=&quot;tb-notif-time&quot;>1 hour ago</div></div></div><div class=&quot;tb-notif-item unread&quot;><div class=&quot;tb-notif-ic&quot; style=&quot;background:#FBF1DF;color:#A9791F&quot;><i data-lucide='trending-down'></i></div><div class=&quot;tb-notif-body&quot;><div class=&quot;tb-notif-t&quot;>MOUD adherence dropped — S. Patel</div><div class=&quot;tb-notif-d&quot;>Down to 72% this week</div><div class=&quot;tb-notif-time&quot;>2 hours ago</div></div></div><div class=&quot;tb-notif-item&quot;><div class=&quot;tb-notif-ic&quot; style=&quot;background:#E8F1EB;color:#3F6650&quot;><i data-lucide='user-plus'></i></div><div class=&quot;tb-notif-body&quot;><div class=&quot;tb-notif-t&quot;>New patient enrolled — Omar S.</div><div class=&quot;tb-notif-d&quot;>Assigned to H. Ito</div><div class=&quot;tb-notif-time&quot;>Yesterday</div></div></div><div class=&quot;tb-notif-item&quot;><div class=&quot;tb-notif-ic&quot; style=&quot;background:#EFEAF8;color:#6A5CB0&quot;><i data-lucide='calendar-check'></i></div><div class=&quot;tb-notif-body&quot;><div class=&quot;tb-notif-t&quot;>Care plan updated by Dr. Chen</div><div class=&quot;tb-notif-d&quot;>Robert H. · Naltrexone dose review</div><div class=&quot;tb-notif-time&quot;>Yesterday</div></div></div></div><button class=&quot;tb-notif-foot&quot; onclick=&quot;tbNotifViewAll(event)&quot;>View all notifications</button></div></div>
+          <div class=&quot;tb-notif-wrap&quot; style=&quot;position:relative;display:inline-flex&quot;><button class=&quot;tb-icon-btn&quot; title=&quot;Notifications&quot; onclick=&quot;tbToggleNotif(event)&quot;><i data-lucide='bell'></i><span class=&quot;tb-dot&quot; id=&quot;tbNotifDot&quot;></span></button><div class=&quot;tb-notif-menu&quot; id=&quot;tbNotifMenu&quot;><div class=&quot;tb-notif-head&quot;><span>Notifications</span><span style=&quot;display:inline-flex;align-items:center;gap:12px&quot;><button class=&quot;tb-notif-clear&quot; onclick=&quot;openPushSettings(event)&quot; title=&quot;Push notification settings&quot; style=&quot;display:inline-flex;align-items:center;gap:4px&quot;><i data-lucide='smartphone' style='width:13px;height:13px'></i> Push</button><button class=&quot;tb-notif-clear&quot; onclick=&quot;tbMarkAllRead(event)&quot;>Mark all read</button></span></div><div class=&quot;tb-notif-list&quot;><div class=&quot;tb-notif-item unread&quot;><div class=&quot;tb-notif-ic&quot; style=&quot;background:#FBEAEA;color:#C0413F&quot;><i data-lucide='siren'></i></div><div class=&quot;tb-notif-body&quot;><div class=&quot;tb-notif-t&quot;>Jamie L. flagged high-risk</div><div class=&quot;tb-notif-d&quot;>3 missed MOUD doses · 78% relapse risk</div><div class=&quot;tb-notif-time&quot;>5 min ago</div></div></div><div class=&quot;tb-notif-item unread&quot;><div class=&quot;tb-notif-ic&quot; style=&quot;background:#E9F1FA;color:#2F6DB0&quot;><i data-lucide='message-square-text'></i></div><div class=&quot;tb-notif-body&quot;><div class=&quot;tb-notif-t&quot;>New survey response — M. Lee</div><div class=&quot;tb-notif-d&quot;>PHQ-9 completed</div><div class=&quot;tb-notif-time&quot;>1 hour ago</div></div></div><div class=&quot;tb-notif-item unread&quot;><div class=&quot;tb-notif-ic&quot; style=&quot;background:#FBF1DF;color:#A9791F&quot;><i data-lucide='trending-down'></i></div><div class=&quot;tb-notif-body&quot;><div class=&quot;tb-notif-t&quot;>MOUD adherence dropped — S. Patel</div><div class=&quot;tb-notif-d&quot;>Down to 72% this week</div><div class=&quot;tb-notif-time&quot;>2 hours ago</div></div></div><div class=&quot;tb-notif-item&quot;><div class=&quot;tb-notif-ic&quot; style=&quot;background:#E8F1EB;color:#3F6650&quot;><i data-lucide='user-plus'></i></div><div class=&quot;tb-notif-body&quot;><div class=&quot;tb-notif-t&quot;>New patient enrolled — Omar S.</div><div class=&quot;tb-notif-d&quot;>Assigned to H. Ito</div><div class=&quot;tb-notif-time&quot;>Yesterday</div></div></div><div class=&quot;tb-notif-item&quot;><div class=&quot;tb-notif-ic&quot; style=&quot;background:#EFEAF8;color:#6A5CB0&quot;><i data-lucide='calendar-check'></i></div><div class=&quot;tb-notif-body&quot;><div class=&quot;tb-notif-t&quot;>Care plan updated by Dr. Chen</div><div class=&quot;tb-notif-d&quot;>Robert H. · Naltrexone dose review</div><div class=&quot;tb-notif-time&quot;>Yesterday</div></div></div></div><button class=&quot;tb-notif-foot&quot; onclick=&quot;tbNotifViewAll(event)&quot;>View all notifications</button></div></div>
           <div class=&quot;tb-avatar-wrap&quot; style=&quot;position:relative&quot;><div class=&quot;tb-avatar&quot; onclick=&quot;tbToggleProfile(event)&quot;><i data-lucide='user'></i></div><div class=&quot;tb-profile-menu&quot; id=&quot;tbProfileMenu&quot;><div class=&quot;tb-pm-head&quot;><div class=&quot;tb-pm-av&quot;>AD</div><div><div class=&quot;tb-pm-name&quot;>Admin User</div><div class=&quot;tb-pm-email&quot;>admin@rudrahealth.com</div></div></div><button class=&quot;tb-pm-item&quot; onclick=&quot;tbViewProfile(event)&quot;><i data-lucide='user'></i> My Profile</button><button class=&quot;tb-pm-item&quot; onclick=&quot;tbChangePassword(event)&quot;><i data-lucide='key-round'></i> Change Password</button><button class=&quot;tb-pm-item danger&quot; onclick=&quot;tbLogout(event)&quot;><i data-lucide='log-out'></i> Logout</button></div></div></div>
         </div>
       </div>
@@ -5076,6 +5076,217 @@ function toggleMobSidebar(){var s=document.querySelector('.sidebar'),o=document.
 function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.getElementById('mobOverlay');if(s)s.classList.remove('mob-open');if(o)o.classList.remove('show');}
 (function(){function setup(){document.querySelectorAll('.sidebar .nav-item').forEach(function(n){n.addEventListener('click',function(){if(window.innerWidth<=900)closeMobSidebar();});});if(window.lucide)lucide.createIcons();}if(document.readyState!=='loading')setup();else document.addEventListener('DOMContentLoaded',setup);})();
 </script>
+<!-- ═══ FEATURES: push notifications · desktop high-risk alert · voice+chat assistant ═══ -->
+<style id=&quot;feat-notify-assistant&quot;>
+  #aiFab{display:none;position:fixed;right:22px;bottom:22px;z-index:400;width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;background:linear-gradient(135deg,#4E7B5E,#3C6249);color:#fff;box-shadow:0 12px 30px rgba(60,98,73,.42);align-items:center;justify-content:center;transition:transform .18s,box-shadow .18s}
+  #aiFab:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 16px 40px rgba(60,98,73,.52)}
+  #aiFab svg{width:24px;height:24px}
+  .ai-panel{position:fixed;right:22px;bottom:88px;z-index:401;width:372px;max-width:calc(100vw - 32px);height:524px;max-height:calc(100vh - 130px);background:#fff;border:1px solid #E4E7E3;border-radius:20px;box-shadow:0 24px 64px rgba(24,32,27,.26);display:flex;flex-direction:column;overflow:hidden;opacity:0;transform:translateY(14px) scale(.98);pointer-events:none;transition:opacity .22s,transform .22s}
+  .ai-panel.open{opacity:1;transform:none;pointer-events:auto}
+  .ai-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:linear-gradient(135deg,#4E7B5E,#3C6249);color:#fff}
+  .ai-head-l{display:flex;align-items:center;gap:11px}
+  .ai-avatar{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center}
+  .ai-avatar svg{width:19px;height:19px}
+  .ai-title{font-weight:700;font-size:14.5px}
+  .ai-sub{font-size:11px;opacity:.85;margin-top:1px}
+  .ai-x{background:rgba(255,255,255,.16);border:none;color:#fff;width:30px;height:30px;border-radius:9px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .ai-x svg{width:16px;height:16px}
+  .ai-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;background:#F7F9F6}
+  .ai-msg{display:flex}
+  .ai-msg.user{justify-content:flex-end}
+  .ai-bubble{max-width:82%;padding:10px 13px;border-radius:14px;font-size:13px;line-height:1.5;box-shadow:0 1px 2px rgba(0,0,0,.05);word-wrap:break-word}
+  .ai-msg.bot .ai-bubble{background:#fff;color:#2C3A2F;border-bottom-left-radius:5px}
+  .ai-msg.user .ai-bubble{background:#4E7B5E;color:#fff;border-bottom-right-radius:5px}
+  .ai-bubble b{font-weight:700}
+  .ai-link{color:#4E7B5E;font-weight:600;cursor:pointer;text-decoration:underline}
+  .ai-typing{display:inline-flex;gap:4px;padding:2px 0}
+  .ai-typing i{width:6px;height:6px;border-radius:50%;background:#B7C2B9;animation:aiBlink 1.2s infinite}
+  .ai-typing i:nth-child(2){animation-delay:.2s}
+  .ai-typing i:nth-child(3){animation-delay:.4s}
+  @keyframes aiBlink{0%,60%,100%{opacity:.3}30%{opacity:1}}
+  .ai-chips{display:flex;gap:7px;padding:10px 12px;overflow-x:auto;border-top:1px solid #EEF1ED;background:#fff}
+  .ai-chip{white-space:nowrap;flex-shrink:0;font-size:12px;font-weight:600;color:#3C6249;background:#EAF1EC;border:1px solid #D6E3D9;border-radius:999px;padding:6px 12px;cursor:pointer}
+  .ai-chip:hover{background:#DDE9E0}
+  .ai-input{display:flex;align-items:center;gap:8px;padding:11px 12px;border-top:1px solid #EEF1ED;background:#fff}
+  .ai-input input{flex:1;min-width:0;border:1px solid #E1E5E1;border-radius:999px;padding:10px 15px;font-family:inherit;font-size:13px;outline:none}
+  .ai-input input:focus{border-color:#9DBBA8}
+  .ai-mic,.ai-send{width:40px;height:40px;flex-shrink:0;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .ai-mic{background:#EAF1EC;color:#3C6249}
+  .ai-mic.rec{background:#E5484D;color:#fff;animation:aiPulse 1.1s infinite}
+  .ai-mic svg,.ai-send svg{width:18px;height:18px}
+  .ai-send{background:#4E7B5E;color:#fff}
+  @keyframes aiPulse{0%,100%{box-shadow:0 0 0 0 rgba(229,72,77,.5)}50%{box-shadow:0 0 0 8px rgba(229,72,77,0)}}
+  .hr-alert{position:fixed;top:20px;right:20px;z-index:398;width:360px;max-width:calc(100vw - 32px);background:#fff;border:1px solid #F0D9D8;border-radius:16px;box-shadow:0 20px 48px rgba(120,30,30,.2);overflow:hidden;transform:translateX(125%);transition:transform .42s cubic-bezier(.2,.9,.3,1)}
+  .hr-alert.show{transform:none}
+  .hr-alert-bar{height:4px;background:linear-gradient(90deg,#E5484D,#C0413F)}
+  .hr-alert-in{display:flex;gap:13px;padding:15px 16px}
+  .hr-alert-ic{width:40px;height:40px;flex-shrink:0;border-radius:11px;background:#FBEAEA;color:#C0413F;display:flex;align-items:center;justify-content:center}
+  .hr-alert-ic svg{width:21px;height:21px}
+  .hr-alert-main{flex:1;min-width:0}
+  .hr-alert-top{display:flex;align-items:center;justify-content:space-between}
+  .hr-alert-tag{font-size:11px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;color:#C0413F}
+  .hr-alert-x{background:none;border:none;color:#9AA0A8;cursor:pointer;padding:2px;line-height:0}
+  .hr-alert-x svg{width:16px;height:16px}
+  .hr-alert-name{font-weight:700;font-size:15px;color:#2C3A2F;margin-top:3px}
+  .hr-alert-desc{font-size:12.5px;color:#6E766C;margin-top:2px;line-height:1.45}
+  .hr-alert-acts{display:flex;gap:8px;margin-top:11px}
+  .hr-alert-btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-family:inherit;font-size:12.5px;font-weight:600;padding:8px 10px;border-radius:10px;border:1px solid #E1E5E1;background:#fff;color:#2C3A2F;cursor:pointer}
+  .hr-alert-btn svg{width:15px;height:15px}
+  .hr-alert-btn.primary{background:#4E7B5E;border-color:#4E7B5E;color:#fff}
+  .hr-alert-btn:hover{filter:brightness(.98)}
+  @media (max-width:900px){.hr-alert{display:none}}
+  .push-sec-label{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#9AA0A8;margin:18px 0 8px}
+  .push-dev{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid #E7EAE6;border-radius:13px;margin-bottom:10px}
+  .push-dev-ic{width:38px;height:38px;border-radius:10px;background:#EAF1EC;color:#3C6249;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .push-dev-ic svg{width:20px;height:20px}
+  .push-dev-main{flex:1;min-width:0}
+  .push-dev-name{font-weight:600;font-size:13.5px;color:#2C3A2F}
+  .push-dev-meta{font-size:11.5px;color:#8A928A;margin-top:1px}
+  .push-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:11px 2px;border-bottom:1px solid #F0F2EF}
+  .push-row:last-of-type{border-bottom:none}
+  .push-row-t{font-size:13px;color:#2C3A2F;font-weight:500}
+  .push-row-d{font-size:11.5px;color:#9AA0A8;margin-top:1px}
+  .psw{position:relative;display:inline-block;width:42px;height:24px;flex-shrink:0;cursor:pointer}
+  .psw input{opacity:0;width:0;height:0;position:absolute}
+  .psw .track{position:absolute;inset:0;background:#D3D8D2;border-radius:999px;transition:.2s}
+  .psw .track::before{content:'';position:absolute;width:18px;height:18px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+  .psw input:checked + .track{background:#4E7B5E}
+  .psw input:checked + .track::before{transform:translateX(18px)}
+  .push-preview{background:linear-gradient(160deg,#2C3A33,#1B241F);border-radius:18px;padding:16px 14px 18px;margin-top:6px}
+  .push-preview-time{color:rgba(255,255,255,.75);text-align:center;font-size:12px;margin-bottom:10px}
+  .push-card{background:rgba(255,255,255,.14);border-radius:13px;padding:11px 12px;display:flex;gap:10px;align-items:flex-start}
+  .push-card.pop{animation:pushPop .5s cubic-bezier(.2,.9,.3,1)}
+  @keyframes pushPop{0%{transform:translateY(-12px);opacity:0}100%{transform:none;opacity:1}}
+  .push-card-ic{width:30px;height:30px;border-radius:8px;background:#C0413F;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .push-card-ic svg{width:16px;height:16px}
+  .push-card-body{flex:1;min-width:0}
+  .push-card-t{color:#fff;font-weight:700;font-size:12.5px}
+  .push-card-m{color:rgba(255,255,255,.85);font-size:11.5px;margin-top:2px;line-height:1.4}
+  .push-card-time{color:rgba(255,255,255,.6);font-size:10px;margin-top:4px}
+  .push-platforms{display:flex;gap:8px;margin-top:10px}
+  .push-plat{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;font-size:12px;font-weight:600;color:#3C6249;background:#EAF1EC;border-radius:10px;padding:8px}
+  .push-plat svg{width:15px;height:15px}
+</style>
+
+<button id=&quot;aiFab&quot; onclick=&quot;aiToggle()&quot; aria-label=&quot;Open assistant&quot; title=&quot;Ask the assistant&quot;><i data-lucide='sparkles'></i></button>
+<div id=&quot;aiPanel&quot; class=&quot;ai-panel&quot;>
+  <div class=&quot;ai-head&quot;>
+    <div class=&quot;ai-head-l&quot;><div class=&quot;ai-avatar&quot;><i data-lucide='sparkles'></i></div><div><div class=&quot;ai-title&quot;>Rudra Assistant</div><div class=&quot;ai-sub&quot;>Voice &amp; chat · view your dashboard</div></div></div>
+    <button class=&quot;ai-x&quot; onclick=&quot;aiToggle()&quot; aria-label=&quot;Close&quot;><i data-lucide='x'></i></button>
+  </div>
+  <div class=&quot;ai-body&quot; id=&quot;aiBody&quot;>
+    <div class=&quot;ai-msg bot&quot;><div class=&quot;ai-bubble&quot;>Hi Dr. Rivera 👋 Ask me things like <b>&quot;show high-risk patients&quot;</b>, <b>&quot;how many active patients?&quot;</b>, or <b>&quot;open outcomes&quot;</b>. Tap the mic to speak.</div></div>
+  </div>
+  <div class=&quot;ai-chips&quot;>
+    <button class=&quot;ai-chip&quot; onclick=&quot;aiQuick('Show high-risk patients')&quot;>High-risk patients</button>
+    <button class=&quot;ai-chip&quot; onclick=&quot;aiQuick('How many active patients?')&quot;>Active patients</button>
+    <button class=&quot;ai-chip&quot; onclick=&quot;aiQuick('Survey completion rate')&quot;>Survey completion</button>
+    <button class=&quot;ai-chip&quot; onclick=&quot;aiQuick('Open outcomes')&quot;>Outcomes</button>
+  </div>
+  <div class=&quot;ai-input&quot;>
+    <button class=&quot;ai-mic&quot; id=&quot;aiMic&quot; onclick=&quot;aiVoice()&quot; title=&quot;Speak&quot; aria-label=&quot;Speak&quot;><i data-lucide='mic'></i></button>
+    <input id=&quot;aiText&quot; type=&quot;text&quot; placeholder=&quot;Ask or say something…&quot; onkeydown=&quot;if(event.key==='Enter')aiSend(false)&quot; autocomplete=&quot;off&quot;>
+    <button class=&quot;ai-send&quot; onclick=&quot;aiSend(false)&quot; aria-label=&quot;Send&quot;><i data-lucide='arrow-up'></i></button>
+  </div>
+</div>
+
+<div id=&quot;hrAlert&quot; class=&quot;hr-alert&quot; role=&quot;alert&quot;>
+  <div class=&quot;hr-alert-bar&quot;></div>
+  <div class=&quot;hr-alert-in&quot;>
+    <div class=&quot;hr-alert-ic&quot;><i data-lucide='siren'></i></div>
+    <div class=&quot;hr-alert-main&quot;>
+      <div class=&quot;hr-alert-top&quot;><span class=&quot;hr-alert-tag&quot;>New high-risk patient</span><button class=&quot;hr-alert-x&quot; onclick=&quot;hrAlertClose()&quot; aria-label=&quot;Dismiss&quot;><i data-lucide='x'></i></button></div>
+      <div class=&quot;hr-alert-name&quot;>Marcus T. flagged</div>
+      <div class=&quot;hr-alert-desc&quot;>Relapse risk 82% · 3 missed MOUD doses · last check-in 4 days ago</div>
+      <div class=&quot;hr-alert-acts&quot;><button class=&quot;hr-alert-btn primary&quot; onclick=&quot;hrAlertView()&quot;><i data-lucide='eye'></i> View patient</button><button class=&quot;hr-alert-btn&quot; onclick=&quot;hrAlertCall()&quot;><i data-lucide='phone'></i> Call</button></div>
+    </div>
+  </div>
+</div>
+
+<div class=&quot;modal-overlay&quot; id=&quot;modalPush&quot; onclick=&quot;closeModal('modalPush')&quot;>
+  <div class=&quot;modal&quot; onclick=&quot;event.stopPropagation()&quot; style=&quot;max-width:460px&quot;>
+    <div class=&quot;modal-title&quot;>Push Notifications</div>
+    <div style=&quot;font-size:13px;color:#8A928A;margin:-2px 0 4px&quot;>Real-time alerts delivered to your phone on iOS &amp; Android.</div>
+    <div class=&quot;push-sec-label&quot;>Registered devices</div>
+    <div class=&quot;push-dev&quot;><div class=&quot;push-dev-ic&quot;><i data-lucide='apple'></i></div><div class=&quot;push-dev-main&quot;><div class=&quot;push-dev-name&quot;>iPhone 15 Pro — Dr. Rivera</div><div class=&quot;push-dev-meta&quot;>iOS 18.2 · registered · active 2m ago</div></div><label class=&quot;psw&quot;><input type='checkbox' checked onchange='pushToggle(this)'><span class=&quot;track&quot;></span></label></div>
+    <div class=&quot;push-dev&quot;><div class=&quot;push-dev-ic&quot;><i data-lucide='smartphone'></i></div><div class=&quot;push-dev-main&quot;><div class=&quot;push-dev-name&quot;>Pixel 8 — On-call device</div><div class=&quot;push-dev-meta&quot;>Android 15 · registered · active 1h ago</div></div><label class=&quot;psw&quot;><input type='checkbox' checked onchange='pushToggle(this)'><span class=&quot;track&quot;></span></label></div>
+    <div class=&quot;push-sec-label&quot;>Alert types</div>
+    <div class=&quot;push-row&quot;><div><div class=&quot;push-row-t&quot;>High-risk patient flagged</div><div class=&quot;push-row-d&quot;>Immediate push when relapse risk crosses threshold</div></div><label class=&quot;psw&quot;><input type='checkbox' checked onchange='pushToggle(this)'><span class=&quot;track&quot;></span></label></div>
+    <div class=&quot;push-row&quot;><div><div class=&quot;push-row-t&quot;>Missed MOUD doses</div><div class=&quot;push-row-d&quot;>After 2+ consecutive missed doses</div></div><label class=&quot;psw&quot;><input type='checkbox' checked onchange='pushToggle(this)'><span class=&quot;track&quot;></span></label></div>
+    <div class=&quot;push-row&quot;><div><div class=&quot;push-row-t&quot;>New survey responses</div><div class=&quot;push-row-d&quot;>PHQ-9, GAD-7 and check-in submissions</div></div><label class=&quot;psw&quot;><input type='checkbox' onchange='pushToggle(this)'><span class=&quot;track&quot;></span></label></div>
+    <div class=&quot;push-row&quot;><div><div class=&quot;push-row-t&quot;>Weekly summary</div><div class=&quot;push-row-d&quot;>Every Monday · 8:00 AM</div></div><label class=&quot;psw&quot;><input type='checkbox' checked onchange='pushToggle(this)'><span class=&quot;track&quot;></span></label></div>
+    <div class=&quot;push-sec-label&quot;>Preview</div>
+    <div class=&quot;push-preview&quot;>
+      <div class=&quot;push-preview-time&quot;>9:41 · Lock Screen</div>
+      <div class=&quot;push-card&quot; id=&quot;pushPreviewCard&quot;><div class=&quot;push-card-ic&quot;><i data-lucide='siren'></i></div><div class=&quot;push-card-body&quot;><div class=&quot;push-card-t&quot;>RudraHealth · High-risk alert</div><div class=&quot;push-card-m&quot;>Marcus T. flagged — 82% relapse risk, 3 missed doses. Tap to review.</div><div class=&quot;push-card-time&quot;>now</div></div></div>
+      <div class=&quot;push-platforms&quot;><div class=&quot;push-plat&quot;><i data-lucide='apple'></i> iOS</div><div class=&quot;push-plat&quot;><i data-lucide='smartphone'></i> Android</div></div>
+    </div>
+    <div class=&quot;modal-footer&quot;><button class=&quot;btn btn-secondary&quot; onclick=&quot;pushTest()&quot;>Send test push</button><button class=&quot;btn btn-primary&quot; onclick=&quot;closeModal('modalPush')&quot;>Done</button></div>
+  </div>
+</div>
+
+<script>
+  // ── Assistant open/close ──
+  function aiToggle(){var p=document.getElementById('aiPanel');if(!p)return;var open=p.classList.toggle('open');if(open){setTimeout(function(){var i=document.getElementById('aiText');if(i)i.focus();},80);if(window.lucide)lucide.createIcons();}else{try{if(window.speechSynthesis)window.speechSynthesis.cancel();}catch(e){}}}
+  function aiClose(){var p=document.getElementById('aiPanel');if(p)p.classList.remove('open');try{if(window.speechSynthesis)window.speechSynthesis.cancel();}catch(e){}}
+  // ── Chat plumbing ──
+  function aiAddUser(text){var b=document.getElementById('aiBody');if(!b)return;var m=document.createElement('div');m.className='ai-msg user';var x=document.createElement('div');x.className='ai-bubble';x.textContent=text;m.appendChild(x);b.appendChild(m);b.scrollTop=b.scrollHeight;}
+  function aiAddBot(html){var b=document.getElementById('aiBody');if(!b)return;var m=document.createElement('div');m.className='ai-msg bot';m.innerHTML='<div class=&quot;ai-bubble&quot;>'+html+'</div>';b.appendChild(m);b.scrollTop=b.scrollHeight;if(window.lucide)lucide.createIcons();}
+  function aiTyping(on){var b=document.getElementById('aiBody');var ex=document.getElementById('aiTypeRow');if(on){if(ex||!b)return;var m=document.createElement('div');m.className='ai-msg bot';m.id='aiTypeRow';m.innerHTML='<div class=&quot;ai-bubble&quot;><span class=&quot;ai-typing&quot;><i></i><i></i><i></i></span></div>';b.appendChild(m);b.scrollTop=b.scrollHeight;}else if(ex){ex.parentNode.removeChild(ex);}}
+  function aiQuick(t){var i=document.getElementById('aiText');if(i)i.value=t;aiSend(false);}
+  function aiSend(spoke){var i=document.getElementById('aiText');if(!i)return;var v=(i.value||'').trim();if(!v)return;aiAddUser(v);i.value='';aiTyping(true);setTimeout(function(){aiTyping(false);var r=aiResolve(v);aiAddBot(r.html);if(r.act){try{r.act();}catch(e){}}if(spoke)aiSpeak(r.say||r.html);},480);}
+  function aiSpeak(text){try{if(!window.speechSynthesis)return;var u=new SpeechSynthesisUtterance((text||'').replace(/<[^>]+>/g,''));u.lang='en-US';u.rate=1.03;window.speechSynthesis.cancel();window.speechSynthesis.speak(u);}catch(e){}}
+  // ── Voice input ──
+  var _aiRec=null,_aiRecOn=false;
+  function aiVoice(){var SR=window.SpeechRecognition||window.webkitSpeechRecognition;var mic=document.getElementById('aiMic');if(!SR){aiAddBot('Voice input is not supported in this browser — you can type instead 🙂');return;}if(_aiRecOn){try{_aiRec.stop();}catch(e){}return;}try{_aiRec=new SR();_aiRec.lang='en-US';_aiRec.interimResults=false;_aiRec.maxAlternatives=1;if(mic)mic.classList.add('rec');_aiRecOn=true;_aiRec.onresult=function(ev){var s=ev.results[0][0].transcript;var i=document.getElementById('aiText');if(i)i.value=s;aiSend(true);};_aiRec.onerror=function(ev){if(mic)mic.classList.remove('rec');_aiRecOn=false;aiAddBot('Could not hear that ('+(ev.error||'error')+'). Please allow microphone access, or type your question.');};_aiRec.onend=function(){if(mic)mic.classList.remove('rec');_aiRecOn=false;};_aiRec.start();}catch(e){if(mic)mic.classList.remove('rec');_aiRecOn=false;aiAddBot('Voice needs microphone permission. Please allow it, or type your question.');}}
+  // ── Read a live KPI value off the dashboard ──
+  function aiStat(label){var best=null;document.querySelectorAll('#sec-dashboard .stat-tile').forEach(function(t){if(best)return;if((t.textContent||'').toLowerCase().indexOf(label)>=0){var v=t.querySelector('.stat-val');if(v)best=v.textContent.trim();}});return best;}
+  function aiGoHighRisk(){goSection('patients');setTimeout(function(){var el=null;document.querySelectorAll('#patientTabs *').forEach(function(x){if(el)return;var oc=x.getAttribute&&x.getAttribute('onclick');if(oc&&oc.indexOf('tab-high-risk')>=0)el=x;});if(el)el.click();},70);}
+  // ── Intent resolution ──
+  function aiResolve(q){
+    var s=(q||'').toLowerCase();
+    function has(){for(var i=0;i<arguments.length;i++){if(s.indexOf(arguments[i])>=0)return true;}return false;}
+    if(has('high risk','high-risk','highest risk','relapse risk','at risk')){
+      if(has('how many','number','count','total')){var v=aiStat('relapse')||'17';return {html:'You currently have <b>'+v+' high-risk patients</b> needing intervention. <span class=&quot;ai-link&quot; onclick=&quot;aiGoHighRisk()&quot;>Open the list →</span>',say:'You currently have '+v+' high risk patients needing intervention.'};}
+      return {html:'Your highest-risk patients: <b>J. Davis</b> (risk 8), <b>M. Lee</b> (15), <b>S. Patel</b> (18) — and 14 more. Lower score means higher risk. Opening the High-Risk tab →',say:'Your highest risk patients are J. Davis, M. Lee and S. Patel, plus 14 more. Opening the high risk tab.',act:aiGoHighRisk};
+    }
+    if(has('active patient','how many patient','total patient','patient count','how many active','patients in')){var a=aiStat('active')||'248';return {html:'There are <b>'+a+' active patients</b> in your panel for the selected period.',say:'There are '+a+' active patients in your panel.'};}
+    if(has('survey completion','completion rate','completion')){var c=aiStat('completion')||'81%';return {html:'Survey completion is <b>'+c+'</b> for the selected period.',say:'Survey completion is '+c+'.'};}
+    if(has('recovery score','avg recovery','average recovery','recovery')){var rs=aiStat('recovery')||'71';return {html:'The average recovery score is <b>'+rs+'</b> out of 100.',say:'The average recovery score is '+rs+' out of 100.'};}
+    if(has('push','ios','android','mobile alert','mobile notif','notification setting')){return {html:'Opening <b>Push Notification</b> settings for iOS &amp; Android.',say:'Opening push notification settings.',act:function(){openPushSettings(null);}};}
+    if(has('simulate','test alert','new patient alert','trigger alert','demo alert','fake alert')){return {html:'Simulating a <b>new high-risk patient</b> desktop alert now.',say:'Simulating a new high risk patient alert.',act:function(){simulateHighRiskAlert(true);}};}
+    var nav=[
+      {k:['dashboard','home screen','overview'],id:'dashboard',name:'Dashboard'},
+      {k:['user management','users','staff','team','provider'],id:'users',name:'User Management'},
+      {k:['survey scheduling','schedule survey','survey schedul'],id:'surveys',name:'Survey Scheduling'},
+      {k:['survey management','survey manager','survey template','templates'],id:'surveymanager',name:'Survey Management'},
+      {k:['integration'],id:'integrations',name:'Integrations'},
+      {k:['messaging'],id:'messaging',name:'Messaging Setup'},
+      {k:['outcome','analytics','trends','reports'],id:'outcomes',name:'Outcomes Data'},
+      {k:['patients','care plan','patient'],id:'patients',name:'Patients & Care'},
+      {k:['survey'],id:'surveys',name:'Survey Scheduling'}
+    ];
+    for(var i=0;i<nav.length;i++){if(has.apply(null,nav[i].k)){var n=nav[i];return {html:'Opening <b>'+n.name+'</b>.',say:'Opening '+n.name,act:function(){goSection(n.id);}};}}
+    if(has('help','what can you','what do you','how do you')){return {html:'I can pull up any part of your dashboard by voice or text. Try <b>&quot;show high-risk patients&quot;</b>, <b>&quot;how many active patients?&quot;</b>, <b>&quot;survey completion&quot;</b>, <b>&quot;open outcomes&quot;</b>, or <b>&quot;push settings&quot;</b>.',say:'I can pull up any part of your dashboard. Try, show high risk patients, or, how many active patients.'};}
+    if(has('thank')){return {html:'Anytime, Dr. Rivera 🙂',say:'Anytime.'};}
+    return {html:'I can help you view dashboard data. Try <b>&quot;show high-risk patients&quot;</b>, <b>&quot;active patients&quot;</b>, <b>&quot;survey completion&quot;</b>, <b>&quot;average recovery score&quot;</b>, or <b>&quot;open outcomes&quot;</b>.',say:'Try asking to show high risk patients, or active patients.'};
+  }
+  // ── Desktop in-app high-risk alert ──
+  function simulateHighRiskAlert(force){var el=document.getElementById('hrAlert');if(!el)return;if(!force&&window.innerWidth<=900)return;var dot=document.getElementById('tbNotifDot');if(dot)dot.style.display='block';aiPrependNotif();el.classList.add('show');if(window.lucide)lucide.createIcons();clearTimeout(el._t);el._t=setTimeout(function(){el.classList.remove('show');},13000);}
+  function hrAlertClose(){var el=document.getElementById('hrAlert');if(el)el.classList.remove('show');}
+  function hrAlertView(){hrAlertClose();aiGoHighRisk();}
+  function hrAlertCall(){if(window.toast)toast('Calling Marcus T. …','info');hrAlertClose();}
+  function aiPrependNotif(){var list=document.querySelector('#tbNotifMenu .tb-notif-list');if(!list||list._added)return;list._added=true;var d=document.createElement('div');d.className='tb-notif-item unread';d.innerHTML='<div class=&quot;tb-notif-ic&quot; style=&quot;background:#FBEAEA;color:#C0413F&quot;><i data-lucide=&quot;siren&quot;></i></div><div class=&quot;tb-notif-body&quot;><div class=&quot;tb-notif-t&quot;>New high-risk patient — Marcus T.</div><div class=&quot;tb-notif-d&quot;>Relapse risk 82% · 3 missed doses</div><div class=&quot;tb-notif-time&quot;>Just now</div></div>';list.insertBefore(d,list.firstChild);if(window.lucide)lucide.createIcons();}
+  // ── Push settings modal ──
+  function openPushSettings(e){if(e&&e.stopPropagation)e.stopPropagation();if(window.tbCloseNotif)tbCloseNotif();openModal('modalPush');if(window.lucide)lucide.createIcons();}
+  function pushTest(){var c=document.getElementById('pushPreviewCard');if(c){c.classList.remove('pop');void c.offsetWidth;c.classList.add('pop');}if(window.toast)toast('Test push sent to 2 devices (iOS & Android)','success');}
+  function pushToggle(el){if(window.toast)toast('Notification preference updated','success');}
+  // ── Wire into login lifecycle ──
+  function featOnLogin(){var fab=document.getElementById('aiFab');if(fab)fab.style.display='flex';try{if(!sessionStorage.getItem('rhHr')){sessionStorage.setItem('rhHr','1');if(window.innerWidth>900){setTimeout(function(){simulateHighRiskAlert(false);},6500);}}}catch(e){}if(window.lucide)lucide.createIcons();}
+  function featOnLogout(){var fab=document.getElementById('aiFab');if(fab)fab.style.display='none';aiClose();hrAlertClose();}
+  (function(){function wrap(){if(window.doLogin){var L=window.doLogin;window.doLogin=function(){var r=L.apply(this,arguments);try{featOnLogin();}catch(e){}return r;};}if(window.doLogout){var O=window.doLogout;window.doLogout=function(){try{featOnLogout();}catch(e){}return O.apply(this,arguments);};}var app=document.getElementById('page-app');if(app&&app.style.display&&app.style.display!=='none'){var fab=document.getElementById('aiFab');if(fab)fab.style.display='flex';}}if(document.readyState!=='loading')wrap();else document.addEventListener('DOMContentLoaded',wrap);})();
+</script>
+
 <div class=&quot;toast-wrap&quot; id=&quot;toastWrap&quot;></div>
 
 <script>
