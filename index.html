@@ -5382,6 +5382,113 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
   (function(){function wrap(){if(window.doLogin){var L=window.doLogin;window.doLogin=function(){var r=L.apply(this,arguments);try{featOnLogin();}catch(e){}return r;};}if(window.doLogout){var O=window.doLogout;window.doLogout=function(){try{featOnLogout();}catch(e){}return O.apply(this,arguments);};}var app=document.getElementById('page-app');if(app&&app.style.display&&app.style.display!=='none'){var fab=document.getElementById('aiFab');if(fab)fab.style.display='flex';}}if(document.readyState!=='loading')wrap();else document.addEventListener('DOMContentLoaded',wrap);})();
 </script>
 
+<!-- ═══ RECOVERY SCORE GAUGE + DETAIL MODAL ═══ -->
+<style id=&quot;gauge-styles&quot;>
+  .hr-rec{display:flex;align-items:center;gap:10px}
+  .hr-rec .gauge-svg{width:58px;height:32px;flex-shrink:0;overflow:visible}
+  .gauge-num{font-weight:800;font-size:15px;cursor:pointer;line-height:1;border-bottom:1.5px dotted transparent}
+  .gauge-num:hover{border-bottom-color:currentColor}
+  #modalRecovery .modal{position:relative}
+  #recTitle{padding-right:44px}
+  .rec-close{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:10px;border:1px solid var(--border);background:#fff;color:#6E766C;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:.14s}
+  .rec-close:hover{background:#F5F7F4;color:#2C3A2F}
+  .rec-close svg{width:18px;height:18px}
+  .rec-top{display:flex;align-items:center;gap:22px;margin:6px 0 18px}
+  .rec-gauge .gauge-svg{width:200px;height:auto}
+  .rec-score-num{font:800 42px/1 Sora,Manrope,sans-serif;color:#20261F}
+  .rec-score-band{font-weight:700;font-size:14px;margin-top:5px;text-transform:capitalize}
+  .rec-score-sub{font-size:12px;color:#9AA0A8;margin-top:4px}
+  .rec-metrics{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+  .rec-metric{background:#F5F7F4;border:1px solid #E7EAE6;border-radius:10px;padding:7px 12px;font-size:11.5px;color:#8A928A;font-weight:600}
+  .rec-metric b{display:block;font-size:13px;color:#20261F;margin-top:2px;font-weight:700}
+  .rec-takeaways{background:#EEF4EF;border:1px solid #DBE7DE;border-radius:16px;padding:20px 22px}
+  .rec-tk-title{font-weight:700;font-size:16px;color:#20261F;margin-bottom:12px}
+  .rec-takeaways p{font-size:14px;line-height:1.6;color:#3C4A3F;margin:0 0 12px}
+  .rec-takeaways p:last-child{margin-bottom:0}
+  .rec-takeaways b{font-weight:700;color:#3C6249}
+  @media (max-width:600px){.rec-top{flex-direction:column;text-align:center;gap:10px}.rec-gauge .gauge-svg{width:220px}}
+</style>
+
+<div class=&quot;modal-overlay&quot; id=&quot;modalRecovery&quot; onclick=&quot;closeModal('modalRecovery')&quot;>
+  <div class=&quot;modal&quot; onclick=&quot;event.stopPropagation()&quot; style=&quot;max-width:560px&quot;>
+    <button class=&quot;rec-close&quot; onclick=&quot;closeModal('modalRecovery')&quot; aria-label=&quot;Close&quot;><i data-lucide='x'></i></button>
+    <div class=&quot;modal-title&quot; id=&quot;recTitle&quot;>Recovery Details</div>
+    <div class=&quot;rec-top&quot;>
+      <div class=&quot;rec-gauge&quot; id=&quot;recGauge&quot;></div>
+      <div><div class=&quot;rec-score-num&quot; id=&quot;recNum&quot;>0</div><div class=&quot;rec-score-band&quot; id=&quot;recBand&quot;>—</div><div class=&quot;rec-score-sub&quot;>recovery health score · out of 100</div></div>
+    </div>
+    <div class=&quot;rec-metrics&quot; id=&quot;recMetrics&quot;></div>
+    <div class=&quot;rec-takeaways&quot;><div class=&quot;rec-tk-title&quot;>Key Takeaways</div><div id=&quot;recBody&quot;></div></div>
+  </div>
+</div>
+
+<script>
+  function gaugeArc(cx,cy,r,p1,p2){
+    var a1=Math.PI*(1-p1/100), a2=Math.PI*(1-p2/100);
+    var x1=cx+r*Math.cos(a1), y1=cy-r*Math.sin(a1);
+    var x2=cx+r*Math.cos(a2), y2=cy-r*Math.sin(a2);
+    return 'M'+x1.toFixed(2)+' '+y1.toFixed(2)+' A'+r+' '+r+' 0 0 1 '+x2.toFixed(2)+' '+y2.toFixed(2);
+  }
+  function gaugeSVG(v){
+    var cx=34,cy=32,r=26,sw=6;
+    var zones=[[0,20,'#D9776B'],[20,40,'#E0A56A'],[40,60,'#E7CE73'],[60,80,'#A9C48E'],[80,100,'#7BA87C']];
+    var arcs='';
+    for(var i=0;i<zones.length;i++){var z=zones[i];arcs+=`<path d='${gaugeArc(cx,cy,r,z[0]+1.5,z[1]-1.5)}' stroke='${z[2]}' stroke-width='${sw}' fill='none' stroke-linecap='round'/>`;}
+    var vv=Math.max(0,Math.min(100,v)); var a=Math.PI*(1-vv/100);
+    var tx=cx+(r-5)*Math.cos(a), ty=cy-(r-5)*Math.sin(a);
+    return `<svg class='gauge-svg' viewBox='0 2 68 36'><path d='${gaugeArc(cx,cy,r,0,100)}' stroke='#EEF0ED' stroke-width='${sw}' fill='none' stroke-linecap='round'/>${arcs}<line x1='${cx}' y1='${cy}' x2='${tx.toFixed(2)}' y2='${ty.toFixed(2)}' stroke='#2C3A2F' stroke-width='2.2' stroke-linecap='round'/><circle cx='${cx}' cy='${cy}' r='3.2' fill='#fff' stroke='#2C3A2F' stroke-width='1.6'/></svg>`;
+  }
+  function recColor(v){return v<34?'#C0413F':(v<67?'#B07D1E':'#3C6249');}
+  function renderRecoveryGauges(){
+    var cells=document.querySelectorAll('.hr-rec');
+    for(var i=0;i<cells.length;i++){
+      var cell=cells[i]; if(cell.getAttribute('data-gauge'))continue;
+      var b=cell.querySelector('b'); var v=b?parseInt(b.textContent,10):0; if(isNaN(v))v=0;
+      cell.setAttribute('data-gauge','1');
+      cell.innerHTML=gaugeSVG(v)+`<b class='gauge-num' data-val='${v}' style='color:${recColor(v)}' onclick='openRecovery(this)'>${v}</b>`;
+    }
+  }
+  function recBand(v){if(v<25)return['needs close support','#C0413F'];if(v<50)return['below average','#B07D1E'];if(v<70)return['around average','#B07D1E'];return['above average','#3C6249'];}
+  function recFocusLine(focus,moud){
+    var f=(focus||'').toLowerCase();
+    if(f.indexOf('craving')>=0)return 'Cravings look like the biggest focus today. Cravings are a normal part of this process and don\'t erase the progress already made. A short stress-relief activity is queued on the activities page — today could be a good day to fit it in.';
+    if(f.indexOf('missed')>=0||f.indexOf('dose')>=0)return 'Missed medication doses are the main flag today. A quick check-in about what\'s getting in the way of taking '+moud+' can get things back on track quickly.';
+    if(f.indexOf('therapy')>=0)return 'Therapy engagement is the focus today. Keeping the next session on the calendar tends to protect the rest of the routine.';
+    if(f.indexOf('care')>=0)return 'Care-plan alignment is the focus today. A brief review makes sure the plan still matches what\'s actually working.';
+    if(f.indexOf('med')>=0)return 'A medication adjustment is the focus today. Small, monitored changes to '+moud+' can make the daily routine easier to stick with.';
+    return 'The focus today is staying consistent with the recovery routine.';
+  }
+  function openRecovery(el){
+    var tr=el.closest('tr'); if(!tr)return;
+    var name=((tr.querySelector('.fw-600')||{}).textContent||'This patient').trim();
+    var val=parseInt(el.getAttribute('data-val')||el.textContent,10)||0;
+    var days=(((tr.querySelector('.hr-days')||{}).textContent)||'').replace(/\s+/g,' ').trim();
+    var moud=(((tr.querySelector('.hr-moud')||{}).textContent)||'their medication').trim();
+    var diag=(((tr.querySelector('.hr-diag')||{}).textContent)||'').trim();
+    var focus=(((tr.querySelector('.hr-focus')||{}).textContent)||'').trim();
+    var bnd=recBand(val);
+    document.getElementById('recTitle').textContent='Recovery Details — '+name;
+    document.getElementById('recGauge').innerHTML=gaugeSVG(val);
+    document.getElementById('recNum').textContent=val;
+    var bandEl=document.getElementById('recBand'); bandEl.textContent=bnd[0]; bandEl.style.color=bnd[1];
+    var chips='';
+    if(days)chips+=`<div class='rec-metric'>Days sober<b>${days}</b></div>`;
+    if(moud)chips+=`<div class='rec-metric'>MOUD<b>${moud}</b></div>`;
+    if(diag)chips+=`<div class='rec-metric'>Diagnosis<b>${diag}</b></div>`;
+    if(focus)chips+=`<div class='rec-metric'>Today\'s focus<b>${focus}</b></div>`;
+    document.getElementById('recMetrics').innerHTML=chips;
+    var trend = val<50 ? 'The focus this week is bringing it up with small, steady steps.' : 'It has held fairly steady lately, and steady counts for a lot in recovery.';
+    var p1=`Today\'s recovery health score is <b>${val}</b>. That puts it <b>${bnd[0]}</b>. ${trend}`;
+    var p2=recFocusLine(focus,moud);
+    var p3=`Now the encouraging part. <b>${days||'Every day'}</b> in recovery without non-medical opioid use, and staying with ${moud}. That kind of consistency takes real effort, one day at a time — nobody gets there by luck. The same skills that built this progress are the ones that will keep it going. <b>This is what showing up looks like.</b>`;
+    document.getElementById('recBody').innerHTML='<p>'+p1+'</p><p>'+p2+'</p><p>'+p3+'</p>';
+    if(window.openModal)openModal('modalRecovery');
+    if(window.lucide)lucide.createIcons();
+  }
+  function recOpenPlan(){if(window.closeModal)closeModal('modalRecovery');if(window.toast)toast('Opening care plan','info');}
+  (function(){function go(){try{renderRecoveryGauges();}catch(e){}}if(document.readyState!=='loading')go();else document.addEventListener('DOMContentLoaded',go);})();
+</script>
+
 <div class=&quot;toast-wrap&quot; id=&quot;toastWrap&quot;></div>
 
 <script>
