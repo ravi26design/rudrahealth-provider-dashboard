@@ -5428,11 +5428,6 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
   <div class=&quot;modal&quot; onclick=&quot;event.stopPropagation()&quot; style=&quot;max-width:560px&quot;>
     <button class=&quot;rec-close&quot; onclick=&quot;closeModal('modalRecovery')&quot; aria-label=&quot;Close&quot;><i data-lucide='x'></i></button>
     <div class=&quot;modal-title&quot; id=&quot;recTitle&quot;>Recovery Details</div>
-    <div class=&quot;rec-top&quot;>
-      <div class=&quot;rec-gauge&quot; id=&quot;recGauge&quot;></div>
-      <div><div class=&quot;rec-score-num&quot; id=&quot;recNum&quot;>0</div><div class=&quot;rec-score-band&quot; id=&quot;recBand&quot;>—</div><div class=&quot;rec-score-sub&quot;>recovery health score · out of 100</div></div>
-    </div>
-    <div class=&quot;rec-metrics&quot; id=&quot;recMetrics&quot;></div>
     <div class=&quot;rec-takeaways&quot;><div class=&quot;rec-tk-title&quot;>Key Takeaways</div><div id=&quot;recBody&quot;></div></div>
   </div>
 </div>
@@ -5483,15 +5478,6 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
     var focus=(((tr.querySelector('.hr-focus')||{}).textContent)||'').trim();
     var bnd=recBand(val);
     document.getElementById('recTitle').textContent='Recovery Details — '+name;
-    document.getElementById('recGauge').innerHTML=gaugeSVG(val);
-    document.getElementById('recNum').textContent=val;
-    var bandEl=document.getElementById('recBand'); bandEl.textContent=bnd[0]; bandEl.style.color=bnd[1];
-    var chips='';
-    if(days)chips+=`<div class='rec-metric'>Days sober<b>${days}</b></div>`;
-    if(moud)chips+=`<div class='rec-metric'>MOUD<b>${moud}</b></div>`;
-    if(diag)chips+=`<div class='rec-metric'>Diagnosis<b>${diag}</b></div>`;
-    if(focus)chips+=`<div class='rec-metric'>Today\'s focus<b>${focus}</b></div>`;
-    document.getElementById('recMetrics').innerHTML=chips;
     var trend = val<50 ? 'The focus this week is bringing it up with small, steady steps.' : 'It has held fairly steady lately, and steady counts for a lot in recovery.';
     var p1=`Today\'s recovery health score is <b>${val}</b>. That puts it <b>${bnd[0]}</b>. ${trend}`;
     var p2=recFocusLine(focus,moud);
