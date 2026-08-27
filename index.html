@@ -2702,7 +2702,7 @@ body{padding-top:0!important}
   .connector-card{border:1.5px solid var(--border);border-radius:var(--radius);padding:18px;display:flex;flex-direction:column;gap:10px;transition:.16s;cursor:pointer;background:var(--surface);box-shadow:var(--shadow)}
   .connector-card:hover{border-color:var(--accent);transform:translateY(-2px)}
   .connector-card.connected{border-color:#cfe0d2;background:linear-gradient(160deg,var(--green-light),#fff)}
-  .connector-icon{font-size:26px}
+  .connector-icon{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}.connector-icon svg{width:23px;height:23px}.connector-card .btn{width:100%;margin-top:auto}#integTabs .tab{display:inline-flex;align-items:center;gap:7px}#integTabs .tab svg{width:15px;height:15px}.cap-yes{color:#3C6249}.cap-no{color:#C0413F}.cap-yes,.cap-no{display:inline-block;width:15px;height:15px;vertical-align:-3px}
   .connector-name{font-size:14px;font-weight:700;font-family:&quot;Manrope&quot;}
   .connector-type{font-size:11px;color:var(--text-3)}
 
@@ -3616,12 +3616,12 @@ body{padding-top:0!important}
       </div>
 
       <div class=&quot;tabs&quot; id=&quot;integTabs&quot; style=&quot;flex-wrap:wrap;&quot;>
-        <div class=&quot;tab active&quot; onclick=&quot;switchTab('integTabs','tab-ehr',this)&quot;>🏥 EHR / EMR</div>
-        <div class=&quot;tab&quot; onclick=&quot;switchTab('integTabs','tab-api',this)&quot;>🔑 API Keys</div>
-        <div class=&quot;tab&quot; onclick=&quot;switchTab('integTabs','tab-fhir',this)&quot;>⚙️ FHIR Settings</div>
-        <div class=&quot;tab&quot; onclick=&quot;switchTab('integTabs','tab-twilio',this)&quot;>📱 Twilio</div>
-        <div class=&quot;tab&quot; onclick=&quot;switchTab('integTabs','tab-bandwidth',this)&quot;>📡 Bandwidth</div>
-        <div class=&quot;tab&quot; onclick=&quot;switchTab('integTabs','tab-whatsapp',this)&quot;>💬 WhatsApp</div>
+        <div class=&quot;tab active&quot; onclick=&quot;switchTab('integTabs','tab-ehr',this)&quot;><i data-lucide='building-2'></i>EHR / EMR</div>
+        <div class=&quot;tab&quot; onclick=&quot;switchTab('integTabs','tab-api',this)&quot;><i data-lucide='key-round'></i>API Keys</div>
+        <div class=&quot;tab&quot; onclick=&quot;switchTab('integTabs','tab-fhir',this)&quot;><i data-lucide='settings'></i>FHIR Settings</div>
+        <div class=&quot;tab&quot; onclick=&quot;switchTab('integTabs','tab-twilio',this)&quot;><i data-lucide='message-square-text'></i>Twilio</div>
+        <div class=&quot;tab&quot; onclick=&quot;switchTab('integTabs','tab-bandwidth',this)&quot;><i data-lucide='signal'></i>Bandwidth</div>
+        <div class=&quot;tab&quot; onclick=&quot;switchTab('integTabs','tab-whatsapp',this)&quot;><i data-lucide='message-circle'></i>WhatsApp</div>
       </div>
 
       <!-- EHR Tab -->
@@ -3629,49 +3629,49 @@ body{padding-top:0!important}
         <div class=&quot;alert alert-info&quot;><i data-lucide='lock' class=&quot;alert-ic-sm&quot;></i> All EHR connections use OAuth 2.0 / SMART on FHIR and are encrypted in transit and at rest.</div>
         <div class=&quot;connector-grid&quot;>
           <div class=&quot;connector-card connected&quot;>
-            <div class=&quot;connector-icon&quot;>🏥</div>
+            <div class=&quot;connector-icon&quot; style=&quot;background:#E0EDF8;color:#2F6DB0&quot;><i data-lucide='building-2'></i></div>
             <div><div class=&quot;connector-name&quot;>Epic MyChart</div><div class=&quot;connector-type&quot;>EHR · SMART on FHIR R4</div></div>
             <span class=&quot;tag tag-green&quot;>● Connected</span>
             <button class=&quot;btn btn-secondary btn-sm&quot; onclick=&quot;openConnectModal('Epic MyChart','Configure')&quot;>Configure</button>
           </div>
           <div class=&quot;connector-card&quot;>
-            <div class=&quot;connector-icon&quot;>🩺</div>
+            <div class=&quot;connector-icon&quot; style=&quot;background:#E7F0EA;color:#3C6249&quot;><i data-lucide='stethoscope'></i></div>
             <div><div class=&quot;connector-name&quot;>Cerner PowerChart</div><div class=&quot;connector-type&quot;>EHR · FHIR R4</div></div>
             <span class=&quot;tag tag-gray&quot;>Not Connected</span>
             <button class=&quot;btn btn-primary btn-sm&quot; onclick=&quot;openConnectModal('Cerner PowerChart')&quot;>Connect</button>
           </div>
           <div class=&quot;connector-card connected&quot;>
-            <div class=&quot;connector-icon&quot;>📋</div>
+            <div class=&quot;connector-icon&quot; style=&quot;background:#EFEAF8;color:#6A5CB0&quot;><i data-lucide='clipboard-list'></i></div>
             <div><div class=&quot;connector-name&quot;>Athenahealth</div><div class=&quot;connector-type&quot;>EMR · REST API</div></div>
             <span class=&quot;tag tag-green&quot;>● Connected</span>
             <button class=&quot;btn btn-secondary btn-sm&quot; onclick=&quot;openConnectModal('Athenahealth','Configure')&quot;>Configure</button>
           </div>
           <div class=&quot;connector-card&quot;>
-            <div class=&quot;connector-icon&quot;>💊</div>
+            <div class=&quot;connector-icon&quot; style=&quot;background:#F7E7E4;color:#C0413F&quot;><i data-lucide='pill'></i></div>
             <div><div class=&quot;connector-name&quot;>DrFirst / Rcopia</div><div class=&quot;connector-type&quot;>e-Prescribing · MOUD</div></div>
             <span class=&quot;tag tag-gray&quot;>Not Connected</span>
             <button class=&quot;btn btn-primary btn-sm&quot; onclick=&quot;openConnectModal('DrFirst')&quot;>Connect</button>
           </div>
           <div class=&quot;connector-card&quot;>
-            <div class=&quot;connector-icon&quot;>🔬</div>
+            <div class=&quot;connector-icon&quot; style=&quot;background:#DCEDEC;color:#3F8E8C&quot;><i data-lucide='flask-conical'></i></div>
             <div><div class=&quot;connector-name&quot;>LabCorp / Quest</div><div class=&quot;connector-type&quot;>Lab Results · HL7</div></div>
             <span class=&quot;tag tag-gray&quot;>Not Connected</span>
             <button class=&quot;btn btn-primary btn-sm&quot; onclick=&quot;openConnectModal('LabCorp')&quot;>Connect</button>
           </div>
           <div class=&quot;connector-card&quot;>
-            <div class=&quot;connector-icon&quot;>🏛</div>
+            <div class=&quot;connector-icon&quot; style=&quot;background:#FBF4E2;color:#9A7C28&quot;><i data-lucide='landmark'></i></div>
             <div><div class=&quot;connector-name&quot;>PDMP / CURES</div><div class=&quot;connector-type&quot;>State Prescription Monitoring</div></div>
             <span class=&quot;tag tag-gray&quot;>Not Connected</span>
             <button class=&quot;btn btn-primary btn-sm&quot; onclick=&quot;openConnectModal('PDMP')&quot;>Connect</button>
           </div>
           <div class=&quot;connector-card&quot;>
-            <div class=&quot;connector-icon&quot;>📊</div>
+            <div class=&quot;connector-icon&quot; style=&quot;background:#E0EDF8;color:#2F6DB0&quot;><i data-lucide='bar-chart-3'></i></div>
             <div><div class=&quot;connector-name&quot;>Greenway Health</div><div class=&quot;connector-type&quot;>EMR · HL7 v2</div></div>
             <span class=&quot;tag tag-gray&quot;>Not Connected</span>
             <button class=&quot;btn btn-primary btn-sm&quot; onclick=&quot;openConnectModal('Greenway')&quot;>Connect</button>
           </div>
           <div class=&quot;connector-card&quot;>
-            <div class=&quot;connector-icon&quot;>🖥</div>
+            <div class=&quot;connector-icon&quot; style=&quot;background:#ECEFF2;color:#5A6472&quot;><i data-lucide='monitor'></i></div>
             <div><div class=&quot;connector-name&quot;>NextGen</div><div class=&quot;connector-type&quot;>EMR · FHIR</div></div>
             <span class=&quot;tag tag-gray&quot;>Not Connected</span>
             <button class=&quot;btn btn-primary btn-sm&quot; onclick=&quot;openConnectModal('NextGen')&quot;>Connect</button>
@@ -3731,12 +3731,12 @@ body{padding-top:0!important}
 
       <!-- ── TWILIO TAB ── -->
       <div id=&quot;tab-twilio&quot; class=&quot;hidden&quot;>
-        <div class=&quot;alert alert-info&quot;>📋 Twilio powers SMS and voice outreach. You need an active Twilio account with <strong>A2P 10DLC registration</strong> for healthcare messaging compliance.</div>
+        <div class=&quot;alert alert-info&quot;><i data-lucide='message-square-text' class=&quot;alert-ic-sm&quot;></i> Twilio powers SMS and voice outreach. You need an active Twilio account with <strong>A2P 10DLC registration</strong> for healthcare messaging compliance.</div>
 
         <!-- Status banner -->
         <div class=&quot;card&quot; style=&quot;background:var(--yellow-light);border:1.5px solid var(--yellow);margin-bottom:20px;&quot;>
           <div style=&quot;display:flex;align-items:center;gap:14px;&quot;>
-            <span style=&quot;font-size:28px;&quot;>📱</span>
+            <span style=&quot;font-size:28px;&quot;><i data-lucide='smartphone' style='width:26px;height:26px'></i></span>
             <div style=&quot;flex:1;&quot;>
               <div style=&quot;font-weight:700;font-size:14px;&quot;>Twilio — Not Connected</div>
               <div style=&quot;font-size:12px;color:var(--text-2);margin-top:2px;&quot;>Enter your credentials below and click <strong>Test &amp; Save</strong> to activate.</div>
@@ -3759,7 +3759,7 @@ body{padding-top:0!important}
               <label>Auth Token <span style=&quot;color:var(--red);&quot;>*</span></label>
               <div style=&quot;position:relative;&quot;>
                 <input type=&quot;password&quot; id=&quot;twAuthToken&quot; placeholder=&quot;••••••••••••••••••••••••••••••••&quot; style=&quot;padding-right:40px;&quot;>
-                <button onclick=&quot;togglePwd('twAuthToken',this)&quot; style=&quot;position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-3);font-size:14px;&quot;>👁</button>
+                <button onclick=&quot;togglePwd('twAuthToken',this)&quot; style=&quot;position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-3);font-size:14px;&quot;><i data-lucide='eye' style='width:16px;height:16px;vertical-align:-3px'></i></button>
               </div>
               <div class=&quot;text-xs mt-8&quot;>Keep this secret — never share or commit to source control</div>
             </div>
@@ -3825,20 +3825,20 @@ body{padding-top:0!important}
             <label class=&quot;check-row&quot;><input type=&quot;checkbox&quot;> Twilio HIPAA BAA signed (required for PHI in messages)</label>
           </div>
           <div class=&quot;flex flex-end&quot; style=&quot;gap:10px;&quot;>
-            <button class=&quot;btn btn-secondary btn-sm&quot; onclick=&quot;testTwilio()&quot;>🔍 Test Connection</button>
+            <button class=&quot;btn btn-secondary btn-sm&quot; onclick=&quot;testTwilio()&quot;><i data-lucide='zap' style='width:15px;height:15px;vertical-align:-3px;margin-right:5px'></i>Test Connection</button>
             <button class=&quot;btn btn-primary btn-sm&quot; onclick=&quot;saveTwilio()&quot;>Save &amp;amp; Activate Twilio</button>
           </div>
-          <div id=&quot;twilioTestResult&quot; class=&quot;alert alert-success mt-16&quot; style=&quot;display:none;&quot;>✅ Twilio connected successfully. Test SMS delivered in 1.1s. Account: RudraHealth AI — A2P 10DLC active.</div>
+          <div id=&quot;twilioTestResult&quot; class=&quot;alert alert-success mt-16&quot; style=&quot;display:none;&quot;><i data-lucide='circle-check-big' class=&quot;alert-ic-sm&quot;></i> Twilio connected successfully. Test SMS delivered in 1.1s. Account: RudraHealth AI — A2P 10DLC active.</div>
         </div>
       </div>
 
       <!-- ── BANDWIDTH TAB ── -->
       <div id=&quot;tab-bandwidth&quot; class=&quot;hidden&quot;>
-        <div class=&quot;alert alert-info&quot;>📡 Bandwidth.com provides carrier-grade messaging and voice. Best for <strong>high-volume deployments</strong> (&amp;gt;10k messages/month), local number provisioning, and toll-free SMS.</div>
+        <div class=&quot;alert alert-info&quot;><i data-lucide='signal' class=&quot;alert-ic-sm&quot;></i> Bandwidth.com provides carrier-grade messaging and voice. Best for <strong>high-volume deployments</strong> (&amp;gt;10k messages/month), local number provisioning, and toll-free SMS.</div>
 
         <div class=&quot;card&quot; style=&quot;background:var(--bg);border:1.5px solid var(--border);margin-bottom:20px;&quot;>
           <div style=&quot;display:flex;align-items:center;gap:14px;&quot;>
-            <span style=&quot;font-size:28px;&quot;>📡</span>
+            <span style=&quot;font-size:28px;&quot;><i data-lucide='signal' style='width:26px;height:26px'></i></span>
             <div style=&quot;flex:1;&quot;>
               <div style=&quot;font-weight:700;font-size:14px;&quot;>Bandwidth — Not Connected</div>
               <div style=&quot;font-size:12px;color:var(--text-2);margin-top:2px;&quot;>Enter your Bandwidth dashboard credentials to enable SMS and voice.</div>
@@ -3864,14 +3864,14 @@ body{padding-top:0!important}
               <label>API Token <span style=&quot;color:var(--red);&quot;>*</span></label>
               <div style=&quot;position:relative;&quot;>
                 <input type=&quot;password&quot; id=&quot;bwApiToken&quot; placeholder=&quot;••••••••••••••••••••••••&quot; style=&quot;padding-right:40px;&quot;>
-                <button onclick=&quot;togglePwd('bwApiToken',this)&quot; style=&quot;position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-3);&quot;>👁</button>
+                <button onclick=&quot;togglePwd('bwApiToken',this)&quot; style=&quot;position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-3);&quot;><i data-lucide='eye' style='width:16px;height:16px;vertical-align:-3px'></i></button>
               </div>
             </div>
             <div class=&quot;field&quot;>
               <label>API Secret <span style=&quot;color:var(--red);&quot;>*</span></label>
               <div style=&quot;position:relative;&quot;>
                 <input type=&quot;password&quot; id=&quot;bwApiSecret&quot; placeholder=&quot;••••••••••••••••••••••••&quot; style=&quot;padding-right:40px;&quot;>
-                <button onclick=&quot;togglePwd('bwApiSecret',this)&quot; style=&quot;position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-3);&quot;>👁</button>
+                <button onclick=&quot;togglePwd('bwApiSecret',this)&quot; style=&quot;position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-3);&quot;><i data-lucide='eye' style='width:16px;height:16px;vertical-align:-3px'></i></button>
               </div>
             </div>
           </div>
@@ -3927,10 +3927,10 @@ body{padding-top:0!important}
             <label class=&quot;check-row&quot;><input type=&quot;checkbox&quot; checked> Delivery receipt logging</label>
           </div>
           <div class=&quot;flex flex-end&quot; style=&quot;gap:10px;&quot;>
-            <button class=&quot;btn btn-secondary btn-sm&quot; onclick=&quot;testBandwidth()&quot;>🔍 Test Connection</button>
+            <button class=&quot;btn btn-secondary btn-sm&quot; onclick=&quot;testBandwidth()&quot;><i data-lucide='zap' style='width:15px;height:15px;vertical-align:-3px;margin-right:5px'></i>Test Connection</button>
             <button class=&quot;btn btn-primary btn-sm&quot; onclick=&quot;saveBandwidth()&quot;>Save &amp;amp; Activate Bandwidth</button>
           </div>
-          <div id=&quot;bandwidthTestResult&quot; class=&quot;alert alert-success mt-16&quot; style=&quot;display:none;&quot;>✅ Bandwidth connected. Test SMS delivered in 0.9s. Account verified · Application ID confirmed.</div>
+          <div id=&quot;bandwidthTestResult&quot; class=&quot;alert alert-success mt-16&quot; style=&quot;display:none;&quot;><i data-lucide='circle-check-big' class=&quot;alert-ic-sm&quot;></i> Bandwidth connected. Test SMS delivered in 0.9s. Account verified · Application ID confirmed.</div>
         </div>
 
         <div class=&quot;card&quot;>
@@ -3939,11 +3939,11 @@ body{padding-top:0!important}
             <thead><tr><th>Feature</th><th>Twilio</th><th>Bandwidth</th></tr></thead>
             <tbody>
               <tr><td>Best for</td><td>Quick setup, smaller volumes</td><td>High volume, enterprise</td></tr>
-              <tr><td>A2P 10DLC</td><td>✅ Built-in</td><td>✅ Supported</td></tr>
-              <tr><td>WhatsApp</td><td>✅ Native</td><td>❌ Not supported</td></tr>
+              <tr><td>A2P 10DLC</td><td><i data-lucide='check' class='cap-yes'></i> Built-in</td><td><i data-lucide='check' class='cap-yes'></i> Supported</td></tr>
+              <tr><td>WhatsApp</td><td><i data-lucide='check' class='cap-yes'></i> Native</td><td><i data-lucide='x' class='cap-no'></i> Not supported</td></tr>
               <tr><td>Pricing model</td><td>Pay-per-message</td><td>Volume tiers</td></tr>
-              <tr><td>Local number provisioning</td><td>Manual</td><td>✅ Automated DNI</td></tr>
-              <tr><td>HIPAA BAA available</td><td>✅</td><td>✅</td></tr>
+              <tr><td>Local number provisioning</td><td>Manual</td><td><i data-lucide='check' class='cap-yes'></i> Automated DNI</td></tr>
+              <tr><td>HIPAA BAA available</td><td><i data-lucide='check' class='cap-yes'></i></td><td><i data-lucide='check' class='cap-yes'></i></td></tr>
             </tbody>
           </table>
         </div>
@@ -3951,13 +3951,13 @@ body{padding-top:0!important}
 
       <!-- ── WHATSAPP TAB ── -->
       <div id=&quot;tab-whatsapp&quot; class=&quot;hidden&quot;>
-        <div class=&quot;alert alert-info&quot;>💬 WhatsApp reaches patients who prefer messaging apps over SMS. Requires a <strong>Meta Business Account</strong> with WhatsApp Business API access, or connect via Twilio WhatsApp.</div>
+        <div class=&quot;alert alert-info&quot;><i data-lucide='message-circle' class=&quot;alert-ic-sm&quot;></i> WhatsApp reaches patients who prefer messaging apps over SMS. Requires a <strong>Meta Business Account</strong> with WhatsApp Business API access, or connect via Twilio WhatsApp.</div>
 
         <div class=&quot;card&quot;>
           <div class=&quot;card-header&quot;><div class=&quot;card-title&quot;>Provider</div></div>
           <div class=&quot;channel-row&quot; id=&quot;waProviderRow&quot;>
-            <div class=&quot;channel-btn sel&quot; onclick=&quot;selectWAProvider(this,'meta')&quot; id=&quot;waProvMeta&quot;><span class=&quot;ch-icon&quot;>🔵</span>Meta Cloud API<div style=&quot;font-size:10px;color:var(--text-3);margin-top:2px;&quot;>Direct · Lower cost</div></div>
-            <div class=&quot;channel-btn&quot; onclick=&quot;selectWAProvider(this,'twilio')&quot; id=&quot;waProvTwilio&quot;><span class=&quot;ch-icon&quot;>🔴</span>Twilio WhatsApp<div style=&quot;font-size:10px;color:var(--text-3);margin-top:2px;&quot;>Easier setup</div></div>
+            <div class=&quot;channel-btn sel&quot; onclick=&quot;selectWAProvider(this,'meta')&quot; id=&quot;waProvMeta&quot;><span class=&quot;ch-icon&quot; style=&quot;color:#2F6DB0&quot;><i data-lucide='circle-dot'></i></span>Meta Cloud API<div style=&quot;font-size:10px;color:var(--text-3);margin-top:2px;&quot;>Direct · Lower cost</div></div>
+            <div class=&quot;channel-btn&quot; onclick=&quot;selectWAProvider(this,'twilio')&quot; id=&quot;waProvTwilio&quot;><span class=&quot;ch-icon&quot; style=&quot;color:#C0413F&quot;><i data-lucide='circle-dot'></i></span>Twilio WhatsApp<div style=&quot;font-size:10px;color:var(--text-3);margin-top:2px;&quot;>Easier setup</div></div>
           </div>
         </div>
 
@@ -3978,7 +3978,7 @@ body{padding-top:0!important}
                 <label>Permanent Access Token <span style=&quot;color:var(--red);&quot;>*</span></label>
                 <div style=&quot;position:relative;&quot;>
                   <input type=&quot;password&quot; placeholder=&quot;EAAxxxxxxxxxxxxxxx&quot; style=&quot;padding-right:40px;&quot; id=&quot;waMetaToken&quot;>
-                  <button onclick=&quot;togglePwd('waMetaToken',this)&quot; style=&quot;position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-3);&quot;>👁</button>
+                  <button onclick=&quot;togglePwd('waMetaToken',this)&quot; style=&quot;position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-3);&quot;><i data-lucide='eye' style='width:16px;height:16px;vertical-align:-3px'></i></button>
                 </div>
                 <div class=&quot;text-xs mt-8&quot;>Create a System User token in Meta Business Manager for production use</div>
               </div>
@@ -4020,7 +4020,7 @@ body{padding-top:0!important}
 
         <div class=&quot;card&quot;>
           <div class=&quot;card-header&quot;><div class=&quot;card-title&quot;>Message Templates</div><div class=&quot;card-sub&quot;>WhatsApp requires pre-approved templates for outbound messages</div></div>
-          <div class=&quot;alert alert-warn&quot;>⚠️ Only approved templates can be sent as outbound messages. Free-form replies are allowed within 24h of a patient message.</div>
+          <div class=&quot;alert alert-warn&quot;><i data-lucide='alert-triangle' class=&quot;alert-ic-sm&quot;></i> Only approved templates can be sent as outbound messages. Free-form replies are allowed within 24h of a patient message.</div>
           <table>
             <thead><tr><th>Template Name</th><th>Category</th><th>Language</th><th>Status</th><th>Actions</th></tr></thead>
             <tbody>
@@ -4045,10 +4045,10 @@ body{padding-top:0!important}
             <label class=&quot;check-row&quot;><input type=&quot;checkbox&quot;> Spanish language templates</label>
           </div>
           <div class=&quot;flex flex-end&quot; style=&quot;gap:10px;&quot;>
-            <button class=&quot;btn btn-secondary btn-sm&quot; onclick=&quot;testWhatsApp()&quot;>🔍 Test Connection</button>
+            <button class=&quot;btn btn-secondary btn-sm&quot; onclick=&quot;testWhatsApp()&quot;><i data-lucide='zap' style='width:15px;height:15px;vertical-align:-3px;margin-right:5px'></i>Test Connection</button>
             <button class=&quot;btn btn-primary btn-sm&quot;>Save &amp;amp; Activate WhatsApp</button>
           </div>
-          <div id=&quot;whatsappTestResult&quot; class=&quot;alert alert-success mt-16&quot; style=&quot;display:none;&quot;>✅ WhatsApp Business API connected. WABA verified · 3 templates active.</div>
+          <div id=&quot;whatsappTestResult&quot; class=&quot;alert alert-success mt-16&quot; style=&quot;display:none;&quot;><i data-lucide='circle-check-big' class=&quot;alert-ic-sm&quot;></i> WhatsApp Business API connected. WABA verified · 3 templates active.</div>
         </div>
       </div>
 
