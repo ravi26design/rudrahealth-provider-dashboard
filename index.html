@@ -5493,6 +5493,7 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
   .rec-focus2 .rf-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9AA0A8}
   .rec-focus2 .rf-text{font-size:16px;font-weight:700;color:#20261F;margin-top:2px}
   .hr-table .fw-600{cursor:pointer;transition:color .12s}
+  .hr-table tbody tr{cursor:pointer}
   .hr-table .fw-600:hover{color:var(--accent)}
   #modalPatient .modal{position:relative}
   .pt-head{display:flex;align-items:center;gap:14px;margin:2px 0 18px}
@@ -5601,7 +5602,7 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
 <script>
   function openPatient(tr){var q=function(sel){var x=tr.querySelector(sel);return x?x.textContent.replace(/\s+/g,' ').trim():'';};var name=q('.fw-600'),sub=q('.hr-pt-sub'),diag=q('.hr-diag'),moud=q('.hr-moud'),days=q('.hr-days'),team=q('.hr-team-name'),focus=q('.hr-focus');var recEl=tr.querySelector('.hr-rec b');var rec=recEl?(parseInt(recEl.getAttribute('data-val')||recEl.textContent,10)||0):0;var checkin='';var recTd=tr.querySelector('.hr-rec');if(recTd){var ptd=recTd.closest('td');var ntd=ptd&&ptd.nextElementSibling;if(ntd)checkin=ntd.textContent.trim();}var init=((window.nameInitials?nameInitials(name):(name||'?').slice(0,2))||'?').toUpperCase();var col=(window.avatarColor?avatarColor(init):'#4E7B5E');var av=document.getElementById('ptAvatar');av.textContent=init;av.style.background=col;document.getElementById('ptName').textContent=name||'Patient';document.getElementById('ptSub').textContent=sub;var risk=document.getElementById('ptRisk');var rc=(window.recBandColors?recBandColors(rec):['#3C6249','#E7F0EA']);var rl=rec<25?'High risk':(rec<50?'Elevated':'Stable');risk.textContent=rl;risk.style.color=rc[0];risk.style.background=rc[1];document.getElementById('ptRec').textContent=rec;document.getElementById('ptDays').textContent=days||'--';document.getElementById('ptCheckin').textContent=checkin||'--';document.getElementById('ptDiag').textContent=diag||'--';document.getElementById('ptMoud').textContent=moud||'--';document.getElementById('ptTeam').textContent=team||'--';document.getElementById('ptFocus').textContent=focus||'--';if(window.openModal)openModal('modalPatient');if(window.lucide)lucide.createIcons();}
   function ptAct(a){var n=(document.getElementById('ptName')||{}).textContent||'patient';if(window.toast)toast(a+' - '+n,'info');}
-  document.addEventListener('click',function(e){var t=e.target;if(!t||!t.closest)return;var nm=t.closest('.fw-600');if(!nm)return;var tr=nm.closest('tr');if(!tr||!tr.querySelector('.hr-rec'))return;openPatient(tr);});
+  document.addEventListener('click',function(e){var t=e.target;if(!t||!t.closest)return;if(t.closest('button,a,input,select,.gauge-num,.rowact'))return;var tr=t.closest('tr');if(!tr||!tr.querySelector('.hr-rec'))return;openPatient(tr);});
 </script>
 <div class=&quot;toast-wrap&quot; id=&quot;toastWrap&quot;></div>
 
