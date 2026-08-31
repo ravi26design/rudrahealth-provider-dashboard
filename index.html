@@ -5479,6 +5479,19 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
   .rec-takeaways p{font-size:14px;line-height:1.6;color:#3C4A3F;margin:0 0 12px}
   .rec-takeaways p:last-child{margin-bottom:0}
   .rec-takeaways b{font-weight:700;color:#3C6249}
+  .rec-hero{text-align:center;padding:2px 0 0;border-bottom:1px solid #EEF1ED;padding-bottom:18px;margin-bottom:18px}
+  .rec-gauge2{max-width:300px;margin:0 auto}
+  .rec-num2{font:800 44px/1 Sora,Manrope,sans-serif;color:#20261F;margin-top:-12px}
+  .rec-outof{font-size:11px;font-weight:700;letter-spacing:.14em;color:#9AA0A8;margin-top:6px}
+  .rec-pills{display:flex;justify-content:center;gap:12px;margin-top:16px;flex-wrap:wrap}
+  .rec-band-pill{font-weight:800;font-size:13px;letter-spacing:.03em;text-transform:uppercase;padding:9px 18px;border-radius:999px}
+  .rec-delta-pill{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#8A928A;background:#fff;border:1px solid #E7EAE6;border-radius:999px;padding:9px 16px}
+  .rec-delta-pill b{color:#3C6249;font-size:14px}
+  .rec-focus2{display:inline-flex;align-items:center;gap:13px;margin-top:18px;text-align:left}
+  .rec-focus2 .rf-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .rec-focus2 .rf-ic svg{width:20px;height:20px}
+  .rec-focus2 .rf-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9AA0A8}
+  .rec-focus2 .rf-text{font-size:16px;font-weight:700;color:#20261F;margin-top:2px}
   @media (max-width:600px){.rec-top{flex-direction:column;text-align:center;gap:10px}.rec-gauge .gauge-svg{width:220px}}
 </style>
 
@@ -5486,6 +5499,7 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
   <div class=&quot;modal&quot; onclick=&quot;event.stopPropagation()&quot; style=&quot;max-width:560px&quot;>
     <button class=&quot;rec-close&quot; onclick=&quot;closeModal('modalRecovery')&quot; aria-label=&quot;Close&quot;><i data-lucide='x'></i></button>
     <div class=&quot;modal-title&quot; id=&quot;recTitle&quot;>Recovery Details</div>
+    <div class=&quot;rec-hero&quot;><div class=&quot;rec-gauge2&quot; id=&quot;recGauge2&quot;></div><div class=&quot;rec-num2&quot; id=&quot;recNum2&quot;>0</div><div class=&quot;rec-outof&quot;>OUT OF 100</div><div class=&quot;rec-pills&quot;><span class=&quot;rec-band-pill&quot; id=&quot;recBandPill&quot;>&mdash;</span><span class=&quot;rec-delta-pill&quot;><b>+2</b> STABLE</span></div><div class=&quot;rec-focus2&quot; id=&quot;recFocus2&quot;></div></div>
     <div class=&quot;rec-takeaways&quot;><div class=&quot;rec-tk-title&quot;>Key Takeaways</div><div id=&quot;recBody&quot;></div></div>
   </div>
 </div>
@@ -5507,6 +5521,9 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
     return `<svg class='gauge-svg' viewBox='0 2 68 36'><path d='${gaugeArc(cx,cy,r,0,100)}' stroke='#EEF0ED' stroke-width='${sw}' fill='none' stroke-linecap='round'/>${arcs}<line x1='${cx}' y1='${cy}' x2='${tx.toFixed(2)}' y2='${ty.toFixed(2)}' stroke='#2C3A2F' stroke-width='2.2' stroke-linecap='round'/><circle cx='${cx}' cy='${cy}' r='3.2' fill='#fff' stroke='#2C3A2F' stroke-width='1.6'/></svg>`;
   }
   function recColor(v){return v<34?'#C0413F':(v<67?'#B07D1E':'#3C6249');}
+  function gaugeSVG2(v){var cx=150,cy=150,r=116,sw=22;var zones=[[0,20,'#D9776B'],[20,40,'#E0A56A'],[40,60,'#E7CE73'],[60,80,'#A9C48E'],[80,100,'#7BA87C']];var arcs='';for(var i=0;i<zones.length;i++){var z=zones[i];arcs+=`<path d='${gaugeArc(cx,cy,r,z[0]+1,z[1]-1)}' stroke='${z[2]}' stroke-width='${sw}' fill='none' stroke-linecap='round'/>`;}var vv=Math.max(0,Math.min(100,v));var a=Math.PI*(1-vv/100);var L=r-22;var tx=(cx+L*Math.cos(a)).toFixed(1),ty=(cy-L*Math.sin(a)).toFixed(1);var w=7;var b1x=(cx+w*Math.sin(a)).toFixed(1),b1y=(cy+w*Math.cos(a)).toFixed(1),b2x=(cx-w*Math.sin(a)).toFixed(1),b2y=(cy-w*Math.cos(a)).toFixed(1);return `<svg viewBox='0 0 300 190' style='width:100%;height:auto;display:block'>${arcs}<polygon points='${tx},${ty} ${b1x},${b1y} ${b2x},${b2y}' fill='#2C3A2F'/><circle cx='${cx}' cy='${cy}' r='13' fill='#2C3A2F'/><circle cx='${cx}' cy='${cy}' r='5.5' fill='#fff'/><text x='26' y='186' font-size='15' font-weight='700' fill='#C0413F'>Low</text><text x='274' y='186' font-size='15' font-weight='700' fill='#4E7B5E' text-anchor='end'>HIGH</text></svg>`;}
+  function recBandColors(v){if(v<25)return['#C0413F','#FBEAEA'];if(v<70)return['#B4761C','#FBF0E2'];return['#3C6249','#E7F0EA'];}
+  function recFocusIcon(f){f=(f||'').toLowerCase();if(f.indexOf('craving')>=0)return['zap','#F7E7E4','#C0413F'];if(f.indexOf('missed')>=0||f.indexOf('dose')>=0)return['pill','#FBEAEA','#C0413F'];if(f.indexOf('therapy')>=0)return['message-circle','#E9F1FA','#2F6DB0'];if(f.indexOf('care')>=0)return['clipboard-list','#EAF1EC','#3C6249'];if(f.indexOf('med')>=0)return['pill','#EFEAF8','#6A5CB0'];return['target','#EAF1EC','#3C6249'];}
   function renderRecoveryGauges(){
     var cells=document.querySelectorAll('.hr-rec');
     for(var i=0;i<cells.length;i++){
@@ -5536,6 +5553,10 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
     var focus=(((tr.querySelector('.hr-focus')||{}).textContent)||'').trim();
     var bnd=recBand(val);
     document.getElementById('recTitle').textContent='Recovery Details — '+name;
+    document.getElementById('recGauge2').innerHTML=gaugeSVG2(val);
+    document.getElementById('recNum2').textContent=val;
+    var bp=document.getElementById('recBandPill');if(bp){var bc=recBandColors(val);bp.textContent=bnd[0];bp.style.color=bc[0];bp.style.background=bc[1];}
+    var rf=document.getElementById('recFocus2');if(rf){var fi=recFocusIcon(focus);rf.innerHTML=`<span class='rf-ic' style='background:${fi[1]};color:${fi[2]}'><i data-lucide='${fi[0]}'></i></span><div><div class='rf-label'>Today's focus</div><div class='rf-text'>${focus||'General check-in'}</div></div>`;}
     var trend = val<50 ? 'The focus this week is bringing it up with small, steady steps.' : 'It has held fairly steady lately, and steady counts for a lot in recovery.';
     var p1=`Today\'s recovery health score is <b>${val}</b>. That puts it <b>${bnd[0]}</b>. ${trend}`;
     var p2=recFocusLine(focus,moud);
