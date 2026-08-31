@@ -5492,6 +5492,33 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
   .rec-focus2 .rf-ic svg{width:20px;height:20px}
   .rec-focus2 .rf-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9AA0A8}
   .rec-focus2 .rf-text{font-size:16px;font-weight:700;color:#20261F;margin-top:2px}
+  .hr-table .fw-600{cursor:pointer;transition:color .12s}
+  .hr-table .fw-600:hover{color:var(--accent)}
+  #modalPatient .modal{position:relative}
+  .pt-head{display:flex;align-items:center;gap:14px;margin:2px 0 18px}
+  .pt-avatar{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;color:#fff;font:800 18px/1 Sora,Manrope,sans-serif;flex-shrink:0}
+  .pt-head-main{flex:1;min-width:0}
+  .pt-name{font:800 20px/1.2 Sora,Manrope,sans-serif;color:#20261F}
+  .pt-sub{font-size:12.5px;color:#9AA0A8;margin-top:3px}
+  .pt-risk{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;padding:6px 13px;border-radius:999px;white-space:nowrap}
+  .pt-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+  .pt-stat{background:#F5F8F4;border:1px solid #E7EAE6;border-radius:14px;padding:14px 16px}
+  .pt-stat-l{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9AA0A8}
+  .pt-stat-v{font:800 22px/1 Sora,Manrope,sans-serif;color:#20261F;margin-top:7px}
+  .pt-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+  .pt-field{display:flex;justify-content:space-between;gap:10px;padding:12px 14px;border:1px solid #EEF1ED;border-radius:12px}
+  .pt-field span{font-size:12.5px;color:#8A928A;font-weight:600}
+  .pt-field b{font-size:13px;color:#20261F;font-weight:700;text-align:right}
+  .pt-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+  .pt-actions .btn{width:auto}
+  .pt-actions .btn svg{width:15px;height:15px}
+  .pt-section-title{font-weight:700;font-size:14px;color:#20261F;margin:6px 0 12px}
+  .pt-timeline{display:flex;flex-direction:column}
+  .pt-tl{display:flex;gap:12px;padding:8px 0}
+  .pt-tl-dot{width:10px;height:10px;border-radius:50%;background:#4E7B5E;margin-top:5px;flex-shrink:0;box-shadow:0 0 0 3px #E7F0EA}
+  .pt-tl b{display:block;font-size:13px;color:#2C3A2F;font-weight:600}
+  .pt-tl span{font-size:11.5px;color:#9AA0A8}
+  @media (max-width:600px){.pt-stats{grid-template-columns:1fr}.pt-grid{grid-template-columns:1fr}}
   @media (max-width:600px){.rec-top{flex-direction:column;text-align:center;gap:10px}.rec-gauge .gauge-svg{width:220px}}
 </style>
 
@@ -5570,6 +5597,12 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
 </script>
 
 <div class=&quot;modal-overlay&quot; id=&quot;modalConfirm&quot; onclick=&quot;closeModal('modalConfirm')&quot;><div class=&quot;modal modal-sm&quot; onclick=&quot;event.stopPropagation()&quot;><div class=&quot;modal-title&quot; id=&quot;confTitle&quot;>Are you sure?</div><div id=&quot;confBody&quot; style=&quot;font-size:13.5px;color:#6E766C;line-height:1.55;margin:-2px 0 2px&quot;></div><div class=&quot;modal-footer&quot;><button class=&quot;btn btn-secondary&quot; onclick=&quot;closeModal('modalConfirm')&quot;>Cancel</button><button class=&quot;btn btn-primary&quot; id=&quot;confOk&quot; style=&quot;width:auto&quot; onclick=&quot;confRun()&quot;>Confirm</button></div></div></div>
+<div class=&quot;modal-overlay&quot; id=&quot;modalPatient&quot; onclick=&quot;closeModal('modalPatient')&quot;><div class=&quot;modal&quot; onclick=&quot;event.stopPropagation()&quot; style=&quot;max-width:640px&quot;><button class=&quot;rec-close&quot; onclick=&quot;closeModal('modalPatient')&quot; aria-label=&quot;Close&quot;><i data-lucide='x'></i></button><div class=&quot;pt-head&quot;><div class=&quot;pt-avatar&quot; id=&quot;ptAvatar&quot;>--</div><div class=&quot;pt-head-main&quot;><div class=&quot;pt-name&quot; id=&quot;ptName&quot;>Patient</div><div class=&quot;pt-sub&quot; id=&quot;ptSub&quot;></div></div><span class=&quot;pt-risk&quot; id=&quot;ptRisk&quot;>--</span></div><div class=&quot;pt-stats&quot;><div class=&quot;pt-stat&quot;><div class=&quot;pt-stat-l&quot;>Recovery score</div><div class=&quot;pt-stat-v&quot; id=&quot;ptRec&quot;>0</div></div><div class=&quot;pt-stat&quot;><div class=&quot;pt-stat-l&quot;>Days sober</div><div class=&quot;pt-stat-v&quot; id=&quot;ptDays&quot;>--</div></div><div class=&quot;pt-stat&quot;><div class=&quot;pt-stat-l&quot;>Last check-in</div><div class=&quot;pt-stat-v&quot; id=&quot;ptCheckin&quot;>--</div></div></div><div class=&quot;pt-grid&quot;><div class=&quot;pt-field&quot;><span>Diagnosis</span><b id=&quot;ptDiag&quot;>--</b></div><div class=&quot;pt-field&quot;><span>MOUD</span><b id=&quot;ptMoud&quot;>--</b></div><div class=&quot;pt-field&quot;><span>Care team</span><b id=&quot;ptTeam&quot;>--</b></div><div class=&quot;pt-field&quot;><span>Today&#39;s focus</span><b id=&quot;ptFocus&quot;>--</b></div></div><div class=&quot;pt-actions&quot;><button class=&quot;btn btn-primary&quot; style=&quot;width:auto&quot; onclick=&quot;ptAct('Call')&quot;><i data-lucide='phone'></i> Call</button><button class=&quot;btn btn-secondary&quot; onclick=&quot;ptAct('Message')&quot;><i data-lucide='message-square-text'></i> Message</button><button class=&quot;btn btn-secondary&quot; onclick=&quot;ptAct('Full chart')&quot;><i data-lucide='file-text'></i> View full chart</button></div><div class=&quot;pt-section-title&quot;>Recent activity</div><div class=&quot;pt-timeline&quot;><div class=&quot;pt-tl&quot;><span class=&quot;pt-tl-dot&quot;></span><div><b>Daily check-in completed</b><span>Today &middot; 8:12 AM</span></div></div><div class=&quot;pt-tl&quot;><span class=&quot;pt-tl-dot&quot;></span><div><b>MOUD dose confirmed</b><span>Today &middot; 8:00 AM</span></div></div><div class=&quot;pt-tl&quot;><span class=&quot;pt-tl-dot&quot;></span><div><b>PHQ-9 survey submitted</b><span>Yesterday &middot; 6:40 PM</span></div></div><div class=&quot;pt-tl&quot;><span class=&quot;pt-tl-dot&quot;></span><div><b>Care-team note added</b><span>2 days ago</span></div></div></div></div></div>
+<script>
+  function openPatient(tr){var q=function(sel){var x=tr.querySelector(sel);return x?x.textContent.replace(/\s+/g,' ').trim():'';};var name=q('.fw-600'),sub=q('.hr-pt-sub'),diag=q('.hr-diag'),moud=q('.hr-moud'),days=q('.hr-days'),team=q('.hr-team-name'),focus=q('.hr-focus');var recEl=tr.querySelector('.hr-rec b');var rec=recEl?(parseInt(recEl.getAttribute('data-val')||recEl.textContent,10)||0):0;var checkin='';var recTd=tr.querySelector('.hr-rec');if(recTd){var ptd=recTd.closest('td');var ntd=ptd&&ptd.nextElementSibling;if(ntd)checkin=ntd.textContent.trim();}var init=((window.nameInitials?nameInitials(name):(name||'?').slice(0,2))||'?').toUpperCase();var col=(window.avatarColor?avatarColor(init):'#4E7B5E');var av=document.getElementById('ptAvatar');av.textContent=init;av.style.background=col;document.getElementById('ptName').textContent=name||'Patient';document.getElementById('ptSub').textContent=sub;var risk=document.getElementById('ptRisk');var rc=(window.recBandColors?recBandColors(rec):['#3C6249','#E7F0EA']);var rl=rec<25?'High risk':(rec<50?'Elevated':'Stable');risk.textContent=rl;risk.style.color=rc[0];risk.style.background=rc[1];document.getElementById('ptRec').textContent=rec;document.getElementById('ptDays').textContent=days||'--';document.getElementById('ptCheckin').textContent=checkin||'--';document.getElementById('ptDiag').textContent=diag||'--';document.getElementById('ptMoud').textContent=moud||'--';document.getElementById('ptTeam').textContent=team||'--';document.getElementById('ptFocus').textContent=focus||'--';if(window.openModal)openModal('modalPatient');if(window.lucide)lucide.createIcons();}
+  function ptAct(a){var n=(document.getElementById('ptName')||{}).textContent||'patient';if(window.toast)toast(a+' - '+n,'info');}
+  document.addEventListener('click',function(e){var t=e.target;if(!t||!t.closest)return;var nm=t.closest('.fw-600');if(!nm)return;var tr=nm.closest('tr');if(!tr||!tr.querySelector('.hr-rec'))return;openPatient(tr);});
+</script>
 <div class=&quot;toast-wrap&quot; id=&quot;toastWrap&quot;></div>
 
 <script>
