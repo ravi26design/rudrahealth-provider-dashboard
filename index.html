@@ -3697,7 +3697,7 @@ body{padding-top:0!important}
       <!-- API Keys Tab -->
       <div id=&quot;tab-api&quot; class=&quot;hidden&quot;>
         <div class=&quot;card&quot;>
-          <div class=&quot;card-header&quot;><div class=&quot;card-title&quot;>API Keys</div><button class=&quot;btn btn-primary btn-sm&quot; onclick=&quot;openModal('modalNewKey')&quot;>+ Generate Key</button></div>
+          <div class=&quot;card-header&quot;><div class=&quot;card-title&quot;>API Keys</div><button class=&quot;btn btn-primary btn-sm&quot; style=&quot;width:auto;padding:11px 24px&quot; onclick=&quot;openModal('modalNewKey')&quot;>+ Generate Key</button></div>
           <table>
             <thead><tr><th>Name</th><th>Key</th><th>Scope</th><th>Created</th><th>Status</th><th></th></tr></thead>
             <tbody>
@@ -4395,6 +4395,16 @@ body{padding-top:0!important}
   #sec-integrations .alert{border-radius:14px}
   #sec-integrations .card{border-radius:18px}
   #sec-integrations #integTabs .tab{font-weight:600}
+  #sec-integrations table{border-collapse:separate;border-spacing:0;width:100%}
+  #sec-integrations thead th{font:700 11px/1 Manrope,Inter,sans-serif;letter-spacing:.9px;text-transform:uppercase;color:#8B928A;padding:2px 14px 13px;border-bottom:1px solid rgba(60,70,60,.12);text-align:left;background:none}
+  #sec-integrations tbody td{padding:15px 14px;border-bottom:1px solid rgba(60,70,60,.07);vertical-align:middle;font-size:13.5px;color:#5A6158}
+  #sec-integrations tbody tr:last-child td{border-bottom:none}
+  #sec-integrations tbody tr{transition:background .16s}
+  #sec-integrations tbody tr:hover td{background:rgba(78,123,94,.045)}
+  #sec-integrations tbody tr:hover td:first-child{border-radius:12px 0 0 12px}
+  #sec-integrations tbody tr:hover td:last-child{border-radius:0 12px 12px 0}
+  #sec-integrations td.fw-600{color:#20261F}
+  #sec-integrations .card-header{align-items:center}
   #sec-appointments table .btn{gap:6px}
   #sec-appointments table .btn svg,#sec-appointments table .btn i{width:15px;height:15px}
 </style>
