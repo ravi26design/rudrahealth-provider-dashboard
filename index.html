@@ -4229,7 +4229,7 @@ body{padding-top:0!important}
       <div id=&quot;tab-patient-list&quot; class=&quot;hidden&quot;>
         <div class=&quot;card&quot;>
           <div class=&quot;card-header&quot;>
-            <div class=&quot;card-title&quot;>All Patients <span class=&quot;pill tag-gray&quot; style=&quot;margin-left:8px;&quot; id=&quot;patientCount&quot;>25</span></div>
+            <div class=&quot;card-title&quot;>All Patients <span class=&quot;pill tag-gray&quot; style=&quot;margin-left:8px;&quot; id=&quot;patientCount&quot;>248</span></div>
             <div class=&quot;flex&quot;>
               <input type=&quot;text&quot; id=&quot;patientSearch&quot; class=&quot;tbl-search&quot; placeholder=&quot;Search patients…&quot; oninput=&quot;filterPatients()&quot;>
               <select id=&quot;patientRiskFilter&quot; class=&quot;tbl-select&quot; onchange=&quot;filterPatients()&quot;>
@@ -5565,7 +5565,7 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
   .pd-bc-sep{color:#C1C8BF;font-weight:400}
   .pd-bc-cur{color:#20261F;font-weight:700}
   .pd-header{position:relative;overflow:hidden;padding:24px 28px;border-radius:20px;background:linear-gradient(135deg,#FFFFFF,#F4F7F4);border:1px solid #EAEDE9;box-shadow:0 6px 24px rgba(30,41,59,.06);display:flex;flex-direction:column;align-items:stretch;gap:0}
-  .pd-head-top{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .pd-head-top{display:flex;align-items:center;gap:18px;flex-wrap:wrap;width:100%}
   .pd-head-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px}
   .pd-head-meta:empty{display:none}
   .pd-hm{display:flex;flex-direction:column;gap:3px}
@@ -6243,7 +6243,7 @@ function pdNav(d){if(window.toast)toast(d>0?'Next period':'Previous period','inf
     rows.forEach(function(r){ r.style.display = 'none'; });
     var startIdx = (patientPage - 1) * PATIENTS_PER_PAGE;
     matched.slice(startIdx, startIdx + PATIENTS_PER_PAGE).forEach(function(r){ r.style.display = ''; });
-    var count = document.getElementById('patientCount'); if (count) count.textContent = matched.length;
+    var count = document.getElementById('patientCount'); if (count) count.textContent = (q || prefix) ? matched.length : 248;
     var el = document.getElementById('patientPagination'); if (!el) return;
     el.innerHTML = '';
     if (matched.length <= PATIENTS_PER_PAGE) { el.style.display = 'none'; return; }
