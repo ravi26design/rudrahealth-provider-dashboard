@@ -2995,6 +2995,7 @@ body{padding-top:0!important}
   .sjs-field > label{display:block;font-size:11.5px;font-weight:700;color:var(--text-2);margin-bottom:5px}
   .sjs-field input[type=text],.sjs-field select,.sjs-field textarea{width:100%;border:1.5px solid var(--border);border-radius:9px;padding:8px 10px;font-size:13px;font-family:inherit;background:var(--bg);color:var(--text)}
   .sjs-field input[type=text]:focus,.sjs-field select:focus,.sjs-field textarea:focus{border-color:var(--accent);outline:none;background:var(--surface)}
+  .sjs-field select{appearance:none;-webkit-appearance:none;-moz-appearance:none;padding-right:30px}
   .sjs-field textarea{resize:vertical;min-height:64px;line-height:1.5}
   .sjs-tgl{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
   .sjs-tgl:last-child{border-bottom:none}
@@ -3018,9 +3019,12 @@ body{padding-top:0!important}
   .sjs-foot-info{font-size:12px;color:var(--text-3);display:flex;align-items:center;gap:7px}
   .sjs-foot-info svg{width:14px;height:14px}
   .qcard.sjs-sel{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light),0 7px 20px rgba(58,65,64,.08)}
+  .sjs-tb-item{cursor:grab}
+  .sjs-tb-item:active{cursor:grabbing}
+  .sjs-page.sjs-drop-active{outline:2px dashed var(--accent);outline-offset:6px;border-radius:14px;background:var(--accent-light);transition:background .15s}
   /* qcard footer: type dropdown + inline actions (SurveyJS-style) */
   .qcard-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;padding-top:12px;padding-left:20px;border-top:1px solid var(--border);flex-wrap:wrap}
-  .qcard-type-sel{border:1.5px solid var(--border);border-radius:8px;padding:6px 26px 6px 10px;font-size:12px;font-weight:700;font-family:inherit;color:var(--text-2);background:var(--bg);cursor:pointer}
+  .qcard-type-sel{border:1.5px solid var(--border);border-radius:8px;padding:6px 28px 6px 10px;font-size:12px;font-weight:700;font-family:inherit;color:var(--text-2);background:var(--bg);cursor:pointer;appearance:none;-webkit-appearance:none;-moz-appearance:none}
   .qcard-type-sel:focus{border-color:var(--accent);outline:none;background:var(--surface)}
   .qcard-foot-actions{display:flex;gap:2px;flex-wrap:wrap}
   .qcard-foot-actions button{display:inline-flex;align-items:center;gap:5px;background:none;border:none;cursor:pointer;color:var(--text-3);font-size:12px;font-weight:600;font-family:inherit;padding:6px 9px;border-radius:7px;transition:.13s}
@@ -7169,7 +7173,7 @@ function pdNav(d){if(window.toast)toast(d>0?'Next period':'Previous period','inf
   function smResetCreatorView(){
     smSelIdx = null;
     smCreatorTab('design', document.getElementById('sjsTab-design'));
-    smMarkSelected(); smRenderProps(); smUpdateFoot();
+    smMarkSelected(); smRenderProps(); smUpdateFoot(); smInitDnd();
   }
   function smSelectSurvey(){ smSelIdx = null; smMarkSelected(); smRenderProps(); }
   function smSelectQuestion(i){ smSelIdx = i; smMarkSelected(); smRenderProps(); }
@@ -7230,10 +7234,7 @@ function pdNav(d){if(window.toast)toast(d>0?'Next period':'Previous period','inf
         smChk('Read-only', !!q.readonly, 'smPropFlag(\'readonly\',this.checked)') +
         smChk('Required', !!q.required, 'smPropReq(this.checked)') +
         smChk('Show the title and description', q.showTitle !== false, 'smPropFlag(\'showTitle\',this.checked)') +
-        smChk('Add a comment box', !!q.comment, 'smPropFlag(\'comment\',this.checked)') +
-        '<div class=&quot;sjs-prop-sec&quot;>Actions</div>' +
-        '<button class=&quot;btn btn-secondary btn-sm&quot; style=&quot;width:100%;margin-bottom:8px&quot; onclick=&quot;smDupeQuestion(' + smSelIdx + ')&quot;>Duplicate question</button>' +
-        '<button class=&quot;btn btn-ghost btn-sm&quot; style=&quot;width:100%;color:var(--red)&quot; onclick=&quot;smDeleteSel()&quot;>Delete question</button>';
+        smChk('Add a comment box', !!q.comment, 'smPropFlag(\'comment\',this.checked)');
     }
     try { if (window.lucide) lucide.createIcons(); } catch(e){}
   }
@@ -7281,6 +7282,51 @@ function pdNav(d){if(window.toast)toast(d>0?'Next period':'Previous period','inf
       var t = el.textContent.toLowerCase();
       el.style.display = (!v || t.indexOf(v) >= 0) ? '' : 'none';
     });
+  }
+
+  // ── Drag question types from the toolbox onto the canvas ──
+  var _sjsDragType = null;
+  function smAddQuestionAt(type, idx){
+    var options = [...(SM_DEFAULT_OPTS[type] || [])];
+    var question = { type: type, q: 'Type your question here…', opts: options, required: false };
+    if (idx == null || idx < 0 || idx > smQuestions.length) idx = smQuestions.length;
+    smQuestions.splice(idx, 0, question);
+    smSelIdx = idx;
+    var ap = document.getElementById('smAddPanel'); if (ap) ap.classList.add('hidden');
+    smRenderQuestions(); smRenderPreview(); smRenderProps();
+    if (window.toast) toast('Question added to the survey.', 'ok');
+    setTimeout(function(){ var c = document.getElementById('qcard-' + idx); if (c) c.scrollIntoView({ behavior:'smooth', block:'center' }); }, 50);
+  }
+  function smDropIndex(e){
+    var cards = document.querySelectorAll('#smQuestionList .qcard');
+    for (var i = 0; i < cards.length; i++){
+      var r = cards[i].getBoundingClientRect();
+      if (e.clientY < r.top + r.height / 2) return i;
+    }
+    return cards.length;
+  }
+  function smInitDnd(){
+    var tb = document.getElementById('sjsToolbox');
+    if (tb &amp;&amp; !tb._dnd){
+      tb._dnd = true;
+      tb.querySelectorAll('.sjs-tb-item').forEach(function(it){
+        it.setAttribute('draggable', 'true');
+        it.addEventListener('dragstart', function(e){
+          var m = (it.getAttribute('onclick') || '').match(/smAddQuestion\('([a-z]+)'\)/);
+          _sjsDragType = m ? m[1] : null;
+          try { e.dataTransfer.effectAllowed = 'copy'; e.dataTransfer.setData('text/plain', _sjsDragType || ''); } catch(_){}
+          it.style.opacity = '.5';
+        });
+        it.addEventListener('dragend', function(){ _sjsDragType = null; it.style.opacity = ''; var pg = document.querySelector('.sjs-page'); if (pg) pg.classList.remove('sjs-drop-active'); });
+      });
+    }
+    var surf = document.querySelector('.sjs-surface');
+    if (surf &amp;&amp; !surf._dnd){
+      surf._dnd = true;
+      surf.addEventListener('dragover', function(e){ if (_sjsDragType){ e.preventDefault(); try { e.dataTransfer.dropEffect = 'copy'; } catch(_){} var pg = document.querySelector('.sjs-page'); if (pg) pg.classList.add('sjs-drop-active'); } });
+      surf.addEventListener('dragleave', function(e){ if (e.target === surf){ var pg = document.querySelector('.sjs-page'); if (pg) pg.classList.remove('sjs-drop-active'); } });
+      surf.addEventListener('drop', function(e){ if (!_sjsDragType) return; e.preventDefault(); var t = _sjsDragType; _sjsDragType = null; var pg = document.querySelector('.sjs-page'); if (pg) pg.classList.remove('sjs-drop-active'); smAddQuestionAt(t, smDropIndex(e)); });
+    }
   }
 
   // ── INLINE PREVIEW (right pane) ──
