@@ -3472,6 +3472,12 @@ body{padding-top:0!important}
           <button type='button' class='rl-org' onclick='rlSelectOrg(this)'>Government</button>
         </div>
 
+        <div class='rl-orglabel'>Sign in as</div>
+        <div class='rl-orggrid rl-rolegrid'>
+          <button type='button' class='rl-org rl-role selected' data-role='doctor' onclick='rlSelectRole(this)'>Doctor</button>
+          <button type='button' class='rl-org rl-role' data-role='clinic' onclick='rlSelectRole(this)'>Clinic Admin</button>
+        </div>
+
         <div class='rl-field'>
           <label class='rl-flabel' for='loginEmail'>Work email</label>
           <input class='rl-input' type='email' id='loginEmail' value='dr.rivera@baymark.org' placeholder='you@clinic.org'>
@@ -3543,10 +3549,10 @@ body{padding-top:0!important}
 
     <div class=&quot;sidebar-footer&quot;>
       <div class=&quot;user-chip&quot;>
-        <div class=&quot;avatar&quot;>AD</div>
+        <div class=&quot;avatar&quot; id=&quot;sbAvatar&quot;>DR</div>
         <div class=&quot;user-info&quot;>
-          <div class=&quot;user-name&quot;>Admin User</div>
-          <div class=&quot;user-role&quot;>Clinical Provider</div>
+          <div class=&quot;user-name&quot; id=&quot;sbUserName&quot;>Dr. Rivera</div>
+          <div class=&quot;user-role&quot; id=&quot;sbUserRole&quot;>Clinical Provider</div>
         </div>
         <span style=&quot;cursor:pointer;color:var(--text-3);font-size:18px;&quot; onclick=&quot;doLogout()&quot; title=&quot;Sign out&quot;>↩</span>
       </div>
@@ -3566,7 +3572,7 @@ body{padding-top:0!important}
         <div class=&quot;tb-actions&quot;><div class=&quot;dash-filter&quot;><button class=&quot;df-seg active&quot; onclick=&quot;dashFilter('Daily',this)&quot;>Daily</button><button class=&quot;df-seg&quot; onclick=&quot;dashFilter('Weekly',this)&quot;>Weekly</button><button class=&quot;df-seg&quot; onclick=&quot;dashFilter('Monthly',this)&quot;>Monthly</button></div><script>var DF={Daily:{v:[248,17,81,71],sub:['new today','Needs intervention','vs yesterday','out of 100'],delta:['↑ 12','3 new','↑ 4%','↑ 3'],hr:17,ret:'76% today',chart:[60,62,64,63,66,68,69,71,72,74,75,76],badge:'76%'},Weekly:{v:[262,14,84,72],sub:['new this week','Needs intervention','vs last week','out of 100'],delta:['↑ 18','2 new','↑ 6%','↑ 4'],hr:22,ret:'76% this week',chart:[58,60,62,61,64,66,68,69,71,73,74,76],badge:'76%'},Monthly:{v:[310,23,88,74],sub:['new this month','Needs intervention','vs last month','out of 100'],delta:['↑ 34','5 new','↑ 9%','↑ 6'],hr:30,ret:'78% this month',chart:[50,54,57,60,62,65,67,70,72,74,76,78],badge:'78%'}};function dashFilter(p,el){var s=el.parentNode.querySelectorAll('.df-seg');for(var i=0;i<s.length;i++)s[i].classList.remove('active');el.classList.add('active');var d=DF[p];if(d){var v=document.querySelectorAll('#sec-dashboard .stat-grid .stat-val');var u=document.querySelectorAll('#sec-dashboard .stat-grid .stat-sub');var g=document.querySelectorAll('#sec-dashboard .stat-grid .delta');for(var j=0;j<v.length&&j<d.v.length;j++){var sf=v[j].getAttribute('data-suffix')||'';v[j].setAttribute('data-count',d.v[j]);v[j].textContent=d.v[j]+sf;}for(var k=0;k<u.length&&k<d.sub.length;k++)u[k].textContent=d.sub[k];for(var m=0;m<g.length&&m<d.delta.length;m++)g[m].textContent=d.delta[m];var hrEl=document.getElementById('hrSub');if(hrEl)hrEl.textContent=d.hr+' High-Risk Patients';var rt=document.getElementById('retTag');if(rt)rt.textContent=d.ret;var bars=document.querySelectorAll('#sec-dashboard .retbar');if(bars.length&&d.chart){for(var b=0;b<bars.length&&b<d.chart.length;b++){var cv=d.chart[b];var yt=185-cv*1.59;bars[b].setAttribute('y',yt.toFixed(1));bars[b].setAttribute('height',(185-yt).toFixed(1));bars[b].setAttribute('data-t','Wk '+(b+1)+' · '+cv+'%');}}var bd=document.getElementById('retBadge');if(bd)bd.textContent=d.badge;}if(window.toast)toast('Showing '+p.toLowerCase()+' view','info');}</script>
           <div class=&quot;tb-icons&quot;><button class=&quot;tb-icon-btn&quot; onclick=&quot;exportReport()&quot; title=&quot;Export report&quot;><i data-lucide='download'></i></button>
           <div class=&quot;tb-notif-wrap&quot; style=&quot;position:relative;display:inline-flex&quot;><button class=&quot;tb-icon-btn&quot; title=&quot;Notifications&quot; onclick=&quot;tbToggleNotif(event)&quot;><i data-lucide='bell'></i><span class=&quot;tb-dot&quot; id=&quot;tbNotifDot&quot;></span></button><div class=&quot;tb-notif-menu&quot; id=&quot;tbNotifMenu&quot;><div class=&quot;tb-notif-head&quot;><span>Notifications</span><span style=&quot;display:inline-flex;align-items:center;gap:12px&quot;><button class=&quot;tb-notif-clear&quot; onclick=&quot;openPushSettings(event)&quot; title=&quot;Push notification settings&quot; style=&quot;display:inline-flex;align-items:center;gap:4px&quot;><i data-lucide='smartphone' style='width:13px;height:13px'></i> Push</button><button class=&quot;tb-notif-clear&quot; onclick=&quot;tbMarkAllRead(event)&quot;>Mark all read</button></span></div><div class=&quot;tb-notif-list&quot;><div class=&quot;tb-notif-item unread&quot;><div class=&quot;tb-notif-ic&quot; style=&quot;background:#FBEAEA;color:#C0413F&quot;><i data-lucide='siren'></i></div><div class=&quot;tb-notif-body&quot;><div class=&quot;tb-notif-t&quot;>Jamie L. flagged high-risk</div><div class=&quot;tb-notif-d&quot;>3 missed MOUD doses · 78% relapse risk</div><div class=&quot;tb-notif-time&quot;>5 min ago</div></div></div><div class=&quot;tb-notif-item unread&quot;><div class=&quot;tb-notif-ic&quot; style=&quot;background:#E9F1FA;color:#2F6DB0&quot;><i data-lucide='message-square-text'></i></div><div class=&quot;tb-notif-body&quot;><div class=&quot;tb-notif-t&quot;>New survey response — M. Lee</div><div class=&quot;tb-notif-d&quot;>PHQ-9 completed</div><div class=&quot;tb-notif-time&quot;>1 hour ago</div></div></div><div class=&quot;tb-notif-item unread&quot;><div class=&quot;tb-notif-ic&quot; style=&quot;background:#FBF1DF;color:#A9791F&quot;><i data-lucide='trending-down'></i></div><div class=&quot;tb-notif-body&quot;><div class=&quot;tb-notif-t&quot;>MOUD adherence dropped — S. Patel</div><div class=&quot;tb-notif-d&quot;>Down to 72% this week</div><div class=&quot;tb-notif-time&quot;>2 hours ago</div></div></div><div class=&quot;tb-notif-item&quot;><div class=&quot;tb-notif-ic&quot; style=&quot;background:#E8F1EB;color:#3F6650&quot;><i data-lucide='user-plus'></i></div><div class=&quot;tb-notif-body&quot;><div class=&quot;tb-notif-t&quot;>New patient enrolled — Omar S.</div><div class=&quot;tb-notif-d&quot;>Assigned to H. Ito</div><div class=&quot;tb-notif-time&quot;>Yesterday</div></div></div><div class=&quot;tb-notif-item&quot;><div class=&quot;tb-notif-ic&quot; style=&quot;background:#EFEAF8;color:#6A5CB0&quot;><i data-lucide='calendar-check'></i></div><div class=&quot;tb-notif-body&quot;><div class=&quot;tb-notif-t&quot;>Care plan updated by Dr. Chen</div><div class=&quot;tb-notif-d&quot;>Robert H. · Naltrexone dose review</div><div class=&quot;tb-notif-time&quot;>Yesterday</div></div></div></div><button class=&quot;tb-notif-foot&quot; onclick=&quot;tbNotifViewAll(event)&quot;>View all notifications</button></div></div>
-          <div class=&quot;tb-avatar-wrap&quot; style=&quot;position:relative&quot;><div class=&quot;tb-avatar&quot; onclick=&quot;tbToggleProfile(event)&quot;><i data-lucide='user'></i></div><div class=&quot;tb-profile-menu&quot; id=&quot;tbProfileMenu&quot;><div class=&quot;tb-pm-head&quot;><div class=&quot;tb-pm-av&quot;>AD</div><div><div class=&quot;tb-pm-name&quot;>Admin User</div><div class=&quot;tb-pm-email&quot;>admin@rudrahealth.com</div></div></div><button class=&quot;tb-pm-item&quot; onclick=&quot;tbViewProfile(event)&quot;><i data-lucide='user'></i> My Profile</button><button class=&quot;tb-pm-item&quot; onclick=&quot;tbChangePassword(event)&quot;><i data-lucide='key-round'></i> Change Password</button><button class=&quot;tb-pm-item danger&quot; onclick=&quot;tbLogout(event)&quot;><i data-lucide='log-out'></i> Logout</button></div></div></div>
+          <div class=&quot;tb-avatar-wrap&quot; style=&quot;position:relative&quot;><div class=&quot;tb-avatar&quot; onclick=&quot;tbToggleProfile(event)&quot;><i data-lucide='user'></i></div><div class=&quot;tb-profile-menu&quot; id=&quot;tbProfileMenu&quot;><div class=&quot;tb-pm-head&quot;><div class=&quot;tb-pm-av&quot; id=&quot;tbPmAv&quot;>DR</div><div><div class=&quot;tb-pm-name&quot; id=&quot;tbPmName&quot;>Dr. Rivera</div><div class=&quot;tb-pm-email&quot; id=&quot;tbPmEmail&quot;>dr.rivera@baymark.org</div></div></div><button class=&quot;tb-pm-item&quot; onclick=&quot;tbViewProfile(event)&quot;><i data-lucide='user'></i> My Profile</button><button class=&quot;tb-pm-item&quot; onclick=&quot;tbChangePassword(event)&quot;><i data-lucide='key-round'></i> Change Password</button><button class=&quot;tb-pm-item danger&quot; onclick=&quot;tbLogout(event)&quot;><i data-lucide='log-out'></i> Logout</button></div></div></div>
         </div>
       </div>
       <div class=&quot;card&quot;>
@@ -5618,8 +5624,24 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
   .ai-mic svg,.ai-send svg{width:18px;height:18px}
   .ai-send{background:#4E7B5E;color:#fff}
   @keyframes aiPulse{0%,100%{box-shadow:0 0 0 0 rgba(229,72,77,.5)}50%{box-shadow:0 0 0 8px rgba(229,72,77,0)}}
-  .hr-alert{position:fixed;top:20px;right:20px;z-index:398;width:360px;max-width:calc(100vw - 32px);background:#fff;border:1px solid #F0D9D8;border-radius:16px;box-shadow:0 20px 48px rgba(120,30,30,.2);overflow:hidden;transform:translateX(125%);transition:transform .42s cubic-bezier(.2,.9,.3,1)}
-  .hr-alert.show{transform:none}
+  .hr-alert{position:fixed;top:50%;left:50%;z-index:398;width:400px;max-width:calc(100vw - 32px);background:#fff;border:1px solid #F0D9D8;border-radius:16px;box-shadow:0 30px 70px rgba(120,30,30,.28),0 0 0 100vmax rgba(30,26,26,.28);overflow:hidden;transform:translate(-50%,-50%) scale(.94);opacity:0;visibility:hidden;transition:transform .42s cubic-bezier(.2,.9,.3,1),opacity .3s,visibility .3s}
+  .hr-alert.show{transform:translate(-50%,-50%) scale(1);opacity:1;visibility:visible}
+  /* Clinic Admin location dropdown */
+  .loc-dd{display:inline-flex;align-items:center;gap:6px;cursor:pointer;position:relative;font-size:13.5px;font-weight:600;color:var(--text-2);background:var(--surface);border:1.5px solid var(--border);border-radius:9px;padding:5px 10px;margin-top:2px;transition:border-color .15s,color .15s,box-shadow .15s;user-select:none}
+  .loc-dd:hover{border-color:var(--accent);color:var(--accent);box-shadow:0 3px 10px rgba(58,65,64,.07)}
+  .loc-dd > i[data-lucide='map-pin']{width:12px;height:12px;color:var(--accent)}
+  .loc-caret{width:13px;height:13px;transition:transform .2s}
+  .loc-dd:has(.loc-menu.open) .loc-caret{transform:rotate(180deg)}
+  .loc-menu{position:absolute;top:calc(100% + 7px);left:0;min-width:210px;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow-lg);padding:6px;z-index:200;display:none;flex-direction:column;gap:2px}
+  .loc-menu.open{display:flex}
+  .loc-opt{display:flex;align-items:center;gap:9px;width:100%;text-align:left;background:none;border:none;font-family:inherit;font-size:13px;font-weight:500;color:var(--text-2);padding:9px 10px;border-radius:8px;cursor:pointer;transition:background .13s,color .13s}
+  .loc-opt:hover{background:var(--bg);color:var(--text)}
+  .loc-opt.sel{color:var(--accent);font-weight:700;background:var(--accent-light)}
+  .loc-opt i[data-lucide='map-pin']{width:14px;height:14px;color:var(--text-3);flex-shrink:0}
+  .loc-opt.sel i[data-lucide='map-pin']{color:var(--accent)}
+  .loc-check{width:14px;height:14px;margin-left:auto;color:var(--accent)}
+  .greet-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .greet-row .loc-dd{margin-top:0}
   .hr-alert-bar{height:4px;background:linear-gradient(90deg,#E5484D,#C0413F)}
   .hr-alert-in{display:flex;gap:13px;padding:15px 16px}
   .hr-alert-ic{width:40px;height:40px;flex-shrink:0;border-radius:11px;background:#FBEAEA;color:#C0413F;display:flex;align-items:center;justify-content:center}
@@ -5776,7 +5798,7 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
   // ── Desktop in-app high-risk alert ──
   function simulateHighRiskAlert(force){var el=document.getElementById('hrAlert');if(!el)return;if(!force&&window.innerWidth<=900)return;var dot=document.getElementById('tbNotifDot');if(dot)dot.style.display='block';aiPrependNotif();el.classList.add('show');if(window.lucide)lucide.createIcons();clearTimeout(el._t);el._t=setTimeout(function(){el.classList.remove('show');},13000);}
   function hrAlertClose(){var el=document.getElementById('hrAlert');if(el)el.classList.remove('show');}
-  function hrAlertView(){hrAlertClose();aiGoHighRisk();}
+  function hrAlertView(){hrAlertClose();if(!(window.openPatientByName &amp;&amp; openPatientByName('Marcus T.')))aiGoHighRisk();}
   function hrAlertCall(){if(window.toast)toast('Calling Marcus T. …','info');hrAlertClose();}
   function aiPrependNotif(){var list=document.querySelector('#tbNotifMenu .tb-notif-list');if(!list||list._added)return;list._added=true;var d=document.createElement('div');d.className='tb-notif-item unread';d.innerHTML='<div class=&quot;tb-notif-ic&quot; style=&quot;background:#FBEAEA;color:#C0413F&quot;><i data-lucide=&quot;siren&quot;></i></div><div class=&quot;tb-notif-body&quot;><div class=&quot;tb-notif-t&quot;>New high-risk patient — Marcus T.</div><div class=&quot;tb-notif-d&quot;>Relapse risk 82% · 3 missed doses</div><div class=&quot;tb-notif-time&quot;>Just now</div></div>';list.insertBefore(d,list.firstChild);if(window.lucide)lucide.createIcons();}
   // ── Push settings modal ──
@@ -6025,6 +6047,7 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
 <div class=&quot;modal-overlay&quot; id=&quot;modalConfirm&quot; onclick=&quot;closeModal('modalConfirm')&quot;><div class=&quot;modal modal-sm&quot; onclick=&quot;event.stopPropagation()&quot;><div class=&quot;modal-title&quot; id=&quot;confTitle&quot;>Are you sure?</div><div id=&quot;confBody&quot; style=&quot;font-size:13.5px;color:#6E766C;line-height:1.55;margin:-2px 0 2px&quot;></div><div class=&quot;modal-footer&quot;><button class=&quot;btn btn-secondary&quot; onclick=&quot;closeModal('modalConfirm')&quot;>Cancel</button><button class=&quot;btn btn-primary&quot; id=&quot;confOk&quot; style=&quot;width:auto&quot; onclick=&quot;confRun()&quot;>Confirm</button></div></div></div>
 <script>
   function openPatient(tr){var q=function(sel){var x=tr.querySelector(sel);return x?x.textContent.replace(/\s+/g,' ').trim():'';};var name=q('.fw-600'),sub=q('.hr-pt-sub'),diag=q('.hr-diag'),moud=q('.hr-moud'),days=q('.hr-days'),team=q('.hr-team-name'),focus=q('.hr-focus');var recEl=tr.querySelector('.hr-rec b');var rec=recEl?(parseInt(recEl.getAttribute('data-val')||recEl.textContent,10)||0):0;var checkin='';var recTd=tr.querySelector('.hr-rec');if(recTd){var ptd=recTd.closest('td');var ntd=ptd&&ptd.nextElementSibling;if(ntd)checkin=ntd.textContent.trim();}var init=((window.nameInitials?nameInitials(name):(name||'?').slice(0,2))||'?').toUpperCase();var col=(window.avatarColor?avatarColor(init):'#4E7B5E');var set=function(id,v){var e=document.getElementById(id);if(e)e.textContent=v;};var av=document.getElementById('pdAvatar');if(av){av.textContent=init;av.style.background=col;}set('pdName',name||'Patient');set('pdSub',sub);var bnd=rec<25?'needs close support':(rec<50?'below average':(rec<70?'around average':'above average'));var rc=(window.recBandColors?recBandColors(rec):['#3C6249','#E7F0EA']);var rl=rec<25?'High risk':(rec<50?'Elevated':'Stable');var risk=document.getElementById('pdRisk');if(risk){risk.textContent=rl;risk.style.color=rc[0];risk.style.background=rc[1];}var hdr=document.querySelector('#sec-patient-detail .pd-header');if(hdr)hdr.style.setProperty('--pd-accent',rc[0]);var avd=document.getElementById('pdAvDot');if(avd)avd.style.background=rc[0];set('pdDiagTag',diag||'--');var g=document.getElementById('pdGauge');if(g&&window.gaugeSVG2)g.innerHTML=gaugeSVG2(rec);set('pdScore',rec);var be=document.getElementById('pdBand');if(be){be.textContent=bnd;be.style.color=rc[0];be.style.background=rc[1];}set('pdDays',days||'--');set('pdCheckin',checkin||'--');set('pdDiag',diag||'--');set('pdMoud',moud||'--');set('pdTeam',team||'--');set('pdFocus',focus||'--');set('pdHDiag',diag||'--');set('pdHMoud',moud||'--');set('pdHCheckin',checkin||'--');set('pdHDays',days||'--');set('pdHTeam',team||'--');var hf=document.getElementById('pdHFocus');if(hf){if(focus){hf.className='hr-focus '+focusClass(focus);hf.style.background='';hf.style.color='';hf.style.borderColor='';hf.innerHTML=`<i data-lucide='target'></i> ${focus}`;}else{hf.className='hr-focus';hf.innerHTML='';}}set('pdMedName',moud||'MOUD');var body=document.getElementById('pdBody');if(body){var trend=rec<50?'The focus this week is bringing it up with small, steady steps.':'It has held fairly steady lately, and steady counts for a lot in recovery.';var p1='Today\'s recovery health score is <b>'+rec+'</b>. That puts it <b>'+bnd+'</b>. '+trend;var p2=(window.recFocusLine?recFocusLine(focus,moud):'The focus today is staying consistent with the recovery routine.');var p3='<b>'+(days||'Every day')+'</b> in recovery without non-medical opioid use, staying with '+(moud||'their medication')+'. That consistency takes real effort, one day at a time.';body.innerHTML='<p>'+p1+'</p><p>'+p2+'</p><p>'+p3+'</p>';}var rf=document.getElementById('pdFocus2');if(rf){var fi=(window.recFocusIcon?recFocusIcon(focus):['target','#EAF1EC','#3C6249']);rf.innerHTML=`<span class='rf-ic' style='background:${fi[1]};color:${fi[2]}'><i data-lucide='${fi[0]}'></i></span><div><div class='rf-label'>Today's focus</div><div class='rf-text'>${focus||'General check-in'}</div></div>`;}var dnum=parseInt(days,10)||0;var mils=[30,60,90,180,365];var mil=365;for(var mi=0;mi<mils.length;mi++){if(mils[mi]>dnum){mil=mils[mi];break;}}set('pdStreakDays',dnum);var sbar=document.getElementById('pdStreakBar');if(sbar)sbar.style.width=Math.min(100,Math.round(dnum/(mil||1)*100))+'%';set('pdStreakNote',(mil-dnum)+' days to your '+mil+'-day milestone');set('pdMoudCount',dnum);set('pdMoudCount2',dnum);var cur=document.querySelector('.section:not(.hidden)');window._pdReturn=cur?cur.id.replace('sec-',''):'patients';try{localStorage.setItem('rhDetail',name||'');}catch(e){}var _fn={patients:'Patients & Care',dashboard:'Dashboard',users:'User Management',appointments:'Appointments'};var _re=document.getElementById('pdBcRoot');if(_re)_re.textContent=_fn[window._pdReturn]||'Patients & Care';set('pdBcName',name||'Patient');document.querySelectorAll('.section').forEach(function(sx){sx.classList.add('hidden');});var pd=document.getElementById('sec-patient-detail');if(pd)pd.classList.remove('hidden');var ot=document.querySelector('#pdTabs .tab');if(window.switchTab&&ot)switchTab('pdTabs','tab-pd-overview',ot);if(window.pdRenderCharts)pdRenderCharts();try{window.scrollTo({top:0,behavior:'smooth'});}catch(e){window.scrollTo(0,0);}if(window.lucide)lucide.createIcons();}
+  function openPatientByName(name){var ns=document.querySelectorAll('.fw-600');for(var i=0;i<ns.length;i++){if(ns[i].textContent.trim()===name){var tr=ns[i].closest('tr');if(tr&&tr.querySelector('.hr-rec')){openPatient(tr);return true;}}}return false;}
   function patientBack(){var id=window._pdReturn||'patients';var nav=document.querySelector('.nav-item[onclick*=&quot;'+id+'&quot;]');if(window.showSection)showSection(id,nav);}
   function pdAct(a){var n=(document.getElementById('pdName')||{}).textContent||'patient';if(window.toast)toast(a+' - '+n,'info');}
   document.addEventListener('click',function(e){var t=e.target;if(!t||!t.closest)return;if(t.closest('button,a,input,select,.gauge-num,.rowact'))return;var tr=t.closest('tr');if(!tr||!tr.querySelector('.hr-rec'))return;openPatient(tr);});
@@ -6172,7 +6195,8 @@ function pdNav(d){if(window.toast)toast(d>0?'Next period':'Previous period','inf
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     const dashNav = document.querySelector('.nav-item[onclick*=&quot;dashboard&quot;]');
     if (dashNav) dashNav.classList.add('active');
-    setGreeting();
+    var _role; try { _role = window._rhRole || localStorage.getItem('rhRole') || 'doctor'; } catch(e){ _role = window._rhRole || 'doctor'; }
+    applyRole(_role);
     animateDashboard();
     try { localStorage.setItem('rhLogin', '1'); } catch(e){}
   }
@@ -6216,20 +6240,57 @@ function pdNav(d){if(window.toast)toast(d>0?'Next period':'Previous period','inf
     showSection(id, nav);
   }
 
+  // ── ROLES: Doctor vs Clinic Admin ──
+  var RH_ROLES = {
+    doctor: { name:'Dr. Rivera', role:'Clinical Provider', av:'DR', email:'dr.rivera@baymark.org' },
+    clinic: { name:'Family Clinic', role:'Clinic Admin · Venice, CA', av:'FC', email:'admin@familyclinic.org', clinic:'Family Clinic', location:'Venice, CA' }
+  };
+  var RH_LOCATIONS = ['Venice, CA','Santa Monica, CA','Long Beach, CA','Pasadena, CA','Glendale, CA'];
+  function rhCurrentLocation(){ var l='Venice, CA'; try{ l=localStorage.getItem('rhLocation')||'Venice, CA'; }catch(e){} if(RH_LOCATIONS.indexOf(l)<0)l='Venice, CA'; return l; }
+  function rlSelectRole(el){
+    document.querySelectorAll('.rl-role').forEach(function(b){ b.classList.remove('selected'); });
+    el.classList.add('selected');
+    window._rhRole = el.getAttribute('data-role') || 'doctor';
+    var em = document.getElementById('loginEmail');
+    if (em) em.value = (window._rhRole === 'clinic') ? RH_ROLES.clinic.email : RH_ROLES.doctor.email;
+  }
+  function applyRole(role){
+    if (!role) { try { role = localStorage.getItem('rhRole') || 'doctor'; } catch(e){ role = 'doctor'; } }
+    role = (role === 'clinic') ? 'clinic' : 'doctor';
+    try { localStorage.setItem('rhRole', role); } catch(e){}
+    var r = RH_ROLES[role];
+    var byId = function(id, v){ var e = document.getElementById(id); if (e) e.textContent = v; };
+    byId('sbAvatar', r.av); byId('sbUserName', r.name); byId('sbUserRole', (role === 'clinic') ? ('Clinic Admin · ' + rhCurrentLocation()) : r.role);
+    byId('tbPmAv', r.av); byId('tbPmName', r.name); byId('tbPmEmail', r.email);
+    setGreeting();
+    try { if (window.lucide) lucide.createIcons(); } catch(e){}
+  }
+  function locDropdownHTML(){
+    var cur = rhCurrentLocation();
+    return '<span class=&quot;loc-dd&quot; onclick=&quot;locToggle(event)&quot;><i data-lucide=\'map-pin\'></i><span id=&quot;locCurrent&quot;>' + cur + '</span><i data-lucide=\'chevron-down\' class=&quot;loc-caret&quot;></i><div class=&quot;loc-menu&quot; id=&quot;locMenu&quot;>' + RH_LOCATIONS.map(function(l){ return '<button type=&quot;button&quot; class=&quot;loc-opt' + (l === cur ? ' sel' : '') + '&quot; onclick=&quot;locSelect(event,\'' + l + '\')&quot;><i data-lucide=\'map-pin\'></i><span>' + l + '</span>' + (l === cur ? '<i data-lucide=\'check\' class=&quot;loc-check&quot;></i>' : '') + '</button>'; }).join('') + '</div></span>';
+  }
+  function locToggle(e){ if (e) e.stopPropagation(); var m = document.getElementById('locMenu'); if (m) m.classList.toggle('open'); }
+  function locSelect(e, loc){ if (e) e.stopPropagation(); try { localStorage.setItem('rhLocation', loc); } catch(_){} RH_ROLES.clinic.location = loc; var sr = document.getElementById('sbUserRole'); if (sr) sr.textContent = 'Clinic Admin · ' + loc; setGreeting(); try { if (window.lucide) lucide.createIcons(); } catch(_){} if (window.toast) toast('Viewing ' + loc, 'info'); }
+  document.addEventListener('click', function(){ var m = document.getElementById('locMenu'); if (m) m.classList.remove('open'); });
+
   // ── DASHBOARD: greeting, count-up, animated bars ──
   function setGreeting() {
+    var role = 'doctor'; try { role = localStorage.getItem('rhRole') || 'doctor'; } catch(e){}
     var g = document.getElementById('dashGreeting');
     var d = document.getElementById('dashDate');
-    if (g) {
+    var today = '';
+    try { today = new Date().toLocaleDateString(undefined, { weekday:'long', month:'long', day:'numeric' }); } catch(e){}
+    var gp = g ? g.parentNode : null;
+    if (role === 'clinic') {
+      if (gp) gp.classList.add('greet-row');
+      if (g) g.textContent = RH_ROLES.clinic.clinic;
+      if (d) { d.innerHTML = locDropdownHTML(); try { if (window.lucide) lucide.createIcons(); } catch(e){} }
+    } else {
+      if (gp) gp.classList.remove('greet-row');
       var h = new Date().getHours();
       var part = h < 12 ? 'Good morning' : (h < 17 ? 'Good afternoon' : 'Good evening');
-      g.textContent = part + ', Dr. Rivera';
-    }
-    if (d) {
-      try {
-        var today = new Date().toLocaleDateString(undefined, { weekday:'long', month:'long', day:'numeric' });
-        d.textContent = today + ' · Here\'s what\'s happening with your panel today.';
-      } catch(e) {}
+      if (g) g.textContent = part + ', Dr. Rivera';
+      if (d) d.textContent = (today ? today + ' · ' : '') + 'Here\'s what\'s happening with your panel today.';
     }
   }
 
