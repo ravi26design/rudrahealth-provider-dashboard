@@ -6504,6 +6504,7 @@ function pdNav(d){if(window.toast)toast(d>0?'Next period':'Previous period','inf
     const app = document.getElementById('page-app');
     app.style.display = 'flex';
     app.style.minHeight = '100vh';
+    document.body.classList.add('rh-authed');
     // Show dashboard, hide everything else
     document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
     document.getElementById('sec-dashboard').classList.remove('hidden');
@@ -6520,6 +6521,7 @@ function pdNav(d){if(window.toast)toast(d>0?'Next period':'Previous period','inf
   function doLogout() {
     document.getElementById('page-app').style.display = 'none';
     document.getElementById('page-login').style.display = 'flex';
+    document.body.classList.remove('rh-authed');
     try { localStorage.removeItem('rhLogin'); localStorage.removeItem('rhSection'); } catch(e){}
   }
   // Restore the same page after a refresh (logged-in state + active section)
@@ -6548,6 +6550,7 @@ function pdNav(d){if(window.toast)toast(d>0?'Next period':'Previous period','inf
     if (navEl) navEl.classList.add('active');
     try { localStorage.setItem('rhSection', id); localStorage.removeItem('rhDetail'); } catch(e){}
     if (id === 'dashboard') animateDashboard();
+    if (window.rhLabelTables) rhLabelTables();
     try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch(e) { window.scrollTo(0,0); }
   }
 
@@ -8005,6 +8008,35 @@ function pdNav(d){if(window.toast)toast(d>0?'Next period':'Previous period','inf
     if(el&amp;&amp;el.nodeType===1&amp;&amp;el.hasAttribute('oninput'))runCode(el.getAttribute('oninput'),el,ev);});
   }
 })();
+</script>
+<style>
+body:not(.rh-authed) #mobMenuBtn,body:not(.rh-authed) #mobOverlay{display:none!important}
+@media(max-width:600px){
+  .rl-pills{flex-wrap:wrap!important}
+  table.rtable{min-width:0!important;width:100%;display:block}
+  table.rtable thead{display:none}
+  table.rtable tbody{display:block}
+  table.rtable tr{display:block;background:var(--surface,#fff);border:1px solid var(--border,#E6E9E6);border-radius:14px;padding:12px 14px;margin:0 0 12px;box-shadow:0 1px 2px rgba(16,24,40,.05)}
+  table.rtable tr:last-child{margin-bottom:0}
+  table.rtable td{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 14px;padding:7px 0;border:none!important;text-align:right;font-size:13px;white-space:normal;min-width:0}
+  table.rtable td::before{content:attr(data-label);text-align:left;font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#9AA0A8;flex:0 0 auto;max-width:48%}
+  table.rtable td:not([data-label])::before{display:none}
+  table.rtable td.td-title{display:block;text-align:left;padding:2px 0 10px;margin-bottom:8px;border-bottom:1px solid var(--border,#E6E9E6)!important}
+  table.rtable td.td-title::before{display:none}
+  table.rtable td.td-actions{display:block;text-align:left;padding:12px 0 2px;margin-top:4px;border-top:1px solid var(--border,#E6E9E6)!important}
+  table.rtable td.td-actions::before{display:none}
+  table.rtable td.td-actions .rowact,table.rtable td.td-actions .flex{display:flex;flex-wrap:wrap;gap:8px;margin:0}
+  table.rtable td.td-actions .btn,table.rtable td.td-actions .ra{flex:1 1 auto;justify-content:center}
+  table.rtable td .hr-rec{justify-content:flex-end}
+  table.rtable td .trig-type-chip,table.rtable td .hr-team{margin-left:auto}
+  .flex:has(> .tbl-search){flex-wrap:wrap;gap:8px}
+  .tbl-search{flex:1 1 100%;min-width:0;width:100%}
+  .flex:has(> .tbl-search) select,.flex:has(> .tbl-search) .btn{flex:1 1 auto}
+}
+</style>
+<script>
+function rhLabelTables(){try{var ts=document.querySelectorAll('.section table');for(var i=0;i<ts.length;i++){var t=ts[i];t.classList.add('rtable');var hs=t.querySelectorAll('thead th');var hdr=[];for(var h=0;h<hs.length;h++){hdr.push(hs[h].textContent.replace(/\s+/g,' ').trim());}var rows=t.querySelectorAll('tbody tr');for(var r=0;r<rows.length;r++){var tds=rows[r].children;for(var c=0;c<tds.length;c++){var td=tds[c];var lab=hdr[c];if(lab!==undefined){if(lab!==''){td.setAttribute('data-label',lab);}}if(c===0){td.classList.add('td-title');}if(c===tds.length-1){if(td.querySelector('button,.rowact')){td.classList.add('td-actions');}}}}}}catch(e){}}
+try{rhLabelTables();}catch(e){}
 </script>
 </body>
 </html>
