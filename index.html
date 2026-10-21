@@ -6557,6 +6557,7 @@ function pdNav(d){if(window.toast)toast(d>0?'Next period':'Previous period','inf
     var _role; try { _role = window._rhRole || localStorage.getItem('rhRole') || 'doctor'; } catch(e){ _role = window._rhRole || 'doctor'; }
     applyRole(_role);
     animateDashboard();
+    if (_role === 'clinic' && window.rhApplyLocation) rhApplyLocation(rhCurrentLocation());
     try { localStorage.setItem('rhLogin', '1'); } catch(e){}
     if (window.dhrMaybeShow) dhrMaybeShow();
   }
@@ -6611,6 +6612,14 @@ function pdNav(d){if(window.toast)toast(d>0?'Next period':'Previous period','inf
   };
   var RH_LOCATIONS = ['Venice, CA','Santa Monica, CA','Long Beach, CA','Pasadena, CA','Glendale, CA'];
   function rhCurrentLocation(){ var l='Venice, CA'; try{ l=localStorage.getItem('rhLocation')||'Venice, CA'; }catch(e){} if(RH_LOCATIONS.indexOf(l)<0)l='Venice, CA'; return l; }
+  var RH_LOC_DATA={
+    'Venice, CA':{active:248,highRisk:17,completion:81,recovery:71,providers:5,retention:76},
+    'Santa Monica, CA':{active:186,highRisk:11,completion:84,recovery:74,providers:4,retention:79},
+    'Long Beach, CA':{active:312,highRisk:24,completion:77,recovery:68,providers:6,retention:72},
+    'Pasadena, CA':{active:154,highRisk:9,completion:88,recovery:76,providers:3,retention:81},
+    'Glendale, CA':{active:203,highRisk:14,completion:79,recovery:70,providers:4,retention:75}
+  };
+  function rhApplyLocation(loc){try{var dta=RH_LOC_DATA[loc]||RH_LOC_DATA['Venice, CA'];var vals=document.querySelectorAll('#sec-dashboard .stat-grid .stat-val');var order=[dta.active,dta.highRisk,dta.completion,dta.recovery];for(var i=0;i<vals.length&amp;&amp;i<4;i++){var v=vals[i];v.setAttribute('data-count',order[i]);var suf=v.getAttribute('data-suffix')||'';v.textContent=order[i]+suf;}var hs=document.getElementById('hrSub');if(hs)hs.textContent=dta.highRisk+' High-Risk Patients';var pc=document.getElementById('patientCount');if(pc)pc.textContent=dta.active;var rt=document.getElementById('retTag');if(rt)rt.textContent=dta.retention+'% this week';var rb=document.getElementById('retBadge');if(rb)rb.textContent=dta.retention+'%';var dash=document.getElementById('sec-dashboard');if(dash&amp;&amp;!dash.classList.contains('hidden')&amp;&amp;window.animateDashboard)animateDashboard();}catch(e){}}
   function rlSelectRole(el){
     document.querySelectorAll('.rl-role').forEach(function(b){ b.classList.remove('selected'); });
     el.classList.add('selected');
@@ -6635,7 +6644,7 @@ function pdNav(d){if(window.toast)toast(d>0?'Next period':'Previous period','inf
   }
   function locStaticHTML(loc){ return '<span class=&quot;loc-dd loc-static&quot; title=&quot;Location&quot;><i data-lucide=\'map-pin\'></i><span>' + loc + '</span></span>'; }
   function locToggle(e){ if (e) e.stopPropagation(); var m = document.getElementById('locMenu'); if (m) m.classList.toggle('open'); }
-  function locSelect(e, loc){ if (e) e.stopPropagation(); try { localStorage.setItem('rhLocation', loc); } catch(_){} RH_ROLES.clinic.location = loc; var sr = document.getElementById('sbUserRole'); if (sr) sr.textContent = 'Clinic Admin · ' + loc; setGreeting(); try { if (window.lucide) lucide.createIcons(); } catch(_){} if (window.toast) toast('Viewing ' + loc, 'info'); }
+  function locSelect(e, loc){ if (e) e.stopPropagation(); try { localStorage.setItem('rhLocation', loc); } catch(_){} RH_ROLES.clinic.location = loc; var sr = document.getElementById('sbUserRole'); if (sr) sr.textContent = 'Clinic Admin · ' + loc; setGreeting(); if (window.rhApplyLocation) rhApplyLocation(loc); try { if (window.lucide) lucide.createIcons(); } catch(_){} if (window.toast) toast('Now viewing ' + loc, 'info'); }
   document.addEventListener('click', function(){ var m = document.getElementById('locMenu'); if (m) m.classList.remove('open'); });
 
   // ── DASHBOARD: greeting, count-up, animated bars ──
@@ -8121,6 +8130,8 @@ body:not(.rh-authed) #mobMenuBtn,body:not(.rh-authed) #mobOverlay{display:none!i
 .survey-list-actions .sm-del:hover{color:#C0413F!important;background:#FBECE9!important;border-color:#F2D5D1!important}
 .row-del svg{width:14px;height:14px}
 .row-del:hover{color:#C0413F!important;background:#FBECE9!important}
+/* Reliability: clicks on button icons always register on the button, not the svg/path */
+#page-app button svg,#page-app button i[data-lucide],#page-app .ra svg,#page-app .ra i,#page-app .rowact svg{pointer-events:none}
 /* High-risk modal card polish */
 #modalDailyHighRisk .dhr-card{background:#fff;border:1px solid #EEE1DF;box-shadow:0 8px 24px rgba(192,65,63,.07),inset 3px 0 0 #D4736A;border-radius:16px;padding:18px 18px 18px 20px}
 #modalDailyHighRisk .dhr-bar{margin-top:15px}
