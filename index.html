@@ -5850,7 +5850,7 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
   #aiFab{display:none;position:fixed;right:22px;bottom:22px;z-index:400;width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;background:linear-gradient(135deg,#2C639D,#234E7B);color:#fff;box-shadow:0 12px 30px rgba(35,78,123,.42);align-items:center;justify-content:center;transition:transform .18s,box-shadow .18s}
   #aiFab:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 16px 40px rgba(35,78,123,.52)}
   #aiFab svg{width:24px;height:24px}
-  .ai-panel{position:fixed;right:22px;bottom:88px;z-index:401;width:372px;max-width:calc(100vw - 32px);height:524px;max-height:calc(100vh - 130px);background:#fff;border:1px solid #E4E7E3;border-radius:20px;box-shadow:0 24px 64px rgba(24,32,27,.26);display:flex;flex-direction:column;overflow:hidden;opacity:0;transform:translateY(14px) scale(.98);pointer-events:none;transition:opacity .22s,transform .22s}
+  .ai-panel{position:fixed;inset:0;z-index:401;width:100vw;height:100vh;height:100dvh;max-width:none;max-height:none;background:#fff;border:none;border-radius:0;box-shadow:none;display:flex;flex-direction:column;overflow:hidden;opacity:0;transform:scale(.99);pointer-events:none;transition:opacity .2s,transform .2s}
   .ai-panel.open{opacity:1;transform:none;pointer-events:auto}
   .ai-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:linear-gradient(135deg,#2C639D,#234E7B);color:#fff}
   .ai-head-l{display:flex;align-items:center;gap:11px}
@@ -8276,6 +8276,13 @@ body:not(.rh-authed) #mobMenuBtn,body:not(.rh-authed) #mobOverlay{display:none!i
   .ai-review>div{display:flex;justify-content:space-between;gap:12px;font-size:12.5px;line-height:1.4}
   .ai-review span{color:#8A918B;flex-shrink:0;font-weight:600}
   .ai-review b{color:#20261F;text-align:right}
+  /* Full-screen assistant layout */
+  .ai-panel .ai-head{padding:16px 24px}
+  .ai-panel .ai-body{align-items:center;padding:26px 20px}
+  .ai-panel .ai-body .ai-msg{width:100%;max-width:740px}
+  .ai-panel .ai-chips{justify-content:center;flex-wrap:wrap;max-width:780px;width:100%;margin:0 auto;overflow:visible}
+  .ai-panel .ai-input{max-width:780px;width:100%;margin:0 auto}
+  .ai-panel .ai-head-l .ai-avatar{width:40px;height:40px}
 #page-app .survey-list-card{border-radius:16px;border-color:#ECEEF2;transition:transform .14s ease,box-shadow .14s ease,border-color .14s ease}
 #page-app .survey-list-card:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(30,41,59,.07);border-color:#DCE3EC}
 /* Craft layer: scrollbars, motion, focus, press feedback */
