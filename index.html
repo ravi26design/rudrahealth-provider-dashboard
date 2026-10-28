@@ -5962,9 +5962,10 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
     <button class=&quot;ai-x&quot; onclick=&quot;aiToggle()&quot; aria-label=&quot;Close&quot;><i data-lucide='x'></i></button>
   </div>
   <div class=&quot;ai-body&quot; id=&quot;aiBody&quot;>
-    <div class=&quot;ai-msg bot&quot;><div class=&quot;ai-bubble&quot;>Hi Dr. Rivera 👋 Ask me things like <b>&quot;show high-risk patients&quot;</b>, <b>&quot;how many active patients?&quot;</b>, or <b>&quot;open outcomes&quot;</b>. Tap the mic to speak.</div></div>
+    <div class=&quot;ai-msg bot&quot;><div class=&quot;ai-bubble&quot;>Hi Dr. Rivera 👋 I can answer questions <i>and take actions</i>. Try <b>&quot;send a reminder to discharged alumni&quot;</b> — I'll ask the right details and send it. Or ask <b>&quot;show high-risk patients&quot;</b>, <b>&quot;survey completion&quot;</b>, or <b>&quot;open outcomes&quot;</b>.</div></div>
   </div>
   <div class=&quot;ai-chips&quot;>
+    <button class=&quot;ai-chip&quot; onclick=&quot;aiQuick('Send a reminder to discharged alumni')&quot;>✨ Send alumni reminder</button>
     <button class=&quot;ai-chip&quot; onclick=&quot;aiQuick('Show high-risk patients')&quot;>High-risk patients</button>
     <button class=&quot;ai-chip&quot; onclick=&quot;aiQuick('How many active patients?')&quot;>Active patients</button>
     <button class=&quot;ai-chip&quot; onclick=&quot;aiQuick('Survey completion rate')&quot;>Survey completion</button>
@@ -6021,7 +6022,20 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
   function aiAddBot(html){var b=document.getElementById('aiBody');if(!b)return;var m=document.createElement('div');m.className='ai-msg bot';m.innerHTML='<div class=&quot;ai-bubble&quot;>'+html+'</div>';b.appendChild(m);b.scrollTop=b.scrollHeight;if(window.lucide)lucide.createIcons();}
   function aiTyping(on){var b=document.getElementById('aiBody');var ex=document.getElementById('aiTypeRow');if(on){if(ex||!b)return;var m=document.createElement('div');m.className='ai-msg bot';m.id='aiTypeRow';m.innerHTML='<div class=&quot;ai-bubble&quot;><span class=&quot;ai-typing&quot;><i></i><i></i><i></i></span></div>';b.appendChild(m);b.scrollTop=b.scrollHeight;}else if(ex){ex.parentNode.removeChild(ex);}}
   function aiQuick(t){var i=document.getElementById('aiText');if(i)i.value=t;aiSend(false);}
-  function aiSend(spoke){var i=document.getElementById('aiText');if(!i)return;var v=(i.value||'').trim();if(!v)return;aiAddUser(v);i.value='';aiTyping(true);setTimeout(function(){aiTyping(false);var r=aiResolve(v);aiAddBot(r.html);if(r.act){try{r.act();}catch(e){}}if(spoke)aiSpeak(r.say||r.html);},480);}
+  function aiSend(spoke){var i=document.getElementById('aiText');if(!i)return;var v=(i.value||'').trim();if(!v)return;aiAddUser(v);i.value='';aiTyping(true);setTimeout(function(){aiTyping(false);var r=_aiFlow?aiFlowStep(v):aiResolve(v);aiAddBot(r.html);if(r.act){try{r.act();}catch(e){}}if(spoke)aiSpeak(r.say||r.html);},480);}
+  var _aiFlow=null;
+  function aiOpts(arr){var h='<div class=&quot;ai-opts&quot;>';for(var i=0;i<arr.length;i++){h+='<button class=&quot;ai-opt&quot; onclick=&quot;aiQuick(\''+arr[i]+'\')&quot;>'+arr[i]+'</button>';}return h+'</div>';}
+  function aiConfirm(){return '<div class=&quot;ai-opts&quot;><button class=&quot;ai-opt ai-opt-go&quot; onclick=&quot;aiQuick(\'Yes, send it\')&quot;>Yes, send it</button><button class=&quot;ai-opt&quot; onclick=&quot;aiQuick(\'Cancel\')&quot;>Cancel</button></div>';}
+  function aiAudCount(a){return {'All active patients':'248','High-risk patients':'17','Patients sober 90+ days':'96'}[a]||'0';}
+  function aiStartSend(preAud){_aiFlow={intent:'send',step:'audience',slots:{}};if(preAud)return aiFlowStep(preAud);return {html:'Happy to help you send a message. 👥 Who should it go to?'+aiOpts(['All active patients','High-risk patients','Discharged alumni','Patients sober 90+ days']),say:'Who should the message go to?'};}
+  function aiFlowStep(text){var s=(text||'').toLowerCase();var f=_aiFlow;if(!f)return aiResolve(text);
+    if(f.step==='audience'){var aud=null;if(s.indexOf('alumni')>=0||s.indexOf('discharg')>=0)aud='Discharged alumni';else if(s.indexOf('high')>=0||s.indexOf('risk')>=0)aud='High-risk patients';else if(s.indexOf('sober')>=0||s.indexOf('90')>=0)aud='Patients sober 90+ days';else if(s.indexOf('active')>=0||s.indexOf('all')>=0)aud='All active patients';if(!aud)return {html:'Please pick an audience:'+aiOpts(['All active patients','High-risk patients','Discharged alumni','Patients sober 90+ days'])};f.slots.audience=aud;if(aud==='Discharged alumni'){f.step='window';return {html:'Great for re-engagement. 🗓️ How far back — discharged…'+aiOpts(['3 months ago','6 months ago','1 year ago or longer'])};}f.slots.count=aiAudCount(aud);f.step='channel';return {html:'Got it — <b>'+aud+'</b> ('+f.slots.count+' patients). 📲 Which channel?'+aiOpts(['SMS','Email','WhatsApp'])};}
+    if(f.step==='window'){var w=null,c=null;if(s.indexOf('3')>=0){w='3 months ago';c='~86';}else if(s.indexOf('6')>=0){w='6 months ago';c='~64';}else if(s.indexOf('year')>=0||s.indexOf('12')>=0){w='1 year ago or longer';c='~48';}if(!w)return {html:'Pick a timeframe:'+aiOpts(['3 months ago','6 months ago','1 year ago or longer'])};f.slots.window=w;f.slots.count=c;f.step='channel';return {html:'Targeting <b>'+c+' alumni</b> discharged '+w+'. 📲 Which channel?'+aiOpts(['SMS','Email','WhatsApp'])};}
+    if(f.step==='channel'){var ch=null;if(s.indexOf('sms')>=0||s.indexOf('text')>=0)ch='SMS';else if(s.indexOf('email')>=0||s.indexOf('mail')>=0)ch='Email';else if(s.indexOf('whats')>=0)ch='WhatsApp';if(!ch)return {html:'Which channel?'+aiOpts(['SMS','Email','WhatsApp'])};f.slots.channel=ch;f.step='message';return {html:'What should the message say? Type it below, or…'+aiOpts(['Suggest a message for me'])};}
+    if(f.step==='message'){var msg;if(s.indexOf('suggest')>=0){msg=f.slots.audience==='Discharged alumni'?'Hi {first_name}, it\'s the team at Demo Clinic. We\'ve been thinking of you — if you\'d like a check-in or support, we\'re here anytime. Reply YES to reconnect.':'Hi {first_name}, a quick note from Demo Clinic — we\'re here for you. Reply anytime if we can help.';}else{msg=text;}f.slots.message=msg;f.step='confirm';var sl=f.slots;return {html:'Here\'s the plan:<div class=&quot;ai-review&quot;><div><span>Audience</span><b>'+sl.audience+(sl.window?' · '+sl.window:'')+'</b></div><div><span>Recipients</span><b>'+sl.count+' patients</b></div><div><span>Channel</span><b>'+sl.channel+'</b></div><div><span>Message</span><b>&ldquo;'+msg+'&rdquo;</b></div></div>Shall I send it?'+aiConfirm()};}
+    if(f.step==='confirm'){if(s.indexOf('yes')>=0||s.indexOf('send')>=0||s.indexOf('confirm')>=0){var cc=f.slots.count,cch=f.slots.channel;_aiFlow=null;return {html:'✅ <b>Sent!</b> Your message is on its way to <b>'+cc+' patients</b> via '+cch+'. Replies will route to the care team.',say:'Sent to '+cc+' patients via '+cch,act:function(){if(window.toast)toast('Message sent to '+cc+' patients','ok');}};}_aiFlow=null;return {html:'No problem — I\'ve cancelled that. Anything else I can help with?',say:'Cancelled.'};}
+    return aiResolve(text);
+  }
   function aiSpeak(text){try{if(!window.speechSynthesis)return;var u=new SpeechSynthesisUtterance((text||'').replace(/<[^>]+>/g,''));u.lang='en-US';u.rate=1.03;window.speechSynthesis.cancel();window.speechSynthesis.speak(u);}catch(e){}}
   // ── Voice input ──
   var _aiRec=null,_aiRecOn=false;
@@ -6033,6 +6047,9 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
   function aiResolve(q){
     var s=(q||'').toLowerCase();
     function has(){for(var i=0;i<arguments.length;i++){if(s.indexOf(arguments[i])>=0)return true;}return false;}
+    var sendVerb=has('send','remind','reminder','broadcast','reach out','notify','follow up','follow-up','re-engage','reengage','reconnect','win back','text them','email them','message the','message all','message alumni','message patients');
+    var audHint=has('alumni','discharg','patient','high risk','high-risk','active','sober','everyone','them ','all ');
+    if(sendVerb&amp;&amp;audHint){if(has('alumni','discharg','former','left the program'))return aiStartSend('Discharged alumni');if(has('high risk','high-risk'))return aiStartSend('High-risk patients');if(has('sober'))return aiStartSend('Patients sober 90+ days');if(has('active'))return aiStartSend('All active patients');return aiStartSend(null);}
     if(has('high risk','high-risk','highest risk','relapse risk','at risk')){
       if(has('how many','number','count','total')){var v=aiStat('relapse')||'17';return {html:'You currently have <b>'+v+' high-risk patients</b> needing intervention. <span class=&quot;ai-link&quot; onclick=&quot;aiGoHighRisk()&quot;>Open the list →</span>',say:'You currently have '+v+' high risk patients needing intervention.'};}
       return {html:'Your highest-risk patients: <b>J. Davis</b> (risk 8), <b>M. Lee</b> (15), <b>S. Patel</b> (18) — and 14 more. Lower score means higher risk. Opening the High-Risk tab →',say:'Your highest risk patients are J. Davis, M. Lee and S. Patel, plus 14 more. Opening the high risk tab.',act:aiGoHighRisk};
@@ -8249,6 +8266,16 @@ body:not(.rh-authed) #mobMenuBtn,body:not(.rh-authed) #mobOverlay{display:none!i
   .sl-stat-bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#6C9FCC,#2F6DB0)}
   .sl-stat-draft{display:inline-block;color:#9A7C28;font-size:11.5px;font-weight:700;background:#FBF4E2;padding:7px 12px;border-radius:999px}
   @media(max-width:1040px){.sl-stat{display:none}}
+  .ai-opts{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+  .ai-opt{background:#EAF2FB;color:#2F6DB0;border:1px solid #D6E6F5;border-radius:999px;padding:7px 13px;font:600 12.5px/1 Manrope,Inter,sans-serif;cursor:pointer;transition:background .13s,transform .1s}
+  .ai-opt:hover{background:#DCEAF8}
+  .ai-opt:active{transform:translateY(1px)}
+  .ai-opt-go{background:#2F6DB0;color:#fff;border-color:#2F6DB0}
+  .ai-opt-go:hover{background:#255C96}
+  .ai-review{background:#F5F8FB;border:1px solid #E3EDF6;border-radius:12px;padding:11px 13px;margin:9px 0;display:flex;flex-direction:column;gap:8px}
+  .ai-review>div{display:flex;justify-content:space-between;gap:12px;font-size:12.5px;line-height:1.4}
+  .ai-review span{color:#8A918B;flex-shrink:0;font-weight:600}
+  .ai-review b{color:#20261F;text-align:right}
 #page-app .survey-list-card{border-radius:16px;border-color:#ECEEF2;transition:transform .14s ease,box-shadow .14s ease,border-color .14s ease}
 #page-app .survey-list-card:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(30,41,59,.07);border-color:#DCE3EC}
 /* Craft layer: scrollbars, motion, focus, press feedback */
