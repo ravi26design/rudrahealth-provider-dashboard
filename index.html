@@ -4635,6 +4635,7 @@ body{padding-top:0!important}
   function saveUserEdit(){var tr=_editUserRow;if(!tr){if(window.closeModal)closeModal('modalAddUser');return;}var name=(document.getElementById('invName')||{}).value||'';var email=(document.getElementById('invEmail')||{}).value||'';var role=(document.getElementById('invRole')||{}).value||'';var org=(document.getElementById('invOrg')||{}).value||'';var nmEl=tr.querySelector('.fw-600');if(nmEl)nmEl.textContent=name;var emEl=tr.querySelector('.text-xs');if(emEl)emEl.textContent=email;if(tr.children[1]){var tag=tr.children[1].querySelector('.tag');if(tag)tag.textContent=role;}if(tr.children[2])tr.children[2].textContent=org;tr.setAttribute('data-role',role);_editUserRow=null;if(window.closeModal)closeModal('modalAddUser');if(window.toast)toast('User updated','ok');}
   function userToggleActive(btn){var tr=btn.closest('tr');if(!tr)return;var tag=tr.children[4]?tr.children[4].querySelector('.tag'):null;if(!tag)return;if(/Active/i.test(tag.textContent)){tag.textContent='Inactive';tag.className='tag tag-gray';btn.textContent='Activate';if(window.toast)toast('User deactivated','info');}else{tag.textContent='Active';tag.className='tag tag-green';btn.textContent='Deactivate';if(window.toast)toast('User activated','ok');}}
   var APPT_AVA_C=[['#EAF2FB','#3E6DA0'],['#E7F0EA','#234E7B'],['#F3EEF9','#6A5CB0'],['#FBF1E2','#9A7C28'],['#F7E9E6','#B9543F']];
+  function surveyCardEnhance(){try{var cards=document.querySelectorAll('#smTab-library .survey-list-card');var data=[[184,81],[142,74],[167,88],[0,0],[0,0]];var di=0;for(var i=0;i<cards.length;i++){var c=cards[i];var acts=c.querySelector('.survey-list-actions');if(!acts)continue;if(c.querySelector('.sl-stat')){di++;continue;}var d=data[di]||[0,0];di++;var tag=acts.querySelector('.tag');var draft=!!(tag&&/draft/i.test(tag.textContent));var wrap=document.createElement('div');wrap.className='sl-stat';if(draft||d[0]===0){wrap.innerHTML='<span class=&quot;sl-stat-draft&quot;>Draft · not sent yet</span>';}else{wrap.innerHTML='<div class=&quot;sl-stat-top&quot;><b>'+d[0]+'</b> responses · <span>'+d[1]+'%</span> complete</div><div class=&quot;sl-stat-bar&quot;><i style=&quot;width:'+d[1]+'%&quot;></i></div>';}c.insertBefore(wrap,acts);}}catch(e){}}
   function apptKpiDeco(){try{var cards=document.querySelectorAll('#sec-appointments .appt-kpi, #sec-outcomes .stat-grid .stat-tile');var ns='http://www.w3.org/2000/svg';for(var i=0;i<cards.length;i++){if(cards[i].querySelector('.kpi-deco'))continue;var svg=document.createElementNS(ns,'svg');svg.setAttribute('class','kpi-deco');svg.setAttribute('viewBox','0 0 120 80');var bars=[[8,46,24,34],[48,28,24,52],[88,12,24,68]];for(var b=0;b<bars.length;b++){var r=document.createElementNS(ns,'rect');r.setAttribute('x',bars[b][0]);r.setAttribute('y',bars[b][1]);r.setAttribute('width',bars[b][2]);r.setAttribute('height',bars[b][3]);r.setAttribute('rx','6');svg.appendChild(r);}cards[i].appendChild(svg);}}catch(e){}}
   function apptEnhanceRows(){try{var ts=document.querySelectorAll('#tab-appt-upcoming table, #tab-appt-past table');for(var t=0;t<ts.length;t++){var rows=ts[t].querySelectorAll('tbody tr');for(var r=0;r<rows.length;r++){var td=rows[r].querySelector('td.fw-600');if(!td||td.getAttribute('data-enh'))continue;td.setAttribute('data-enh','1');var name=td.textContent.trim();var parts=name.replace(/[^A-Za-z .]/g,'').split(/\s+/);var init=((parts[0]||'')[0]||'')+((parts[parts.length-1]||'')[0]||'');init=init.toUpperCase();var c=APPT_AVA_C[(name.charCodeAt(0)+name.length)%APPT_AVA_C.length];td.classList.add('appt-pt-cell');td.innerHTML='<span class=&quot;appt-ava&quot; style=&quot;background:'+c[0]+';color:'+c[1]+'&quot;>'+init+'</span><span class=&quot;appt-pt-name&quot;>'+name+'</span>';}}}catch(e){}}
   function apptType(el){var row=el.parentNode;row.querySelectorAll('.channel-btn').forEach(function(b){b.classList.remove('sel');});el.classList.add('sel');}
@@ -6611,6 +6612,7 @@ function pdNav(d){if(window.toast)toast(d>0?'Next period':'Previous period','inf
     if (window.rhLabelTables) rhLabelTables();
     if (id === 'appointments' && window.apptEnhanceRows) apptEnhanceRows();
     if ((id === 'appointments' || id === 'outcomes') && window.apptKpiDeco) apptKpiDeco();
+    if (id === 'surveymanager' && window.surveyCardEnhance) surveyCardEnhance();
     if ((id === 'users' || id === 'surveys') && window.rhDeleteEnhance) rhDeleteEnhance();
     try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch(e) { window.scrollTo(0,0); }
   }
@@ -8234,6 +8236,19 @@ body:not(.rh-authed) #mobMenuBtn,body:not(.rh-authed) #mobOverlay{display:none!i
   .oc-secure svg{width:15px;height:15px;color:#2F6DB0}
   .oc-export{display:inline-flex;align-items:center;gap:7px;font-weight:700}
   .oc-export svg{width:15px;height:15px}
+  #smTab-library .survey-list-card{padding:16px 20px}
+  #smTab-library .survey-list-icon{width:48px;height:48px;border-radius:14px;box-shadow:inset 0 0 0 1px rgba(47,109,176,.08)}
+  #smTab-library .survey-list-icon svg{width:21px;height:21px}
+  #smTab-library .survey-list-name{font-size:15px}
+  #smTab-library .survey-list-meta{font-size:12px;margin-top:4px}
+  .sl-stat{flex:0 0 190px;padding:0 10px}
+  .sl-stat-top{font-size:12px;color:#5A6160;font-weight:600;margin-bottom:6px}
+  .sl-stat-top b{color:#20261F;font-weight:800}
+  .sl-stat-top span{color:#2F6DB0;font-weight:800}
+  .sl-stat-bar{height:6px;border-radius:999px;background:#EEF1F4;overflow:hidden}
+  .sl-stat-bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#6C9FCC,#2F6DB0)}
+  .sl-stat-draft{display:inline-block;color:#9A7C28;font-size:11.5px;font-weight:700;background:#FBF4E2;padding:7px 12px;border-radius:999px}
+  @media(max-width:1040px){.sl-stat{display:none}}
 #page-app .survey-list-card{border-radius:16px;border-color:#ECEEF2;transition:transform .14s ease,box-shadow .14s ease,border-color .14s ease}
 #page-app .survey-list-card:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(30,41,59,.07);border-color:#DCE3EC}
 /* Craft layer: scrollbars, motion, focus, press feedback */
