@@ -5962,7 +5962,7 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
     <button class=&quot;ai-x&quot; onclick=&quot;aiToggle()&quot; aria-label=&quot;Close&quot;><i data-lucide='x'></i></button>
   </div>
   <div class=&quot;ai-body&quot; id=&quot;aiBody&quot;>
-    <div class=&quot;ai-msg bot&quot;><div class=&quot;ai-ava-sm&quot;><i data-lucide='sparkles'></i></div><div class=&quot;ai-bubble&quot;>Hi Dr. Rivera 👋 I can answer questions <i>and take actions</i>. Try <b>&quot;send a reminder to discharged alumni&quot;</b> — I'll ask the right details and send it. Or ask <b>&quot;show high-risk patients&quot;</b>, <b>&quot;survey completion&quot;</b>, or <b>&quot;open outcomes&quot;</b>.</div></div>
+    <div class=&quot;ai-msg bot&quot;><div class=&quot;ai-ava-sm&quot;><i data-lucide='sparkles'></i></div><div class=&quot;ai-bubble&quot;>Hi Dr. Rivera 👋 I can answer questions <i>and take actions</i>. Try <b>&quot;send a reminder to discharged alumni&quot;</b> — I'll ask the right details and send it. Or type a <b>patient's name</b> to open their chart, or ask <b>&quot;show high-risk patients&quot;</b> or <b>&quot;open outcomes&quot;</b>.</div></div>
   </div>
   <div class=&quot;ai-chips&quot;>
     <button class=&quot;ai-chip&quot; onclick=&quot;aiQuick('Send a reminder to discharged alumni')&quot;>✨ Send alumni reminder</button>
@@ -6045,6 +6045,11 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
   function aiGoHighRisk(){goSection('patients');setTimeout(function(){var el=null;document.querySelectorAll('#patientTabs *').forEach(function(x){if(el)return;var oc=x.getAttribute&&x.getAttribute('onclick');if(oc&&oc.indexOf('tab-high-risk')>=0)el=x;});if(el)el.click();},70);}
   // ── Intent resolution ──
   function aiHighRiskList(){var pts=[['J. Davis','OUD + AUD',12],['Marcus T.','OUD',10],['Daniel F.','OUD + AUD',14],['M. Lee','AUD',16],['Maria O.','SUD',16],['S. Patel','OUD',18],['Kevin W.','OUD',18],['Omar S.','AUD',19],['Tanya B.','OUD + AUD',20],['Amy L.','OUD',22]];pts.sort(function(a,b){return a[2]-b[2];});var h='<div class=&quot;ai-list&quot;>';for(var i=0;i<pts.length;i++){var p=pts[i];var col=p[2]<25?'#C0413F':(p[2]<50?'#C79A44':'#2C639D');h+='<div class=&quot;ai-list-row&quot;><span class=&quot;ai-list-nm&quot;>'+p[0]+'</span><span class=&quot;ai-list-dx&quot;>'+p[1]+'</span><span class=&quot;ai-list-sc&quot; style=&quot;color:'+col+'&quot;>'+p[2]+'</span></div>';}return h+'</div>';}
+  var AI_ROSTER=[{name:'J. Davis',id:'#RH-1042',dx:'OUD + AUD',score:12},{name:'J. Davis',id:'#RH-2208',dx:'OUD',score:58},{name:'M. Lee',id:'#RH-0988',dx:'AUD',score:16},{name:'S. Patel',id:'#RH-1177',dx:'OUD',score:18},{name:'Maria O.',id:'#P-006',dx:'SUD',score:16},{name:'Kevin W.',id:'#P-011',dx:'OUD',score:18},{name:'Amy L.',id:'#P-018',dx:'OUD',score:22},{name:'Marcus T.',id:'#P-016',dx:'OUD',score:10},{name:'Priya N.',id:'#P-019',dx:'SUD',score:28},{name:'Robert H.',id:'#P-005',dx:'OUD + AUD',score:39},{name:'Tanya B.',id:'#P-014',dx:'OUD + AUD',score:20},{name:'Daniel F.',id:'#P-021',dx:'OUD + AUD',score:14},{name:'Grace M.',id:'#P-023',dx:'OUD',score:24},{name:'Omar S.',id:'#P-025',dx:'AUD',score:19}];
+  function aiPatientSearch(s){var hits=[];for(var i=0;i<AI_ROSTER.length;i++){var toks=AI_ROSTER[i].name.toLowerCase().replace(/[^a-z ]/g,' ').split(/\s+/);var mt=false;for(var t=0;t<toks.length;t++){if(toks[t].length>=3&amp;&amp;s.indexOf(toks[t])>=0){mt=true;break;}}if(mt)hits.push(AI_ROSTER[i]);}return hits;}
+  function aiPatientList(hits){var h='<div class=&quot;ai-list&quot;>';for(var i=0;i<hits.length;i++){var p=hits[i];var col=p.score<25?'#C0413F':(p.score<50?'#C79A44':'#2C639D');h+='<div class=&quot;ai-list-row ai-prow&quot; onclick=&quot;aiOpenPatient(\''+p.name.replace(/[^A-Za-z. ]/g,'')+'\')&quot;><span class=&quot;ai-list-nm&quot;>'+p.name+'</span><span class=&quot;ai-list-dx&quot;>'+p.id+' · '+p.dx+'</span><span class=&quot;ai-list-sc&quot; style=&quot;color:'+col+'&quot;>'+p.score+'</span><i data-lucide=\'chevron-right\' class=&quot;ai-prow-chev&quot;></i></div>';}return h+'</div>';}
+  function aiNav(id){var p=document.getElementById('aiPanel');if(p&amp;&amp;p.classList.contains('open')&amp;&amp;window.aiToggle)aiToggle();if(window.goSection)goSection(id);}
+  function aiOpenPatient(name){var p=document.getElementById('aiPanel');if(p&amp;&amp;p.classList.contains('open')&amp;&amp;window.aiToggle)aiToggle();setTimeout(function(){if(window.openPatientByName){var ok=openPatientByName(name);if(!ok&amp;&amp;window.goSection)goSection('patients');}},120);}
   function aiResolve(q){
     var s=(q||'').toLowerCase();
     function has(){for(var i=0;i<arguments.length;i++){if(s.indexOf(arguments[i])>=0)return true;}return false;}
@@ -6060,6 +6065,8 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
     if(has('recovery score','avg recovery','average recovery','recovery')){var rs=aiStat('recovery')||'71';return {html:'The average recovery score is <b>'+rs+'</b> out of 100.',say:'The average recovery score is '+rs+' out of 100.'};}
     if(has('push','ios','android','mobile alert','mobile notif','notification setting')){return {html:'Opening <b>Push Notification</b> settings for iOS &amp; Android.',say:'Opening push notification settings.',act:function(){openPushSettings(null);}};}
     if(has('simulate','test alert','new patient alert','trigger alert','demo alert','fake alert')){return {html:'Simulating a <b>new high-risk patient</b> desktop alert now.',say:'Simulating a new high risk patient alert.',act:function(){simulateHighRiskAlert(true);}};}
+    var pHits=aiPatientSearch(s);
+    if(pHits.length){var intro=pHits.length>1?'I found <b>'+pHits.length+' patients</b> matching that — tap one to open their chart:':'Here\'s the patient — tap to open their chart:';return {html:intro+aiPatientList(pHits)+'<span class=&quot;ai-link&quot; onclick=&quot;aiNav(\'patients\')&quot;>Open Patients &amp; Care →</span>',say:pHits.length>1?'I found '+pHits.length+' matching patients.':'Here is the patient.'};}
     var nav=[
       {k:['dashboard','home screen','overview'],id:'dashboard',name:'Dashboard'},
       {k:['user management','users','staff','team','provider'],id:'users',name:'User Management'},
@@ -8312,6 +8319,9 @@ body:not(.rh-authed) #mobMenuBtn,body:not(.rh-authed) #mobOverlay{display:none!i
   .ai-list-nm{font-weight:700;color:#20261F;flex:1}
   .ai-list-dx{color:#8A918B;font-size:11.5px}
   .ai-list-sc{font-weight:800;min-width:24px;text-align:right;font-size:14px}
+  .ai-prow{cursor:pointer;transition:background .12s}
+  .ai-prow:hover{background:#E6F0FB}
+  .ai-prow-chev{width:15px;height:15px;color:#9AA0A8;flex-shrink:0;margin-left:2px}
   .ai-panel .ai-chip{background:#EDF3FA;border:1px solid #DCE8F4;color:#2C639D;padding:8px 15px;font-weight:600;transition:background .13s,transform .1s}
   .ai-panel .ai-chip:hover{background:#E1EDF8}
   .ai-panel .ai-chip:active{transform:translateY(1px)}
