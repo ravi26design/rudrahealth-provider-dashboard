@@ -2597,7 +2597,7 @@ body{padding-top:0!important}
   /* ── BUTTONS ── */
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;border:1.5px solid transparent;transition:.16s;white-space:nowrap}
   .btn:active{transform:translateY(1px)}
-  .btn-primary{background:#6C9FCC;color:#fff;width:100%;border-radius:14px;font-weight:700;box-shadow:0 6px 16px rgba(108,159,204,.34)}
+  .btn-primary{background:#6C9FCC;color:#fff;width:100%;border-radius:14px;font-weight:700;box-shadow:none}
   .btn-primary:hover{filter:brightness(1.04)}
   .btn-primary:active{transform:scale(.98)}
 .btn-primary:focus,.btn-primary:focus-visible{outline:none}
@@ -3208,8 +3208,8 @@ body{padding-top:0!important}
   .btn,.nav-item,.card,.stat-tile,.qa-tile,.connector-card,.survey-list-card,.tab,.freq-chip,.channel-btn,.org-chip,.iv-opt{transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .18s,background .18s,border-color .18s,color .18s}
 
   /* primary button — gentle gradient + lift */
-  .btn-primary{background:#6C9FCC;border-radius:14px;box-shadow:0 6px 16px rgba(108,159,204,.34)}
-  .btn-primary:hover{box-shadow:0 7px 20px rgba(108,159,204,.3);filter:brightness(1.04)}
+  .btn-primary{background:#6C9FCC;border-radius:14px;box-shadow:none}
+  .btn-primary:hover{box-shadow:none;filter:brightness(1.04)}
   .btn:active{transform:translateY(0) scale(.985)}
 
   /* cards — quiet hover lift + faint accent edge */
@@ -4537,10 +4537,10 @@ body{padding-top:0!important}
   .appt-kpi{position:relative;overflow:hidden;background:#fff;border:1px solid var(--border);border-radius:18px;padding:18px 18px 16px;box-shadow:0 1px 2px rgba(30,41,59,.04);transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}
   .appt-kpi::after{content:'';position:absolute;top:-34px;right:-34px;width:104px;height:104px;border-radius:50%;background:var(--k,#2F6DB0);opacity:.07;pointer-events:none}
   .appt-kpi:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(30,41,59,.09);border-color:color-mix(in srgb,var(--k,#2F6DB0) 30%,var(--border))}
-  .appt-kpi:nth-child(1){--k:#234E7B}
+  .appt-kpi:nth-child(1){--k:#5088C6}
   .appt-kpi:nth-child(2){--k:#6C9FCC}
-  .appt-kpi:nth-child(3){--k:#234E7B}
-  .appt-kpi:nth-child(4){--k:#6A5CB0}
+  .appt-kpi:nth-child(3){--k:#4E93CD}
+  .appt-kpi:nth-child(4){--k:#8B7BD4}
   .appt-kpi .k-top{display:flex;align-items:center;gap:10px;color:#6B7280;font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;position:relative;z-index:1}
   .appt-kpi .k-ic{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 6px rgba(30,41,59,.06)}
   .appt-kpi .k-ic svg{width:19px;height:19px}
@@ -8212,7 +8212,7 @@ body:not(.rh-authed) #mobMenuBtn,body:not(.rh-authed) #mobOverlay{display:none!i
 @media(max-width:600px){#page-app .topbar h2{font-size:21px}}
 #page-app .stat-tile{border-radius:20px;border-color:#ECEEF2;box-shadow:0 1px 2px rgba(30,41,59,.04),0 10px 26px rgba(30,41,59,.05);transition:transform .16s ease,box-shadow .16s ease}
 #page-app .stat-tile:hover{transform:translateY(-2px);box-shadow:0 1px 2px rgba(30,41,59,.04),0 16px 34px rgba(30,41,59,.08)}
-#page-app .appt-kpi{border:none!important;color:#fff!important;background:linear-gradient(135deg,color-mix(in srgb,var(--k) 88%,#fff) 0%,var(--k) 52%,color-mix(in srgb,var(--k) 80%,#12294a) 100%)!important;box-shadow:0 12px 28px color-mix(in srgb,var(--k) 38%,transparent)!important}
+#page-app .appt-kpi{border:none!important;color:#fff!important;background:linear-gradient(135deg,var(--k) 0%,color-mix(in srgb,var(--k) 66%,#fff) 100%)!important;box-shadow:0 12px 28px color-mix(in srgb,var(--k) 38%,transparent)!important}
   #page-app .appt-kpi .k-top{color:rgba(255,255,255,.88)!important}
   #page-app .appt-kpi .k-ic{background:rgba(255,255,255,.22)!important;color:#fff!important;box-shadow:none!important}
   #page-app .appt-kpi .k-val{color:#fff!important}
