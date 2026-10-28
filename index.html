@@ -3619,7 +3619,7 @@ body{padding-top:0!important}
       </div>
       <div class=&quot;card&quot;>
         <div class=&quot;card-header&quot;>
-          <div><div class=&quot;card-title&quot;><i data-lucide='users'></i> High-Risk Patients</div><div class=&quot;card-sub&quot; id=&quot;hrSub&quot; style=&quot;color:#C0413F;font-weight:600&quot;>17 High-Risk Patients</div></div>
+          <div><div class=&quot;card-title&quot; style=&quot;color:#C0413F&quot;><i data-lucide='users'></i> <span id=&quot;hrCount&quot;>17</span> High-Risk Patients</div></div>
           <button class=&quot;hr-viewall&quot; onclick=&quot;showSection('patients',document.querySelector('[onclick*=patients]'));switchTab('patientTabs','tab-high-risk',document.querySelector('#patientTabs .tab'))&quot;><i data-lucide='eye'></i>View All</button>
         </div>
         <style>
@@ -6654,7 +6654,7 @@ function pdNav(d){if(window.toast)toast(d>0?'Next period':'Previous period','inf
     'Pasadena, CA':{active:154,highRisk:9,completion:88,recovery:76,providers:3,retention:81},
     'Glendale, CA':{active:203,highRisk:14,completion:79,recovery:70,providers:4,retention:75}
   };
-  function rhApplyLocation(loc){try{var dta=RH_LOC_DATA[loc]||RH_LOC_DATA['Venice, CA'];var vals=document.querySelectorAll('#sec-dashboard .stat-grid .stat-val');var order=[dta.active,dta.highRisk,dta.completion,dta.recovery];for(var i=0;i<vals.length&amp;&amp;i<4;i++){var v=vals[i];v.setAttribute('data-count',order[i]);var suf=v.getAttribute('data-suffix')||'';v.textContent=order[i]+suf;}var hs=document.getElementById('hrSub');if(hs)hs.textContent=dta.highRisk+' High-Risk Patients';var pc=document.getElementById('patientCount');if(pc)pc.textContent=dta.active;var rt=document.getElementById('retTag');if(rt)rt.textContent=dta.retention+'% this week';var rb=document.getElementById('retBadge');if(rb)rb.textContent=dta.retention+'%';var dash=document.getElementById('sec-dashboard');if(dash&amp;&amp;!dash.classList.contains('hidden')&amp;&amp;window.animateDashboard)animateDashboard();}catch(e){}}
+  function rhApplyLocation(loc){try{var dta=RH_LOC_DATA[loc]||RH_LOC_DATA['Venice, CA'];var vals=document.querySelectorAll('#sec-dashboard .stat-grid .stat-val');var order=[dta.active,dta.highRisk,dta.completion,dta.recovery];for(var i=0;i<vals.length&amp;&amp;i<4;i++){var v=vals[i];v.setAttribute('data-count',order[i]);var suf=v.getAttribute('data-suffix')||'';v.textContent=order[i]+suf;}var hs=document.getElementById('hrCount');if(hs)hs.textContent=dta.highRisk;var pc=document.getElementById('patientCount');if(pc)pc.textContent=dta.active;var rt=document.getElementById('retTag');if(rt)rt.textContent=dta.retention+'% this week';var rb=document.getElementById('retBadge');if(rb)rb.textContent=dta.retention+'%';var dash=document.getElementById('sec-dashboard');if(dash&amp;&amp;!dash.classList.contains('hidden')&amp;&amp;window.animateDashboard)animateDashboard();}catch(e){}}
   function rlSelectRole(el){
     document.querySelectorAll('.rl-role').forEach(function(b){ b.classList.remove('selected'); });
     el.classList.add('selected');
