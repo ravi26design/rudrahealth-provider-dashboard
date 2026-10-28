@@ -5962,7 +5962,7 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
     <button class=&quot;ai-x&quot; onclick=&quot;aiToggle()&quot; aria-label=&quot;Close&quot;><i data-lucide='x'></i></button>
   </div>
   <div class=&quot;ai-body&quot; id=&quot;aiBody&quot;>
-    <div class=&quot;ai-msg bot&quot;><div class=&quot;ai-bubble&quot;>Hi Dr. Rivera 👋 I can answer questions <i>and take actions</i>. Try <b>&quot;send a reminder to discharged alumni&quot;</b> — I'll ask the right details and send it. Or ask <b>&quot;show high-risk patients&quot;</b>, <b>&quot;survey completion&quot;</b>, or <b>&quot;open outcomes&quot;</b>.</div></div>
+    <div class=&quot;ai-msg bot&quot;><div class=&quot;ai-ava-sm&quot;><i data-lucide='sparkles'></i></div><div class=&quot;ai-bubble&quot;>Hi Dr. Rivera 👋 I can answer questions <i>and take actions</i>. Try <b>&quot;send a reminder to discharged alumni&quot;</b> — I'll ask the right details and send it. Or ask <b>&quot;show high-risk patients&quot;</b>, <b>&quot;survey completion&quot;</b>, or <b>&quot;open outcomes&quot;</b>.</div></div>
   </div>
   <div class=&quot;ai-chips&quot;>
     <button class=&quot;ai-chip&quot; onclick=&quot;aiQuick('Send a reminder to discharged alumni')&quot;>✨ Send alumni reminder</button>
@@ -6019,8 +6019,8 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
   function aiClose(){var p=document.getElementById('aiPanel');if(p)p.classList.remove('open');try{if(window.speechSynthesis)window.speechSynthesis.cancel();}catch(e){}}
   // ── Chat plumbing ──
   function aiAddUser(text){var b=document.getElementById('aiBody');if(!b)return;var m=document.createElement('div');m.className='ai-msg user';var x=document.createElement('div');x.className='ai-bubble';x.textContent=text;m.appendChild(x);b.appendChild(m);b.scrollTop=b.scrollHeight;}
-  function aiAddBot(html){var b=document.getElementById('aiBody');if(!b)return;var m=document.createElement('div');m.className='ai-msg bot';m.innerHTML='<div class=&quot;ai-bubble&quot;>'+html+'</div>';b.appendChild(m);b.scrollTop=b.scrollHeight;if(window.lucide)lucide.createIcons();}
-  function aiTyping(on){var b=document.getElementById('aiBody');var ex=document.getElementById('aiTypeRow');if(on){if(ex||!b)return;var m=document.createElement('div');m.className='ai-msg bot';m.id='aiTypeRow';m.innerHTML='<div class=&quot;ai-bubble&quot;><span class=&quot;ai-typing&quot;><i></i><i></i><i></i></span></div>';b.appendChild(m);b.scrollTop=b.scrollHeight;}else if(ex){ex.parentNode.removeChild(ex);}}
+  function aiAddBot(html){var b=document.getElementById('aiBody');if(!b)return;var m=document.createElement('div');m.className='ai-msg bot';m.innerHTML='<div class=&quot;ai-ava-sm&quot;><i data-lucide=\'sparkles\'></i></div><div class=&quot;ai-bubble&quot;>'+html+'</div>';b.appendChild(m);b.scrollTop=b.scrollHeight;if(window.lucide)lucide.createIcons();}
+  function aiTyping(on){var b=document.getElementById('aiBody');var ex=document.getElementById('aiTypeRow');if(on){if(ex||!b)return;var m=document.createElement('div');m.className='ai-msg bot';m.id='aiTypeRow';m.innerHTML='<div class=&quot;ai-ava-sm&quot;><i data-lucide=\'sparkles\'></i></div><div class=&quot;ai-bubble&quot;><span class=&quot;ai-typing&quot;><i></i><i></i><i></i></span></div>';b.appendChild(m);b.scrollTop=b.scrollHeight;if(window.lucide)lucide.createIcons();}else if(ex){ex.parentNode.removeChild(ex);}}
   function aiQuick(t){var i=document.getElementById('aiText');if(i)i.value=t;aiSend(false);}
   function aiSend(spoke){var i=document.getElementById('aiText');if(!i)return;var v=(i.value||'').trim();if(!v)return;aiAddUser(v);i.value='';aiTyping(true);setTimeout(function(){aiTyping(false);var r=_aiFlow?aiFlowStep(v):aiResolve(v);aiAddBot(r.html);if(r.act){try{r.act();}catch(e){}}if(spoke)aiSpeak(r.say||r.html);},480);}
   var _aiFlow=null;
@@ -6044,6 +6044,7 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
   function aiStat(label){var best=null;document.querySelectorAll('#sec-dashboard .stat-tile').forEach(function(t){if(best)return;if((t.textContent||'').toLowerCase().indexOf(label)>=0){var v=t.querySelector('.stat-val');if(v)best=v.textContent.trim();}});return best;}
   function aiGoHighRisk(){goSection('patients');setTimeout(function(){var el=null;document.querySelectorAll('#patientTabs *').forEach(function(x){if(el)return;var oc=x.getAttribute&&x.getAttribute('onclick');if(oc&&oc.indexOf('tab-high-risk')>=0)el=x;});if(el)el.click();},70);}
   // ── Intent resolution ──
+  function aiHighRiskList(){var pts=[['J. Davis','OUD + AUD',12],['Marcus T.','OUD',10],['Daniel F.','OUD + AUD',14],['M. Lee','AUD',16],['Maria O.','SUD',16],['S. Patel','OUD',18],['Kevin W.','OUD',18],['Omar S.','AUD',19],['Tanya B.','OUD + AUD',20],['Amy L.','OUD',22]];pts.sort(function(a,b){return a[2]-b[2];});var h='<div class=&quot;ai-list&quot;>';for(var i=0;i<pts.length;i++){var p=pts[i];var col=p[2]<25?'#C0413F':(p[2]<50?'#C79A44':'#2C639D');h+='<div class=&quot;ai-list-row&quot;><span class=&quot;ai-list-nm&quot;>'+p[0]+'</span><span class=&quot;ai-list-dx&quot;>'+p[1]+'</span><span class=&quot;ai-list-sc&quot; style=&quot;color:'+col+'&quot;>'+p[2]+'</span></div>';}return h+'</div>';}
   function aiResolve(q){
     var s=(q||'').toLowerCase();
     function has(){for(var i=0;i<arguments.length;i++){if(s.indexOf(arguments[i])>=0)return true;}return false;}
@@ -6052,7 +6053,7 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
     if(sendVerb&amp;&amp;audHint){if(has('alumni','discharg','former','left the program'))return aiStartSend('Discharged alumni');if(has('high risk','high-risk'))return aiStartSend('High-risk patients');if(has('sober'))return aiStartSend('Patients sober 90+ days');if(has('active'))return aiStartSend('All active patients');return aiStartSend(null);}
     if(has('high risk','high-risk','highest risk','relapse risk','at risk')){
       if(has('how many','number','count','total')){var v=aiStat('relapse')||'17';return {html:'You currently have <b>'+v+' high-risk patients</b> needing intervention. <span class=&quot;ai-link&quot; onclick=&quot;aiGoHighRisk()&quot;>Open the list →</span>',say:'You currently have '+v+' high risk patients needing intervention.'};}
-      return {html:'Your highest-risk patients: <b>J. Davis</b> (risk 8), <b>M. Lee</b> (15), <b>S. Patel</b> (18) — and 14 more. Lower score means higher risk. Opening the High-Risk tab →',say:'Your highest risk patients are J. Davis, M. Lee and S. Patel, plus 14 more. Opening the high risk tab.',act:aiGoHighRisk};
+      return {html:'Here are your <b>high-risk patients</b> (lower recovery score = higher risk):'+aiHighRiskList()+'<span class=&quot;ai-link&quot; onclick=&quot;aiGoHighRisk()&quot;>Open the full list →</span>',say:'Here are your high-risk patients, sorted by recovery score.'};
     }
     if(has('active patient','how many patient','total patient','patient count','how many active','patients in')){var a=aiStat('active')||'248';return {html:'There are <b>'+a+' active patients</b> in your panel for the selected period.',say:'There are '+a+' active patients in your panel.'};}
     if(has('survey completion','completion rate','completion')){var c=aiStat('completion')||'81%';return {html:'Survey completion is <b>'+c+'</b> for the selected period.',say:'Survey completion is '+c+'.'};}
@@ -8294,6 +8295,23 @@ body:not(.rh-authed) #mobMenuBtn,body:not(.rh-authed) #mobOverlay{display:none!i
   .ai-panel .ai-chips{justify-content:center;flex-wrap:wrap;max-width:780px;width:100%;margin:0 auto;overflow:visible}
   .ai-panel .ai-input{max-width:780px;width:100%;margin:0 auto}
   .ai-panel .ai-head-l .ai-avatar{width:40px;height:40px}
+  .ai-panel .ai-bubble{padding:14px 17px;border-radius:16px;font-size:14px;line-height:1.56}
+  .ai-panel .ai-msg.bot .ai-bubble{background:#fff;border:1px solid #EAEDF1;box-shadow:0 6px 20px rgba(30,41,59,.06);border-bottom-left-radius:6px}
+  .ai-panel .ai-msg.bot .ai-bubble>b{color:#2C639D}
+  .ai-panel .ai-msg.user .ai-bubble{box-shadow:0 6px 16px rgba(44,99,157,.22)}
+  .ai-panel .ai-body{background:linear-gradient(180deg,#F7F9FC 0%,#EEF2F7 100%)}
+  .ai-panel .ai-msg.bot{gap:11px;align-items:flex-end}
+  .ai-ava-sm{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#2C639D,#234E7B);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 9px rgba(44,99,157,.3)}
+  .ai-ava-sm svg{width:17px;height:17px}
+  .ai-panel .ai-chips{padding:12px 20px;border-top:1px solid #E7EBF0;background:rgba(255,255,255,.75);backdrop-filter:blur(6px)}
+  .ai-panel .ai-input{padding:14px 20px 20px;background:#fff;border-top:1px solid #EEF1F5}
+  .ai-panel .ai-input input{font-size:15px}
+  .ai-list{display:flex;flex-direction:column;margin:10px 0 4px;background:#F5F8FB;border:1px solid #E3EDF6;border-radius:12px;overflow:hidden}
+  .ai-list-row{display:flex;align-items:center;gap:10px;padding:9px 13px;font-size:12.5px;border-bottom:1px solid #EAF0F6}
+  .ai-list-row:last-child{border-bottom:none}
+  .ai-list-nm{font-weight:700;color:#20261F;flex:1}
+  .ai-list-dx{color:#8A918B;font-size:11.5px}
+  .ai-list-sc{font-weight:800;min-width:24px;text-align:right;font-size:14px}
 #page-app .survey-list-card{border-radius:16px;border-color:#ECEEF2;transition:transform .14s ease,box-shadow .14s ease,border-color .14s ease}
 #page-app .survey-list-card:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(30,41,59,.07);border-color:#DCE3EC}
 /* Craft layer: scrollbars, motion, focus, press feedback */
