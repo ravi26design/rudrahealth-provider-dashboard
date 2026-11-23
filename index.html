@@ -3601,7 +3601,7 @@ body{padding-top:0!important}
     function _navGroupItems(h){var items=[];var n=h.nextElementSibling;while(n&&!n.classList.contains('nav-section')){if(n.classList.contains('nav-item'))items.push(n);n=n.nextElementSibling;}return items;}
     function _setNavGroup(h,collapsed){h.classList.toggle('collapsed',collapsed);_navGroupItems(h).forEach(function(it){it.classList.toggle('ns-hidden',collapsed);});}
     function toggleNavGroup(h){var c=!h.classList.contains('collapsed');_setNavGroup(h,c);try{var g=h.getAttribute('data-group');if(g)localStorage.setItem('rhNav_'+g,c?'1':'0');}catch(e){}}
-    (function(){function restore(){document.querySelectorAll('.sidebar .nav-section[data-group]').forEach(function(h){try{if(localStorage.getItem('rhNav_'+h.getAttribute('data-group'))==='1')_setNavGroup(h,true);}catch(e){}});if(window.lucide)lucide.createIcons();}if(document.readyState!=='loading')restore();else document.addEventListener('DOMContentLoaded',restore);})();
+    (function(){function restore(){document.querySelectorAll('.sidebar .nav-section[data-group]').forEach(function(h){var g=h.getAttribute('data-group');var v=null;try{v=localStorage.getItem('rhNav_'+g);}catch(e){}var collapsed=(v===null)?(g!=='insights'):(v==='1');if(collapsed)_setNavGroup(h,true);});if(window.lucide)lucide.createIcons();}if(document.readyState!=='loading')restore();else document.addEventListener('DOMContentLoaded',restore);})();
     </script>
 
   </div>
