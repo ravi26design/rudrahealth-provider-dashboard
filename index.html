@@ -4381,6 +4381,34 @@ body{padding-top:0!important}
         <button class=&quot;btn btn-primary&quot; style=&quot;padding:12px 26px;font-size:14px&quot; onclick=&quot;openModal('modalAddPatient')&quot;>+ Add Patient</button>
       </div>
 
+      <script>
+      (function(){
+        function lvlFor(s){return s<40?'High':(s<70?'Low':'No Contingency');}
+        function clsFor(l){return l==='High'?'tag-blue':(l==='Low'?'tag-yellow':'tag-gray');}
+        function enhance(){
+          var tabs=document.querySelectorAll('#tab-high-risk table.hr-table, #tab-warning table.hr-table, #tab-patient-list table.hr-table');
+          for(var ti=0;ti<tabs.length;ti++){
+            var t=tabs[ti];
+            if(t.getAttribute('data-cm'))continue; t.setAttribute('data-cm','1');
+            var htr=t.querySelector('thead tr'); if(!htr)continue;
+            var th=document.createElement('th'); th.textContent='Contingency';
+            htr.insertBefore(th, htr.children[htr.children.length-1]);
+            var rows=t.querySelectorAll('tbody tr');
+            for(var ri=0;ri<rows.length;ri++){
+              var r=rows[ri]; if(r.children.length<2)continue;
+              var b=r.querySelector('.hr-rec b'); var sc=b?(parseInt(b.getAttribute('data-val')||b.textContent,10)||50):50;
+              var lvl=lvlFor(sc);
+              var td=document.createElement('td');
+              var span=document.createElement('span'); span.className='tag '+clsFor(lvl); span.textContent=lvl;
+              td.appendChild(span);
+              r.insertBefore(td, r.children[r.children.length-1]);
+            }
+          }
+          if(window.lucide)lucide.createIcons();
+        }
+        if(document.readyState!=='loading')enhance(); else document.addEventListener('DOMContentLoaded',enhance);
+      })();
+      </script>
       <div class=&quot;tabs&quot; id=&quot;patientTabs&quot;>
         <div class=&quot;tab active&quot; onclick=&quot;switchTab('patientTabs','tab-high-risk',this)&quot;>High-Risk</div><div class=&quot;tab&quot; onclick=&quot;switchTab('patientTabs','tab-warning',this)&quot;>Warning</div><div class=&quot;tab&quot; onclick=&quot;switchTab('patientTabs','tab-patient-list',this)&quot;>All Patients</div>
         <div class=&quot;tab&quot; onclick=&quot;switchTab('patientTabs','tab-care-plan',this)&quot;>Care Plan Template</div>
@@ -5847,7 +5875,10 @@ body{padding-top:0!important}
       <div class=&quot;field&quot;><label>Diagnosis</label><select><option>OUD</option><option>AUD</option><option>SUD</option><option>Co-occurring</option></select></div>
       <div class=&quot;field&quot;><label>Assigned clinician</label><select><option>Dr. Rivera</option><option>L. Chen</option></select></div>
     </div>
-    <div class=&quot;field&quot;><label>Care plan template</label><select><option>Standard OUD Recovery Plan</option><option>AUD Recovery Plan</option><option>Custom</option></select></div>
+    <div class=&quot;grid-2&quot;>
+      <div class=&quot;field&quot;><label>Care plan template</label><select><option>Standard OUD Recovery Plan</option><option>AUD Recovery Plan</option><option>Custom</option></select></div>
+      <div class=&quot;field&quot;><label>Contingency level</label><select><option>High</option><option>Low</option><option selected>No Contingency</option></select></div>
+    </div>
     <div class=&quot;modal-footer&quot;>
       <button class=&quot;btn btn-secondary&quot; onclick=&quot;closeModal('modalAddPatient')&quot;>Cancel</button>
       <button class=&quot;btn btn-primary&quot; onclick=&quot;closeModal('modalAddPatient')&quot;>Create Patient</button>
