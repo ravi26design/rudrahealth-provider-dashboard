@@ -8486,6 +8486,10 @@ body:not(.rh-authed) #mobMenuBtn,body:not(.rh-authed) #mobOverlay{display:none!i
 #page-app .btn:focus-visible,#page-app .nav-item:focus-visible,#page-app .tab:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(108,159,204,.32)}
 #page-app .nav-item{transition:background .16s ease,color .16s ease,transform .12s ease}
 #page-app .tab{transition:background .16s ease,color .16s ease,box-shadow .16s ease}
+  #page-app .sched-toggle.tabs{background:#F1F3F7;border:1px solid #E6E9EF;border-radius:999px;padding:3px;gap:2px;margin:0;align-self:center}
+  #page-app .sched-toggle .tab{padding:5px 13px;font-size:12px;font-weight:600;color:#6E766C;background:none;border:none;border-radius:999px;box-shadow:none}
+  #page-app .sched-toggle .tab:hover{color:#2C3A2F;background:none}
+  #page-app .sched-toggle .tab.active{background:#fff;color:#2C3A2F;border:none;box-shadow:0 1px 2px rgba(30,41,59,.14)}
 @media(prefers-reduced-motion:no-preference){
   #page-app .section:not(.hidden){animation:rhSectionIn .36s cubic-bezier(.2,.8,.2,1)}
   @keyframes rhSectionIn{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
