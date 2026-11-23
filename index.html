@@ -5603,42 +5603,53 @@ body{padding-top:0!important}
       <div style=&quot;margin-top:16px&quot;>
         <div class=&quot;card&quot;>
           <div class=&quot;card-header&quot;><div class=&quot;card-title&quot;><i data-lucide='sliders-horizontal'></i> Contingency Level</div><span class=&quot;card-sub&quot;>Payout per activity</span></div>
-          <div class=&quot;cm-tiers&quot;>
-            <button type=&quot;button&quot; class=&quot;cm-tier active&quot; onclick=&quot;cmSelectTier(this,'high')&quot;>High</button>
-            <button type=&quot;button&quot; class=&quot;cm-tier&quot; onclick=&quot;cmSelectTier(this,'low')&quot;>Low</button>
-            <button type=&quot;button&quot; class=&quot;cm-tier&quot; onclick=&quot;cmSelectTier(this,'none')&quot;>No Contingency</button>
-          </div>
-          <div class=&quot;cm-fields&quot;>
-            <div class=&quot;cm-field&quot;><div class=&quot;cm-field-lab&quot;><span class=&quot;cm-dot daily&quot;></span>Daily check-in</div><div class=&quot;cm-money&quot;><span>$</span><input id=&quot;cmDaily&quot; type=&quot;number&quot; min=&quot;0&quot; step=&quot;0.5&quot; value=&quot;1.00&quot; oninput=&quot;cmSave()&quot;></div></div>
-            <div class=&quot;cm-field&quot;><div class=&quot;cm-field-lab&quot;><span class=&quot;cm-dot activity&quot;></span>Activity</div><div class=&quot;cm-money&quot;><span>$</span><input id=&quot;cmActivity&quot; type=&quot;number&quot; min=&quot;0&quot; step=&quot;0.5&quot; value=&quot;2.00&quot; oninput=&quot;cmSave()&quot;></div></div>
-            <div class=&quot;cm-field&quot;><div class=&quot;cm-field-lab&quot;><span class=&quot;cm-dot bonus&quot;></span>Bonus</div><div class=&quot;cm-money&quot;><span>$</span><input id=&quot;cmBonus&quot; type=&quot;number&quot; min=&quot;0&quot; step=&quot;0.5&quot; value=&quot;1.50&quot; oninput=&quot;cmSave()&quot;></div></div>
+          <div class=&quot;cm-table-wrap&quot;>
+            <table class=&quot;cm-table&quot;>
+              <thead>
+                <tr><th>Contingency Level</th><th>Daily check-in</th><th>Activity</th><th>Bonus</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class=&quot;cm-lvl&quot;><span class=&quot;cm-dot lv-high&quot;></span>High</span></td>
+                  <td><div class=&quot;cm-money&quot;><span>$</span><input type=&quot;number&quot; min=&quot;0&quot; step=&quot;0.5&quot; value=&quot;1.00&quot; onchange=&quot;this.value=(parseFloat(this.value)||0).toFixed(2)&quot;></div></td>
+                  <td><div class=&quot;cm-money&quot;><span>$</span><input type=&quot;number&quot; min=&quot;0&quot; step=&quot;0.5&quot; value=&quot;2.00&quot; onchange=&quot;this.value=(parseFloat(this.value)||0).toFixed(2)&quot;></div></td>
+                  <td><div class=&quot;cm-money&quot;><span>$</span><input type=&quot;number&quot; min=&quot;0&quot; step=&quot;0.5&quot; value=&quot;1.50&quot; onchange=&quot;this.value=(parseFloat(this.value)||0).toFixed(2)&quot;></div></td>
+                </tr>
+                <tr>
+                  <td><span class=&quot;cm-lvl&quot;><span class=&quot;cm-dot lv-low&quot;></span>Low</span></td>
+                  <td><div class=&quot;cm-money&quot;><span>$</span><input type=&quot;number&quot; min=&quot;0&quot; step=&quot;0.5&quot; value=&quot;1.00&quot; onchange=&quot;this.value=(parseFloat(this.value)||0).toFixed(2)&quot;></div></td>
+                  <td><div class=&quot;cm-money&quot;><span>$</span><input type=&quot;number&quot; min=&quot;0&quot; step=&quot;0.5&quot; value=&quot;2.00&quot; onchange=&quot;this.value=(parseFloat(this.value)||0).toFixed(2)&quot;></div></td>
+                  <td><div class=&quot;cm-money&quot;><span>$</span><input type=&quot;number&quot; min=&quot;0&quot; step=&quot;0.5&quot; value=&quot;1.50&quot; onchange=&quot;this.value=(parseFloat(this.value)||0).toFixed(2)&quot;></div></td>
+                </tr>
+                <tr>
+                  <td><span class=&quot;cm-lvl&quot;><span class=&quot;cm-dot lv-none&quot;></span>No Contingency</span></td>
+                  <td><div class=&quot;cm-money&quot;><span>$</span><input type=&quot;number&quot; min=&quot;0&quot; step=&quot;0.5&quot; value=&quot;1.00&quot; onchange=&quot;this.value=(parseFloat(this.value)||0).toFixed(2)&quot;></div></td>
+                  <td><div class=&quot;cm-money&quot;><span>$</span><input type=&quot;number&quot; min=&quot;0&quot; step=&quot;0.5&quot; value=&quot;2.00&quot; onchange=&quot;this.value=(parseFloat(this.value)||0).toFixed(2)&quot;></div></td>
+                  <td><div class=&quot;cm-money&quot;><span>$</span><input type=&quot;number&quot; min=&quot;0&quot; step=&quot;0.5&quot; value=&quot;1.50&quot; onchange=&quot;this.value=(parseFloat(this.value)||0).toFixed(2)&quot;></div></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <style>
-            #sec-rewards .cm-tiers{display:flex;gap:8px;margin-bottom:15px;flex-wrap:wrap}
-            #sec-rewards .cm-tier{flex:1;min-width:88px;padding:10px 12px;border:1.5px solid #E3E7EC;background:#fff;border-radius:11px;font:600 13px/1 Manrope,Inter,sans-serif;color:#5A6472;cursor:pointer;transition:all .14s;font-family:inherit}
-            #sec-rewards .cm-tier:hover{border-color:#C3CEDA;color:#2A3139}
-            #sec-rewards .cm-tier.active{border-color:#6C9FCC;background:#EEF4FB;color:#2C639D;box-shadow:0 0 0 3px rgba(108,159,204,.14)}
-            #sec-rewards .cm-fields{display:flex;flex-direction:column;gap:10px}
-            #sec-rewards .cm-field{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border:1px solid #EDEFF2;border-radius:12px;background:#FAFBFC}
-            #sec-rewards .cm-field-lab{display:flex;align-items:center;gap:10px;font:600 13.5px/1 Manrope,Inter,sans-serif;color:#2A3139}
-            #sec-rewards .cm-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
-            #sec-rewards .cm-dot.daily{background:#3E7CBF}
-            #sec-rewards .cm-dot.activity{background:#9A7C28}
-            #sec-rewards .cm-dot.bonus{background:#6A5CB0}
-            #sec-rewards .cm-money{display:flex;align-items:center;gap:3px;background:#fff;border:1.5px solid #DDE2E8;border-radius:9px;padding:6px 12px;transition:border .14s,box-shadow .14s}
+            #sec-rewards .cm-table-wrap{overflow-x:auto}
+            #sec-rewards .cm-table{width:100%;border-collapse:separate;border-spacing:0;min-width:560px}
+            #sec-rewards .cm-table th{font:700 11px/1 Manrope,Inter,sans-serif;letter-spacing:.8px;text-transform:uppercase;color:#8B928A;padding:0 14px 13px;border-bottom:1px solid rgba(60,70,60,.12);text-align:center;white-space:nowrap}
+            #sec-rewards .cm-table th:first-child{text-align:left}
+            #sec-rewards .cm-table td{padding:16px 14px;border-bottom:1px solid rgba(60,70,60,.07);vertical-align:middle;text-align:center}
+            #sec-rewards .cm-table td:first-child{text-align:left}
+            #sec-rewards .cm-table tbody tr:last-child td{border-bottom:none}
+            #sec-rewards .cm-table tbody tr:hover td{background:#F7F9FB}
+            #sec-rewards .cm-lvl{display:inline-flex;align-items:center;gap:10px;font:700 14px/1 Manrope,Inter,sans-serif;color:#242A24}
+            #sec-rewards .cm-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;display:inline-block}
+            #sec-rewards .cm-dot.lv-high{background:#3E7CBF}
+            #sec-rewards .cm-dot.lv-low{background:#9A7C28}
+            #sec-rewards .cm-dot.lv-none{background:#9AA0A6}
+            #sec-rewards .cm-money{display:inline-flex;align-items:center;gap:3px;background:#fff;border:1.5px solid #DDE2E8;border-radius:9px;padding:6px 12px;transition:border .14s,box-shadow .14s}
             #sec-rewards .cm-money:focus-within{border-color:#6C9FCC;box-shadow:0 0 0 3px rgba(108,159,204,.14)}
             #sec-rewards .cm-money>span{font:700 14px/1 Manrope,Inter,sans-serif;color:#8A928A}
-            #sec-rewards .cm-money input{width:60px;border:none;outline:none;background:none;font:700 15px/1 Manrope,Inter,sans-serif;color:#1A2230;text-align:right;-moz-appearance:textfield}
+            #sec-rewards .cm-money input{width:58px;border:none;outline:none;background:none;font:700 15px/1 Manrope,Inter,sans-serif;color:#1A2230;text-align:right;-moz-appearance:textfield}
             #sec-rewards .cm-money input::-webkit-outer-spin-button,#sec-rewards .cm-money input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
           </style>
-          <script>
-            var cmState={high:{daily:1,activity:2,bonus:1.5},low:{daily:1,activity:2,bonus:1.5},none:{daily:1,activity:2,bonus:1.5}};
-            var cmCur='high';
-            function cmFmt(v){v=parseFloat(v);return (isNaN(v)?0:v).toFixed(2);}
-            function cmLoad(){var s=cmState[cmCur];document.getElementById('cmDaily').value=cmFmt(s.daily);document.getElementById('cmActivity').value=cmFmt(s.activity);document.getElementById('cmBonus').value=cmFmt(s.bonus);}
-            function cmSave(){var s=cmState[cmCur];s.daily=parseFloat(document.getElementById('cmDaily').value)||0;s.activity=parseFloat(document.getElementById('cmActivity').value)||0;s.bonus=parseFloat(document.getElementById('cmBonus').value)||0;}
-            function cmSelectTier(btn,t){cmSave();cmCur=t;var ts=document.querySelectorAll('#sec-rewards .cm-tier');for(var i=0;i<ts.length;i++)ts[i].classList.remove('active');btn.classList.add('active');cmLoad();}
-          </script>
         </div>
       </div>
     </div>
