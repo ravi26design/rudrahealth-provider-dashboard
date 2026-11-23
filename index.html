@@ -4766,6 +4766,8 @@ body{padding-top:0!important}
   .wiz-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:24px;padding-top:18px;border-top:1px solid var(--border)}
   #createTriggerBody{max-width:940px;margin:0 auto;width:100%}
   #createTriggerBody #tab-trig-new{display:block}
+  #tab-trig-new.trig-review #wizStep1 .channel-row .channel-btn:not([onclick*='rating']){display:none}
+  #tab-trig-new.trig-review #wizStep1 .channel-row .channel-btn[onclick*='rating']{flex:0 0 auto;width:240px;max-width:100%}
   #newApptBody{max-width:940px;margin:0 auto;width:100%}
   #newApptBody #tab-appt-book{display:block}
   #carePlanBody{max-width:940px;margin:0 auto;width:100%}
@@ -4808,7 +4810,7 @@ body{padding-top:0!important}
 
 <script>
   var _trigHome=null;
-  function newTrigger(){var b=document.getElementById('tab-trig-new'),body=document.getElementById('createTriggerBody');if(b&amp;&amp;body){if(!_trigHome){_trigHome=document.createComment('trig-home');b.parentNode.insertBefore(_trigHome,b);}b.classList.remove('hidden');body.appendChild(b);}_wizStep=1;if(window.wizRender)wizRender();var m=document.getElementById('modalCreateTrigger');if(m)m.classList.add('open');document.body.style.overflow='hidden';if(window.lucide)lucide.createIcons();}
+  function newTrigger(mode){var b=document.getElementById('tab-trig-new'),body=document.getElementById('createTriggerBody');if(b&amp;&amp;body){if(!_trigHome){_trigHome=document.createComment('trig-home');b.parentNode.insertBefore(_trigHome,b);}b.classList.remove('hidden');body.appendChild(b);}_wizStep=1;if(window.wizRender)wizRender();var isRev=(mode==='review');if(b)b.classList.toggle('trig-review',isRev);var ti=document.querySelector('#modalCreateTrigger .fp-modal-title'),su=document.querySelector('#modalCreateTrigger .fp-modal-sub');if(isRev){if(ti)ti.textContent='Request Review';if(su)su.textContent='Ask a discharged patient for a rating';var rb=document.querySelector('#wizStep1 .channel-btn[onclick*=&quot;rating&quot;]');if(rb&amp;&amp;window.trigType)trigType(rb,'rating');}else{if(ti)ti.textContent='Create Trigger';if(su)su.textContent='Set up an automated patient notification';}var m=document.getElementById('modalCreateTrigger');if(m)m.classList.add('open');document.body.style.overflow='hidden';if(window.lucide)lucide.createIcons();}
   function closeCreateTrigger(){var b=document.getElementById('tab-trig-new');if(b&amp;&amp;_trigHome&amp;&amp;_trigHome.parentNode){_trigHome.parentNode.insertBefore(b,_trigHome);b.classList.add('hidden');}var m=document.getElementById('modalCreateTrigger');if(m)m.classList.remove('open');document.body.style.overflow='';}
   var _wizStep=1;
   function wizRender(){for(var i=1;i<=4;i++){var st=document.getElementById('wizStep'+i);if(st)st.classList.toggle('hidden',i!==_wizStep);}var dots=document.querySelectorAll('#wizSteps .wiz-dot');for(var k=0;k<dots.length;k++){var n=k+1;dots[k].classList.toggle('active',n===_wizStep);dots[k].classList.toggle('done',n<_wizStep);var num=dots[k].querySelector('.wiz-num');if(num)num.innerHTML=(n<_wizStep)?&quot;<i data-lucide='check'></i>&quot;:String(n);}var lines=document.querySelectorAll('#wizSteps .wiz-line');for(var li=0;li<lines.length;li++){lines[li].classList.toggle('done',li<_wizStep-1);}var back=document.getElementById('wizBack');if(back)back.style.visibility=_wizStep>1?'visible':'hidden';var last=_wizStep===4;var nx=document.getElementById('wizNext'),sv=document.getElementById('wizSave'),pv=document.getElementById('wizPreviewBtn');if(nx)nx.style.display=last?'none':'inline-flex';if(sv)sv.style.display=last?'inline-flex':'none';if(pv)pv.style.display=last?'inline-flex':'none';if(window.lucide)lucide.createIcons();}
@@ -5562,7 +5564,7 @@ body{padding-top:0!important}
     <div id=&quot;sec-feedback&quot; class=&quot;section hidden&quot;>
       <div class=&quot;topbar&quot;>
         <div><h2>Feedback Management</h2><div class=&quot;desc&quot;>Collect, review and act on patient feedback and public reviews</div></div>
-        <button class=&quot;btn btn-primary&quot; style=&quot;padding:12px 26px;font-size:14px&quot; onclick=&quot;newTrigger()&quot;>+ Request Review</button>
+        <button class=&quot;btn btn-primary&quot; style=&quot;padding:12px 26px;font-size:14px&quot; onclick=&quot;newTrigger('review')&quot;>+ Request Review</button>
       </div>
       <div class=&quot;stat-grid&quot;>
         <div class=&quot;stat-tile&quot;><div class=&quot;stat-top&quot;><div class=&quot;stat-label&quot;>Avg Rating</div><span class=&quot;delta up&quot;>&#8593; 0.3</span></div><div class=&quot;stat-val&quot;>4.6</div><div class=&quot;stat-sub&quot;>out of 5 &middot; 312 reviews</div></div>
