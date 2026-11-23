@@ -2636,7 +2636,11 @@ body{padding-top:0!important}
   .sidebar-logo .sb-logo-mark{display:inline-flex;align-items:center;flex-shrink:0}
   .sidebar-logo .sb-word{font-family:'Manrope',sans-serif;font-weight:700;font-size:16.5px;letter-spacing:-.02em;line-height:1}
   .sidebar-logo .sb-word .r{color:#E7968D} .sidebar-logo .sb-word .h{color:#6DA0CC} .sidebar-logo .sb-word sup{color:#EABA6C;font-size:.5em;font-weight:800;vertical-align:super;margin-left:.5px}
-  .nav-section{font-size:9.5px;font-weight:700;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;padding:16px 24px 6px}
+  .nav-section{font-size:9.5px;font-weight:700;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;padding:16px 24px 6px;display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer;user-select:none;transition:color .13s}
+.nav-section:hover{color:var(--text-2)}
+.nav-section .ns-chev{width:13px;height:13px;stroke-width:2.6;opacity:.6;transition:transform .18s;flex-shrink:0}
+.nav-section.collapsed .ns-chev{transform:rotate(-90deg)}
+#page-app:not(.sb-collapsed) .nav-item.ns-hidden{display:none!important}
   .nav-item{display:flex;align-items:center;gap:13px;padding:12px 16px;font-size:13.5px;font-weight:500;letter-spacing:-.005em;color:var(--text-2);cursor:pointer;transition:.15s;border-left:none;margin:3px 12px;border-radius:14px}
   .nav-item:hover{background:var(--bg);color:var(--text)}
   .nav-item.active{background:var(--accent-light);color:var(--accent);font-weight:600;border-left-color:var(--accent);border-radius:0 10px 10px 0;margin-left:0;padding-left:19px}
@@ -2652,7 +2656,7 @@ body{padding-top:0!important}
   .user-info{flex:1;min-width:0}
   .user-name{font-size:13px;font-weight:600;color:var(--text)}
   .user-role{font-size:11px;color:var(--text-3)}
-  .main{margin-left:250px;flex:1;padding:10px 14px 14px;max-width:none}
+  .main{margin-left:250px;flex:1;min-width:0;padding:10px 14px 14px;max-width:none}
   .topbar{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:26px;flex-wrap:wrap}
   .topbar .btn{width:auto;flex-shrink:0;align-self:center}
   .pg{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;flex-wrap:wrap}
@@ -3573,26 +3577,32 @@ body{padding-top:0!important}
     </div>
     <script>function toggleSidebar(){var p=document.getElementById('page-app');if(!p)return;var c=p.classList.toggle('sb-collapsed');try{localStorage.setItem('rhSbCollapsed',c?'1':'0');}catch(e){}if(window.lucide)lucide.createIcons();}(function(){try{if(localStorage.getItem('rhSbCollapsed')==='1'){var p=document.getElementById('page-app');if(p)p.classList.add('sb-collapsed');}}catch(e){}})();document.addEventListener('DOMContentLoaded',function(){var tip=document.createElement('div');tip.className='sb-tip';(document.getElementById('page-app')||document.body).appendChild(tip);document.querySelectorAll('.sidebar .nav-item').forEach(function(it){var cl=it.cloneNode(true);var b=cl.querySelector('.badge');if(b)b.remove();it.setAttribute('data-tip',cl.textContent.trim());it.addEventListener('mouseenter',function(){var p=document.getElementById('page-app');if(!p||!p.classList.contains('sb-collapsed'))return;tip.textContent=it.getAttribute('data-tip');var r=it.getBoundingClientRect();tip.style.top=(r.top+r.height/2)+'px';tip.style.left=(r.right+12)+'px';tip.classList.add('on');});it.addEventListener('mouseleave',function(){tip.classList.remove('on');});});});</script>
 
-    <div class=&quot;nav-section&quot;>Insights</div>
+    <div class=&quot;nav-section&quot; data-group=&quot;insights&quot; onclick=&quot;toggleNavGroup(this)&quot;><span>Insights</span><i data-lucide='chevron-down' class='ns-chev'></i></div>
     <div class=&quot;nav-item active&quot; onclick=&quot;showSection('dashboard',this)&quot;><span class=&quot;icon&quot;><i data-lucide='layout-dashboard'></i></span> Clinician Dashboard</div>
     <div class=&quot;nav-item&quot; onclick=&quot;showSection('engagement',this)&quot;><span class=&quot;icon&quot;><i data-lucide='bar-chart-3'></i></span> Engagement Dashboard</div>
     <div class=&quot;nav-item&quot; onclick=&quot;showSection('outcomes',this)&quot;><span class=&quot;icon&quot;><i data-lucide='trending-up'></i></span> Outcomes Data</div>
 
-    <div class=&quot;nav-section&quot;>Patient Engagement</div>
+    <div class=&quot;nav-section&quot; data-group=&quot;engagement&quot; onclick=&quot;toggleNavGroup(this)&quot;><span>Patient Engagement</span><i data-lucide='chevron-down' class='ns-chev'></i></div>
     <div class=&quot;nav-item&quot; onclick=&quot;showSection('triggers',this)&quot;><span class=&quot;icon&quot;><i data-lucide='megaphone'></i></span> Communication Management</div>
     <div class=&quot;nav-item&quot; onclick=&quot;showSection('appointments',this)&quot;><span class=&quot;icon&quot;><i data-lucide='calendar-days'></i></span> Appointments</div>
     <div class=&quot;nav-item&quot; onclick=&quot;showSection('feedback',this)&quot;><span class=&quot;icon&quot;><i data-lucide='message-square-heart'></i></span> Feedback Management</div>
     <div class=&quot;nav-item&quot; onclick=&quot;showSection('rewards',this)&quot;><span class=&quot;icon&quot;><i data-lucide='gift'></i></span> Contingency &amp; Rewards</div>
     <div class=&quot;nav-item&quot; onclick=&quot;showSection('surveymanager',this)&quot;><span class=&quot;icon&quot;><i data-lucide='clipboard-list'></i></span> Survey Management</div>
 
-    <div class=&quot;nav-section&quot;>Administration</div>
+    <div class=&quot;nav-section&quot; data-group=&quot;administration&quot; onclick=&quot;toggleNavGroup(this)&quot;><span>Administration</span><i data-lucide='chevron-down' class='ns-chev'></i></div>
     <div class=&quot;nav-item&quot; onclick=&quot;showSection('patients',this)&quot;><span class=&quot;icon&quot;><i data-lucide='heart-pulse'></i></span> Patient Management</div>
     <div class=&quot;nav-item&quot; onclick=&quot;showSection('users',this)&quot;><span class=&quot;icon&quot;><i data-lucide='users'></i></span> User Management</div>
 
-    <div class=&quot;nav-section&quot;>Configuration</div>
+    <div class=&quot;nav-section&quot; data-group=&quot;configuration&quot; onclick=&quot;toggleNavGroup(this)&quot;><span>Configuration</span><i data-lucide='chevron-down' class='ns-chev'></i></div>
     <div class=&quot;nav-item&quot; onclick=&quot;showSection('integrations',this)&quot;><span class=&quot;icon&quot;><i data-lucide='plug-zap'></i></span> Integration <span class=&quot;badge&quot;>2</span></div>
     <div class=&quot;nav-item&quot; onclick=&quot;showSection('messaging',this)&quot;><span class=&quot;icon&quot;><i data-lucide='message-square-text'></i></span> Messaging Setup</div>
     <div class=&quot;nav-item&quot; onclick=&quot;showSection('profile',this)&quot;><span class=&quot;icon&quot;><i data-lucide='circle-user'></i></span> Profile Page</div>
+    <script>
+    function _navGroupItems(h){var items=[];var n=h.nextElementSibling;while(n&&!n.classList.contains('nav-section')){if(n.classList.contains('nav-item'))items.push(n);n=n.nextElementSibling;}return items;}
+    function _setNavGroup(h,collapsed){h.classList.toggle('collapsed',collapsed);_navGroupItems(h).forEach(function(it){it.classList.toggle('ns-hidden',collapsed);});}
+    function toggleNavGroup(h){var c=!h.classList.contains('collapsed');_setNavGroup(h,c);try{var g=h.getAttribute('data-group');if(g)localStorage.setItem('rhNav_'+g,c?'1':'0');}catch(e){}}
+    (function(){function restore(){document.querySelectorAll('.sidebar .nav-section[data-group]').forEach(function(h){try{if(localStorage.getItem('rhNav_'+h.getAttribute('data-group'))==='1')_setNavGroup(h,true);}catch(e){}});if(window.lucide)lucide.createIcons();}if(document.readyState!=='loading')restore();else document.addEventListener('DOMContentLoaded',restore);})();
+    </script>
 
   </div>
 
