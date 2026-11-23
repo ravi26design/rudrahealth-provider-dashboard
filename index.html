@@ -3594,16 +3594,6 @@ body{padding-top:0!important}
     <div class=&quot;nav-item&quot; onclick=&quot;showSection('messaging',this)&quot;><span class=&quot;icon&quot;><i data-lucide='message-square-text'></i></span> Messaging Setup</div>
     <div class=&quot;nav-item&quot; onclick=&quot;showSection('profile',this)&quot;><span class=&quot;icon&quot;><i data-lucide='circle-user'></i></span> Profile Page</div>
 
-    <div class=&quot;sidebar-footer&quot;>
-      <div class=&quot;user-chip&quot;>
-        <div class=&quot;avatar&quot; id=&quot;sbAvatar&quot;>DR</div>
-        <div class=&quot;user-info&quot;>
-          <div class=&quot;user-name&quot; id=&quot;sbUserName&quot;>Dr. Rivera</div>
-          <div class=&quot;user-role&quot; id=&quot;sbUserRole&quot;>Clinical Provider</div>
-        </div>
-        <span class=&quot;sb-logout&quot; style=&quot;cursor:pointer;color:var(--text-3);display:inline-flex;align-items:center&quot; onclick=&quot;doLogout()&quot; title=&quot;Sign out&quot;><i data-lucide='log-out'></i></span>
-      </div>
-    </div>
   </div>
 
   <!-- MAIN -->
@@ -5950,7 +5940,7 @@ function rowAssign(b){if(window.openAssign)openAssign(rowPatient(b));}
 function tbToggleProfile(e){e.stopPropagation();if(window.tbCloseNotif)tbCloseNotif();var m=document.getElementById('tbProfileMenu');if(m){m.classList.toggle('open');if(window.lucide)lucide.createIcons();}}
 function tbCloseProfile(){var m=document.getElementById('tbProfileMenu');if(m)m.classList.remove('open');}
 document.addEventListener('click',tbCloseProfile);
-function tbViewProfile(e){e.stopPropagation();tbCloseProfile();if(window.toast)toast('Opening your profile…','info');}
+function tbViewProfile(e){e.stopPropagation();tbCloseProfile();var nav=document.querySelector(&quot;.sidebar .nav-item[onclick*='profile']&quot;);if(window.showSection){showSection('profile',nav||null);}else if(window.toast){toast('Opening your profile…','info');}}
 function tbChangePassword(e){e.stopPropagation();tbCloseProfile();if(window.openModal)openModal('modalChangePwd');}function tbLogout(e){e.stopPropagation();tbCloseProfile();if(window.doLogout){doLogout();}else if(window.toast){toast('Logged out','info');}}
 </script>
 <div class=&quot;modal-overlay&quot; id=&quot;modalChangePwd&quot; onclick=&quot;closeModal('modalChangePwd')&quot;>
