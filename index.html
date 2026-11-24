@@ -6584,22 +6584,24 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
 
 <div class=&quot;modal-overlay&quot; id=&quot;modalConfirm&quot; onclick=&quot;closeModal('modalConfirm')&quot;><div class=&quot;modal modal-sm&quot; onclick=&quot;event.stopPropagation()&quot;><div class=&quot;modal-title&quot; id=&quot;confTitle&quot;>Are you sure?</div><div id=&quot;confBody&quot; style=&quot;font-size:13.5px;color:#6E766C;line-height:1.55;margin:-2px 0 2px&quot;></div><div class=&quot;modal-footer&quot;><button class=&quot;btn btn-secondary&quot; onclick=&quot;closeModal('modalConfirm')&quot;>Cancel</button><button class=&quot;btn btn-primary&quot; id=&quot;confOk&quot; style=&quot;width:auto&quot; onclick=&quot;confRun()&quot;>Confirm</button></div></div></div>
 <style>
-  .dhr-head{display:flex;align-items:center;gap:13px;margin-bottom:18px}
-  .dhr-badge{width:46px;height:46px;border-radius:13px;background:#FBECE9;color:#C0413F;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-  .dhr-badge svg{width:23px;height:23px}
-  .dhr-eyebrow{font:700 11px/1 Manrope,Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#C0413F;margin-bottom:4px}
-  .dhr-card{border:1.5px solid var(--border);border-radius:15px;padding:17px;background:var(--bg,#F7F9F6)}
+  .dhr-head{display:flex;align-items:center;gap:13px;margin-bottom:20px}
+  .dhr-badge{width:46px;height:46px;border-radius:14px;background:linear-gradient(145deg,#FBECE9,#F6DCD7);color:#C0413F;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:inset 0 0 0 1px rgba(192,65,63,.1)}
+  .dhr-badge svg{width:22px;height:22px}
+  .dhr-eyebrow{font:700 10.5px/1 Manrope,Inter,sans-serif;letter-spacing:.11em;text-transform:uppercase;color:#C0413F;margin-bottom:5px}
+  .dhr-card{position:relative;border:1px solid var(--border);border-radius:16px;padding:18px;background:#fff;box-shadow:0 1px 3px rgba(20,30,20,.05);overflow:hidden}
+  .dhr-card:before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#C0413F,#E08B6A)}
   .dhr-top{display:flex;align-items:center;gap:13px}
-  .dhr-av{width:48px;height:48px;border-radius:50%;background:#2F6DB0;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;font-family:Sora,Inter,sans-serif;flex-shrink:0}
+  .dhr-av{width:50px;height:50px;border-radius:50%;background:linear-gradient(145deg,#2F6DB0,#4E8BC8);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;font-family:Sora,Inter,sans-serif;flex-shrink:0;box-shadow:0 2px 7px rgba(47,109,176,.26)}
   .dhr-id{flex:1;min-width:0}
-  .dhr-name{font-weight:800;font-size:16px;color:#20261F;font-family:Sora,Inter,sans-serif}
-  .dhr-sub{font-size:12px;color:#8A918B;margin-top:2px}
-  .dhr-score{text-align:center;flex-shrink:0}
-  .dhr-score b{font:800 27px/1 Sora,Inter,sans-serif;color:#C0413F;display:block}
-  .dhr-score span{font-size:11px;color:#8A918B}
-  .dhr-meta{display:flex;flex-direction:column;gap:9px;margin-top:15px;padding-top:15px;border-top:1px solid var(--border)}
-  .dhr-meta span{display:flex;align-items:center;gap:9px;font-size:12.5px;color:#5A6160;font-weight:600}
-  .dhr-meta svg{width:15px;height:15px;color:#C0413F;flex-shrink:0}
+  .dhr-name{font-weight:800;font-size:16.5px;color:#20261F;font-family:Sora,Inter,sans-serif;letter-spacing:-.01em}
+  .dhr-sub{font-size:12px;color:#8A918B;margin-top:3px}
+  .dhr-score{display:flex;flex-direction:column;align-items:flex-end;flex-shrink:0;line-height:1}
+  .dhr-score b{font:800 30px/1 Sora,Inter,sans-serif;color:#C0413F;display:block}
+  .dhr-score span{font-size:10px;color:#9AA0A6;margin-top:5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+  .dhr-meta{display:flex;flex-direction:column;gap:2px;margin-top:16px;padding-top:15px;border-top:1px solid var(--border)}
+  .dhr-meta span{display:flex;align-items:center;gap:11px;font-size:12.5px;color:#4B524F;font-weight:600;padding:4px 0}
+  .dhr-meta .mi{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .dhr-meta .mi svg{width:15px;height:15px;flex-shrink:0}
 </style>
 <div class=&quot;modal-overlay&quot; id=&quot;modalDailyHighRisk&quot; onclick=&quot;closeModal('modalDailyHighRisk')&quot;>
   <div class=&quot;modal&quot; onclick=&quot;event.stopPropagation()&quot; style=&quot;max-width:440px&quot;>
@@ -6615,9 +6617,9 @@ function closeMobSidebar(){var s=document.querySelector('.sidebar'),o=document.g
       </div>
       <div class=&quot;dhr-bar&quot;><div class=&quot;dhr-bar-track&quot;><i style=&quot;width:12%&quot;></i></div><div class=&quot;dhr-bar-lbl&quot;><span>Recovery score</span><span class=&quot;dhr-crit&quot;>Critical · needs outreach</span></div></div>
       <div class=&quot;dhr-meta&quot;>
-        <span><i data-lucide='trending-down'></i> 82% relapse risk · trending down this week</span>
-        <span><i data-lucide='target'></i> Craving check-in overdue</span>
-        <span><i data-lucide='calendar-clock'></i> Last visit today · 43 days in program</span>
+        <span><span class=&quot;mi&quot; style=&quot;background:#FBECE9;color:#C0413F&quot;><i data-lucide='trending-down'></i></span> 82% relapse risk · trending down this week</span>
+        <span><span class=&quot;mi&quot; style=&quot;background:#FBF1DF;color:#A9791F&quot;><i data-lucide='target'></i></span> Craving check-in overdue</span>
+        <span><span class=&quot;mi&quot; style=&quot;background:#E9F1FA;color:#2F6DB0&quot;><i data-lucide='calendar-clock'></i></span> Last visit today · 43 days in program</span>
       </div>
     </div>
     <div class=&quot;modal-footer&quot;>
@@ -8365,11 +8367,11 @@ body:not(.rh-authed) #mobMenuBtn,body:not(.rh-authed) #mobOverlay{display:none!i
 #page-app button svg,#page-app button i[data-lucide],#page-app .ra svg,#page-app .ra i,#page-app .rowact svg{pointer-events:none}
 /* High-risk modal card polish */
 #modalDailyHighRisk .dhr-card{background:#fff;border:1px solid #EEE1DF;box-shadow:0 8px 24px rgba(192,65,63,.07),inset 3px 0 0 #D4736A;border-radius:16px;padding:18px 18px 18px 20px}
-#modalDailyHighRisk .dhr-bar{margin-top:15px}
-#modalDailyHighRisk .dhr-bar-track{height:7px;border-radius:99px;background:#F0E3E1;overflow:hidden}
+#modalDailyHighRisk .dhr-bar{margin-top:16px}
+#modalDailyHighRisk .dhr-bar-track{height:8px;border-radius:99px;background:#F1E6E4;overflow:hidden}
 #modalDailyHighRisk .dhr-bar-track i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#C0413F,#E08B6A)}
-#modalDailyHighRisk .dhr-bar-lbl{display:flex;justify-content:space-between;margin-top:6px;font-size:11px;font-weight:600;color:#9A918E}
-#modalDailyHighRisk .dhr-crit{color:#C0413F}
+#modalDailyHighRisk .dhr-bar-lbl{display:flex;justify-content:space-between;align-items:center;margin-top:9px;font-size:11px;font-weight:600;color:#9A918E}
+#modalDailyHighRisk .dhr-crit{color:#C0413F;font-weight:700}
 #modalDailyHighRisk .dhr-meta{margin-top:16px;padding-top:15px}
 /* Appointments listing polish */
 .appt-pt-cell{display:flex!important;align-items:center;gap:11px;min-width:0}
